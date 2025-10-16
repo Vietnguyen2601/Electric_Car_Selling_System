@@ -1,0 +1,30 @@
+﻿@page
+@model ElectricVehicleDealer.Presentation.Pages.Account.IndexModel
+
+<h2>Account List</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Contact</th>
+            <th>Created At</th>
+            <th>Active</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var account in Model.Accounts)
+        {
+            <tr>
+                <td>@account.AccountId</td>
+                <td>@account.Username</td>
+                <td>@account.Email</td>
+                <td>@account.ContactNumber</td>
+                <td>@account.CreatedAt.ToString("yyyy-MM-dd")</td>
+                <td>@(account.IsActive ? "Yes" : "No")</td>
+            </tr>
+        }
+    </tbody>
+</table>
