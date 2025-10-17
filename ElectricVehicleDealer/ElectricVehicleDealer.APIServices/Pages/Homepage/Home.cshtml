@@ -10,13 +10,16 @@
     <meta charset="utf-8" />
     <title>EcoRide - Hệ thống bán xe điện</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/css/Home/home.css" />
     <link rel="stylesheet" href="~/css/Home/footer.css" />
     <link rel="stylesheet" href="~/css/Home/header.css" />
 </head>
 <body>
     <header class="main-header">
-        <div class="logo">EcoRide</div>
+        <a class="logo" href="/Home">EcoRide</a>
         <nav class="nav-left">
             <a href="/Home">Trang chủ</a>
             <a href="/Products">Sản phẩm</a>
@@ -24,50 +27,155 @@
             <a href="/Contact">Liên hệ</a>
         </nav>
         <div class="nav-right">
-            <a href="/Login">Đăng nhập</a>
-            <a href="/Register" class="register-btn">Đăng ký</a>
+            <a href="/store/login">Đăng nhập</a>
+            <a href="/store/register" class="btn-register">Đăng ký</a>
         </div>
     </header>
 
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <span class="eyebrow">Tương lai di chuyển</span>
+                <h1>Trải nghiệm hành trình xanh với công nghệ dẫn đầu</h1>
+                <p>Giải pháp xe điện thông minh giúp bạn đi xa hơn, tiết kiệm hơn và thân thiện với môi trường hơn.</p>
+                <div class="hero-actions">
+                    <a href="/Products" class="btn-primary">Khám phá ngay</a>
+                    <a href="/Contact" class="btn-secondary">Đặt lịch lái thử</a>
+                    <a href="/store/login" class="btn-outline">Đăng nhập khách hàng</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <h3>150+</h3>
+                        <p>Điểm sạc đối tác</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>320km</h3>
+                        <p>Quãng đường trung bình</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>98%</h3>
+                        <p>Khách hàng hài lòng</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-glow"></div>
+        </section>
 
-    <section class="hero">
-        <h2>Trải nghiệm tương lai di chuyển xanh</h2>
-        <p>Xe điện thông minh, hiệu năng cao, thân thiện với môi trường</p>
-        <a href="/Products" class="btn btn-light mt-3">Khám phá ngay</a>
-    </section>
+        <section class="trusted-bar">
+            <div class="trusted-item">Bảo hành pin 10 năm</div>
+            <div class="trusted-item">Ứng dụng điều khiển thông minh</div>
+            <div class="trusted-item">Dịch vụ cứu hộ 24/7</div>
+            <div class="trusted-item">Trả góp 0% lãi suất</div>
+        </section>
 
-    <div class="container text-center">
-        <h3 class="mb-4">Xe nổi bật</h3>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <img src="/images/bike1.jpg" class="card-img-top" alt="EV1">
-                    <div class="card-body">
-                        <h5 class="card-title">EcoRide EV1</h5>
-                        <p class="card-text">Xe điện tiết kiệm năng lượng, thiết kế hiện đại.</p>
-                    </div>
+        <section class="quick-review">
+            <div class="quick-inner">
+                <div>
+                    <h2>Truy cập nhanh UI</h2>
+                    <p>Nhấn vào các nút bên dưới để duyệt nhanh các trang đã dựng.</p>
+                </div>
+                <div class="quick-grid">
+                    <a href="/store/login">Đăng nhập khách hàng</a>
+                    <a href="/store/register">Đăng ký khách hàng</a>
+                    <a href="/products">Danh mục sản phẩm</a>
+                    <a href="/products/detail">Chi tiết sản phẩm</a>
+                    <a href="/cart">Giỏ hàng</a>
+                    <a href="/dashboard/dealer">Dealer Dashboard</a>
+                    <a href="/dealer/vehicles/catalog">Dealer - Danh mục xe</a>
+                    <a href="/dealer/sales/quotes">Dealer - Báo giá</a>
+                    <a href="/dealer/customers/profiles">Dealer - Khách hàng</a>
+                    <a href="/dealer/reports/sales-by-staff">Dealer - Báo cáo</a>
+                    <a href="/dashboard/evm">EVM Dashboard</a>
+                    <a href="/evm/products/catalog">EVM - Sản phẩm</a>
+                    <a href="/evm/dealers/contracts">EVM - Hợp đồng</a>
+                    <a href="/evm/reports/forecast">EVM - Dự báo</a>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <img src="/images/bike2.jpg" class="card-img-top" alt="EV2">
-                    <div class="card-body">
-                        <h5 class="card-title">EcoRide EV2</h5>
-                        <p class="card-text">Tốc độ vượt trội, pin bền bỉ lên đến 150km.</p>
+        </section>
+
+        <section class="feature-section">
+            <div class="section-header">
+                <h2>Vì sao chọn EcoRide</h2>
+                <p>Thiết kế tối ưu trải nghiệm và tối ưu hiệu suất cho hành trình của bạn.</p>
+            </div>
+            <div class="feature-grid">
+                <article class="feature-card">
+                    <span class="feature-icon">⚡</span>
+                    <h3>Sạc siêu tốc</h3>
+                    <p>Đạt 80% pin chỉ trong 20 phút với hệ thống sạc chuẩn CCS2.</p>
+                </article>
+                <article class="feature-card">
+                    <span class="feature-icon">🛰️</span>
+                    <h3>Kết nối IoT</h3>
+                    <p>Theo dõi xe theo thời gian thực và điều khiển từ xa qua ứng dụng EcoRide.</p>
+                </article>
+                <article class="feature-card">
+                    <span class="feature-icon">🛡️</span>
+                    <h3>An toàn chủ động</h3>
+                    <p>Gói công nghệ ADAS hỗ trợ phanh khẩn cấp, giữ làn và kiểm soát hành trình.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="vehicles-section">
+            <div class="section-header">
+                <h2>Xe nổi bật</h2>
+                <a href="/Products" class="link-action">Xem tất cả</a>
+            </div>
+            <div class="vehicle-grid">
+                <article class="vehicle-card">
+                    <figure>
+                        <img src="/images/bike1.jpg" alt="EcoRide EV1">
+                    </figure>
+                    <div class="vehicle-info">
+                        <h3>EcoRide EV1</h3>
+                        <p>Thiết kế nhỏ gọn, hiệu năng cao với tầm hoạt động 280km.</p>
+                        <div class="vehicle-meta">
+                            <span>Pin 72kWh</span>
+                            <span>4.8s 0-60 km/h</span>
+                        </div>
                     </div>
+                </article>
+                <article class="vehicle-card">
+                    <figure>
+                        <img src="/images/bike2.jpg" alt="EcoRide EV2">
+                    </figure>
+                    <div class="vehicle-info">
+                        <h3>EcoRide EV2</h3>
+                        <p>Tối ưu đường dài, pin bền bỉ lên đến 150km mỗi lần sạc.</p>
+                        <div class="vehicle-meta">
+                            <span>Pin 82kWh</span>
+                            <span>Hệ thống AWD</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="vehicle-card">
+                    <figure>
+                        <img src="/images/bike3.jpg" alt="EcoRide EV3">
+                    </figure>
+                    <div class="vehicle-info">
+                        <h3>EcoRide EV3</h3>
+                        <p>Phong cách thể thao với công suất tối đa 320 mã lực.</p>
+                        <div class="vehicle-meta">
+                            <span>Pin 95kWh</span>
+                            <span>Chế độ Track</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="cta-card">
+                <h2>Sẵn sàng chuyển sang năng lượng sạch?</h2>
+                <p>Đội ngũ tư vấn EcoRide sẽ giúp bạn lựa chọn chiếc xe phù hợp và hỗ trợ mọi thủ tục.</p>
+                <div class="cta-actions">
+                    <a href="/Register" class="btn-primary">Đăng ký thành viên</a>
+                    <a href="/Contact" class="btn-outline">Liên hệ tư vấn</a>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <img src="/images/bike3.jpg" class="card-img-top" alt="EV3">
-                    <div class="card-body">
-                        <h5 class="card-title">EcoRide EV3</h5>
-                        <p class="card-text">Phong cách thể thao, mạnh mẽ, đột phá.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
     <footer>
         <p>&copy; 2025 EcoRide | Mọi quyền được bảo lưu.</p>

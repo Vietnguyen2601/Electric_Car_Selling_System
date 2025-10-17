@@ -1,0 +1,190 @@
+﻿@page "/evm/dealers/targets"
+@model PortalPageModel
+@{
+    ViewData["Title"] = "Chỉ tiêu doanh số đại lý - EVM";
+    ViewData["PageTitle"] = "Chỉ tiêu doanh số & đánh giá";
+    ViewData["PageDescription"] = "Thiết lập mục tiêu doanh số, KPI và theo dõi mức độ hoàn thành của từng đại lý.";
+}
+
+@section PageActions {
+    <button class="btn-primary-gradient">Thiết lập chỉ tiêu</button>
+    <button class="btn-secondary-soft">Gửi thông báo đại lý</button>
+}
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Tổng quan mục tiêu</h2>
+            <p>Kế hoạch doanh số toàn quốc năm 2025.</p>
+        </div>
+    </div>
+    <div class="panel-body grid-3">
+        <div class="stat-card">
+            <span>Kế hoạch năm</span>
+            <h3>5.200 xe</h3>
+            <span class="kpi-trend">+18% so với 2024</span>
+        </div>
+        <div class="stat-card">
+            <span>Mức độ hoàn thành</span>
+            <h3>42%</h3>
+            <span class="badge success">Đúng tiến độ</span>
+        </div>
+        <div class="stat-card">
+            <span>Đại lý vượt KPI</span>
+            <h3>9/28</h3>
+            <span class="badge">Top thưởng Q2</span>
+        </div>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Bảng chỉ tiêu theo đại lý</h2>
+            <p>Doanh số mục tiêu và mức hoàn thành thực tế.</p>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table-modern">
+            <thead>
+                <tr>
+                    <th>Đại lý</th>
+                    <th>Mục tiêu quý</th>
+                    <th>Thực tế</th>
+                    <th>Tỷ lệ hoàn thành</th>
+                    <th>KPI phụ</th>
+                    <th>Đánh giá</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>EcoRide Hà Nội</td>
+                    <td>520 xe</td>
+                    <td>286 xe</td>
+                    <td>55%</td>
+                    <td>CSAT 4.6/5</td>
+                    <td class="badge success">Đúng tiến độ</td>
+                </tr>
+                <tr>
+                    <td>EcoRide Sài Gòn</td>
+                    <td>640 xe</td>
+                    <td>362 xe</td>
+                    <td>57%</td>
+                    <td>Fleet 12%</td>
+                    <td class="badge success">Vượt nhẹ</td>
+                </tr>
+                <tr>
+                    <td>EcoRide Đà Nẵng</td>
+                    <td>280 xe</td>
+                    <td>112 xe</td>
+                    <td>40%</td>
+                    <td>CSAT 4.1/5</td>
+                    <td class="badge warning">Cần hỗ trợ</td>
+                </tr>
+                <tr>
+                    <td>EcoRide Cần Thơ</td>
+                    <td>180 xe</td>
+                    <td>92 xe</td>
+                    <td>51%</td>
+                    <td>Fleet 6%</td>
+                    <td class="badge">Theo dõi</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="split-2">
+    <div class="panel soft">
+        <div class="panel-header">
+            <div>
+                <h2>Thiết lập KPI</h2>
+                <p>Cấu hình mục tiêu doanh số và KPI phụ cho từng đại lý.</p>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="form-grid">
+                <div class="form-control-modern">
+                    <label>Đại lý</label>
+                    <select>
+                        <option>EcoRide Hà Nội</option>
+                        <option>EcoRide Sài Gòn</option>
+                        <option>EcoRide Đà Nẵng</option>
+                        <option>EcoRide Quy Nhơn</option>
+                    </select>
+                </div>
+                <div class="form-control-modern">
+                    <label>Chỉ tiêu quý</label>
+                    <input placeholder="Số lượng xe" />
+                </div>
+                <div class="form-control-modern">
+                    <label>Chỉ tiêu Fleet</label>
+                    <input placeholder="%" />
+                </div>
+                <div class="form-control-modern">
+                    <label>Chỉ tiêu CSAT</label>
+                    <input placeholder="Điểm" />
+                </div>
+            </div>
+            <div class="panel-actions">
+                <button class="btn-secondary-soft">Lưu nháp</button>
+                <button class="btn-primary-gradient">Cập nhật</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-header">
+            <div>
+                <h2>Chương trình thưởng</h2>
+                <p>Chính sách thưởng theo mức độ hoàn thành KPI.</p>
+            </div>
+        </div>
+        <div class="panel-body list-modern">
+            <div class="list-item">
+                <strong>≥ 120% KPI</strong>
+                <span>Thưởng 4% doanh số + hỗ trợ marketing</span>
+            </div>
+            <div class="list-item">
+                <strong>100% - 119% KPI</strong>
+                <span>Thưởng 2% doanh số</span>
+            </div>
+            <div class="list-item">
+                <strong>80% - 99% KPI</strong>
+                <span>Cần kế hoạch cải thiện cùng hãng</span>
+            </div>
+            <div class="list-item">
+                <strong>&lt; 80% KPI</strong>
+                <span>Kích hoạt chương trình hỗ trợ đặc biệt</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Đánh giá và ghi chú</h2>
+            <p>Ghi nhận nhận xét từ team khu vực và kế hoạch hỗ trợ.</p>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="form-grid">
+            <div class="form-control-modern">
+                <label>Đại lý</label>
+                <input value="EcoRide Đà Nẵng" />
+            </div>
+            <div class="form-control-modern">
+                <label>Người đánh giá</label>
+                <input value="Regional Manager - Trung" />
+            </div>
+        </div>
+        <div class="form-control-modern">
+            <label>Ghi chú</label>
+            <textarea placeholder="Đề xuất hỗ trợ truyền thông, đào tạo, điều chỉnh chỉ tiêu...">Đề xuất chương trình roadshow EV1 tại phố đi bộ và bổ sung 10 xe demo trong tháng 7.</textarea>
+        </div>
+        <div class="panel-actions">
+            <button class="btn-primary-gradient">Lưu đánh giá</button>
+        </div>
+    </div>
+</div>

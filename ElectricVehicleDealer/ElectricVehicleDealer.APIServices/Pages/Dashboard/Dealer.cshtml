@@ -1,0 +1,206 @@
+﻿@page "/dashboard/dealer"
+@model PortalPageModel
+@{
+    ViewData["Title"] = "Dealer Dashboard - EcoRide";
+    ViewData["PageTitle"] = "Tổng quan hoạt động đại lý";
+    ViewData["PageDescription"] = "Nắm bắt nhanh hiệu suất bán hàng, tồn kho và trải nghiệm khách hàng để ra quyết định tức thời.";
+}
+
+@section PageActions {
+    <button class="btn-primary-gradient">Tạo báo giá mới</button>
+    <button class="btn-secondary-soft">Thêm lịch lái thử</button>
+}
+
+<div class="grid-4">
+    <div class="stat-card">
+        <span>Doanh số tháng</span>
+        <h3>182 xe</h3>
+        <span class="kpi-trend">+18% so với tháng trước</span>
+    </div>
+    <div class="stat-card">
+        <span>Giá trị hợp đồng</span>
+        <h3>92 tỷ ₫</h3>
+        <span class="kpi-trend">+12% QoQ</span>
+    </div>
+    <div class="stat-card">
+        <span>Lịch lái thử</span>
+        <h3>34 đang chờ</h3>
+        <span class="badge warning">Cần xác nhận</span>
+    </div>
+    <div class="stat-card">
+        <span>Mức hài lòng</span>
+        <h3>4.7/5</h3>
+        <span class="kpi-trend">Tăng 0.3 điểm</span>
+    </div>
+</div>
+
+<div class="split-2">
+    <div class="panel">
+        <div class="panel-header">
+            <div>
+                <h2>Pipeline bán hàng</h2>
+                <p>Tổng hợp trạng thái lead và cơ hội theo từng giai đoạn.</p>
+            </div>
+            <div class="panel-actions">
+                <button class="btn-ghost">Cập nhật dữ liệu</button>
+            </div>
+        </div>
+        <div class="panel-body">
+            <table class="table-modern">
+                <thead>
+                    <tr>
+                        <th>Giai đoạn</th>
+                        <th>Lead</th>
+                        <th>Giá trị ước tính</th>
+                        <th>Tỷ lệ chuyển đổi</th>
+                        <th>Người phụ trách</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Tiếp cận</td>
+                        <td>128</td>
+                        <td>38 tỷ ₫</td>
+                        <td>24%</td>
+                        <td class="badge">Phòng Marketing</td>
+                    </tr>
+                    <tr>
+                        <td>Tư vấn sản phẩm</td>
+                        <td>76</td>
+                        <td>27 tỷ ₫</td>
+                        <td>51%</td>
+                        <td class="badge success">Team Sales Zone 1</td>
+                    </tr>
+                    <tr>
+                        <td>Báo giá gửi khách</td>
+                        <td>48</td>
+                        <td>19 tỷ ₫</td>
+                        <td>63%</td>
+                        <td class="badge success">Team Sales Zone 2</td>
+                    </tr>
+                    <tr>
+                        <td>Ký hợp đồng</td>
+                        <td>26</td>
+                        <td>8.7 tỷ ₫</td>
+                        <td>92%</td>
+                        <td class="badge success">Manager Thảo</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel soft">
+        <div class="panel-header">
+            <div>
+                <h2>Hiệu suất theo dòng xe</h2>
+                <p>Doanh số top 5 dòng xe bán chạy trong 30 ngày gần nhất.</p>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="chart-placeholder">Biểu đồ cột doanh số xe (đang chờ tích hợp)</div>
+            <div class="list-modern">
+                <div class="list-item">
+                    <strong>EcoRide EV3 Sport</strong>
+                    <span>62 xe · 28.6 tỷ ₫</span>
+                </div>
+                <div class="list-item">
+                    <strong>EcoRide EV2 Touring</strong>
+                    <span>48 xe · 21.4 tỷ ₫</span>
+                </div>
+                <div class="list-item">
+                    <strong>EcoRide EV1 Urban</strong>
+                    <span>36 xe · 12.8 tỷ ₫</span>
+                </div>
+                <div class="list-item">
+                    <strong>EcoRide Cargo Fleet</strong>
+                    <span>24 xe · 17.2 tỷ ₫</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="split-2">
+    <div class="panel soft">
+        <div class="panel-header">
+            <div>
+                <h2>Hoạt động cần xử lý</h2>
+                <p>Lịch công việc và sự kiện quan trọng trong tuần.</p>
+            </div>
+        </div>
+        <div class="panel-body timeline">
+            <div class="timeline-item">
+                <h4>08:30 · Demo EcoRide EV3</h4>
+                <p>Khách hàng: Công ty Ánh Dương · Nhân sự: Phương (Sales)</p>
+            </div>
+            <div class="timeline-item">
+                <h4>10:30 · Review hợp đồng #HD-0923</h4>
+                <p>Khách hàng: Trần Minh Khôi · Quản lý: Anh Tài</p>
+            </div>
+            <div class="timeline-item">
+                <h4>14:00 · Meeting với hãng</h4>
+                <p>Yêu cầu thêm 20 xe EV2 bản Premium · Điều phối: Ms. Hạnh</p>
+            </div>
+            <div class="timeline-item">
+                <h4>16:00 · Training sản phẩm</h4>
+                <p>Update công nghệ pin thể rắn 2025 · Trainer: EVM Academy</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-header">
+            <div>
+                <h2>Khách hàng ưu tiên</h2>
+                <p>Các khách hàng đang trong giai đoạn chốt đơn hoặc có vấn đề cần chăm sóc.</p>
+            </div>
+            <div class="panel-actions">
+                <button class="btn-secondary-soft">Thêm khách hàng</button>
+            </div>
+        </div>
+        <div class="panel-body">
+            <table class="table-modern">
+                <thead>
+                    <tr>
+                        <th>Khách hàng</th>
+                        <th>Giai đoạn</th>
+                        <th>Giá trị</th>
+                        <th>Nhân viên</th>
+                        <th>Tình trạng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nguyễn Thị Yến</td>
+                        <td>Đợi ngân hàng duyệt</td>
+                        <td>1.25 tỷ ₫</td>
+                        <td>Liên</td>
+                        <td class="badge warning">Theo dõi</td>
+                    </tr>
+                    <tr>
+                        <td>Công ty LogiTrans</td>
+                        <td>Ký hợp đồng</td>
+                        <td>5.8 tỷ ₫</td>
+                        <td>Đại</td>
+                        <td class="badge success">On track</td>
+                    </tr>
+                    <tr>
+                        <td>Hoàng Gia Group</td>
+                        <td>Lên cấu hình</td>
+                        <td>3.2 tỷ ₫</td>
+                        <td>Hà</td>
+                        <td class="badge">Cần hỗ trợ</td>
+                    </tr>
+                    <tr>
+                        <td>Lý Quốc Minh</td>
+                        <td>Test drive</td>
+                        <td>1.8 tỷ ₫</td>
+                        <td>Trâm</td>
+                        <td class="badge danger">Có phản hồi</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,206 @@
+﻿@page "/dashboard/evm"
+@model PortalPageModel
+@{
+    ViewData["Title"] = "EVM Dashboard - EcoRide";
+    ViewData["PageTitle"] = "Tổng quan điều hành hãng xe";
+    ViewData["PageDescription"] = "Theo dõi cung cầu theo khu vực, điều phối tồn kho và hiệu suất của từng đại lý để tối ưu chuỗi cung ứng.";
+}
+
+@section PageActions {
+    <button class="btn-primary-gradient">Tạo chính sách mới</button>
+    <button class="btn-secondary-soft">Xuất báo cáo</button>
+}
+
+<div class="grid-4">
+    <div class="stat-card">
+        <span>Tồn kho toàn quốc</span>
+        <h3>1.284 xe</h3>
+        <span class="kpi-trend">-6% tuần qua</span>
+    </div>
+    <div class="stat-card">
+        <span>Tỷ lệ phân phối</span>
+        <h3>92%</h3>
+        <span class="kpi-trend">Kẻo sát target</span>
+    </div>
+    <div class="stat-card">
+        <span>Doanh số đại lý</span>
+        <h3>186 tỷ ₫</h3>
+        <span class="kpi-trend">+22% YoY</span>
+    </div>
+    <div class="stat-card">
+        <span>Forecast nhu cầu</span>
+        <h3>+312 xe</h3>
+        <span class="badge success">Tháng tới</span>
+    </div>
+</div>
+
+<div class="split-2">
+    <div class="panel">
+        <div class="panel-header">
+            <div>
+                <h2>Điều phối theo khu vực</h2>
+                <p>Phân bổ tồn kho và nhu cầu dự báo của từng vùng trong hệ thống.</p>
+            </div>
+            <div class="panel-actions">
+                <button class="btn-ghost">Cập nhật định tuyến</button>
+            </div>
+        </div>
+        <div class="panel-body">
+            <table class="table-modern">
+                <thead>
+                    <tr>
+                        <th>Khu vực</th>
+                        <th>Tồn kho</th>
+                        <th>Nhu cầu dự báo</th>
+                        <th>Tốc độ tiêu thụ</th>
+                        <th>Trạng thái</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Miền Bắc</td>
+                        <td>420</td>
+                        <td>+18%</td>
+                        <td>27 ngày</td>
+                        <td class="badge success">Ổn định</td>
+                    </tr>
+                    <tr>
+                        <td>Miền Trung</td>
+                        <td>216</td>
+                        <td>+24%</td>
+                        <td>19 ngày</td>
+                        <td class="badge warning">Cần điều phối</td>
+                    </tr>
+                    <tr>
+                        <td>Miền Nam</td>
+                        <td>648</td>
+                        <td>+32%</td>
+                        <td>14 ngày</td>
+                        <td class="badge success">Đạt kế hoạch</td>
+                    </tr>
+                    <tr>
+                        <td>Tây Nguyên</td>
+                        <td>84</td>
+                        <td>+9%</td>
+                        <td>34 ngày</td>
+                        <td class="badge danger">Chậm luân chuyển</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel soft">
+        <div class="panel-header">
+            <div>
+                <h2>Điểm nóng vận hành</h2>
+                <p>Theo dõi các cảnh báo hệ thống và đề xuất hành động tức thời.</p>
+            </div>
+        </div>
+        <div class="panel-body list-modern">
+            <div class="list-item">
+                <strong>EV2 Touring thiếu linh kiện pin</strong>
+                <span>ETA bổ sung: 4 ngày · Nhà máy: Hải Phòng</span>
+            </div>
+            <div class="list-item">
+                <strong>Đại lý Đà Nẵng vượt chỉ tiêu 34%</strong>
+                <span>Đề xuất thưởng nóng & tăng quota</span>
+            </div>
+            <div class="list-item">
+                <strong>Chiết khấu miền Tây hết hạn 31/05</strong>
+                <span>Yêu cầu cập nhật chính sách mới</span>
+            </div>
+            <div class="list-item">
+                <strong>Dự báo tăng nhu cầu fleet EV Cargo</strong>
+                <span>+58 đơn từ doanh nghiệp logistic</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="split-2">
+    <div class="panel soft">
+        <div class="panel-header">
+            <div>
+                <h2>Top đại lý theo doanh số</h2>
+                <p>Xếp hạng doanh số tháng và mức độ hoàn thành chỉ tiêu.</p>
+            </div>
+        </div>
+        <div class="panel-body">
+            <table class="table-modern">
+                <thead>
+                    <tr>
+                        <th>Đại lý</th>
+                        <th>Doanh số</th>
+                        <th>Chỉ tiêu</th>
+                        <th>Tăng trưởng</th>
+                        <th>Trạng thái</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>EcoRide Hà Nội</td>
+                        <td>62 tỷ ₫</td>
+                        <td>48 tỷ ₫</td>
+                        <td>+28%</td>
+                        <td class="badge success">Vượt 129%</td>
+                    </tr>
+                    <tr>
+                        <td>EcoRide Sài Gòn</td>
+                        <td>54 tỷ ₫</td>
+                        <td>52 tỷ ₫</td>
+                        <td>+16%</td>
+                        <td class="badge success">Đạt kế hoạch</td>
+                    </tr>
+                    <tr>
+                        <td>EcoRide Đà Nẵng</td>
+                        <td>22 tỷ ₫</td>
+                        <td>28 tỷ ₫</td>
+                        <td>-8%</td>
+                        <td class="badge warning">Cần hỗ trợ</td>
+                    </tr>
+                    <tr>
+                        <td>EcoRide Cần Thơ</td>
+                        <td>18 tỷ ₫</td>
+                        <td>20 tỷ ₫</td>
+                        <td>+4%</td>
+                        <td class="badge">Theo dõi</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-header">
+            <div>
+                <h2>AI dự báo nhu cầu</h2>
+                <p>Dự đoán sản lượng và khuyến nghị sản xuất cho 6 tuần tới.</p>
+            </div>
+            <div class="panel-actions">
+                <button class="btn-secondary-soft">Xem chi tiết mô hình</button>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="chart-placeholder">Biểu đồ đường dự báo (đang chờ tích hợp)</div>
+            <div class="list-modern">
+                <div class="list-item">
+                    <strong>EV3 Sport</strong>
+                    <span>+24% nhu cầu · Ưu tiên sản xuất</span>
+                </div>
+                <div class="list-item">
+                    <strong>EV2 Touring</strong>
+                    <span>+14% nhu cầu · Đề nghị tăng tồn</span>
+                </div>
+                <div class="list-item">
+                    <strong>EV1 Urban</strong>
+                    <span>Ổn định · Duy trì kế hoạch</span>
+                </div>
+                <div class="list-item">
+                    <strong>Cargo Fleet</strong>
+                    <span>+32% nhu cầu doanh nghiệp · Giao sớm</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

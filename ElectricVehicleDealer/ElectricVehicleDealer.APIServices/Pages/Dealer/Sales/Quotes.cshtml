@@ -1,0 +1,201 @@
+﻿@page "/dealer/sales/quotes"
+@model PortalPageModel
+@{
+    ViewData["Title"] = "Báo giá & hợp đồng - Dealer";
+    ViewData["PageTitle"] = "Quản lý báo giá & hợp đồng";
+    ViewData["PageDescription"] = "Khởi tạo báo giá, lưu phiên bản và chuyển đổi thành hợp đồng bán hàng chỉ với vài bước kéo thả.";
+}
+
+@section PageActions {
+    <button class="btn-primary-gradient">Báo giá mới</button>
+    <button class="btn-secondary-soft">Nhập dữ liệu</button>
+}
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Pipeline báo giá</h2>
+            <p>Theo dõi trạng thái từ lúc tạo báo giá tới khi ký hợp đồng.</p>
+        </div>
+        <div class="panel-actions">
+            <button class="btn-ghost">Tùy chỉnh cột</button>
+        </div>
+    </div>
+    <div class="panel-body grid-3">
+        <div class="card-ghost">
+            <h3>Draft</h3>
+            <p>4 báo giá đang chỉnh sửa</p>
+            <div class="list-modern">
+                <div class="list-item">
+                    <strong>#Q-2105 · EV3 Sport</strong>
+                    <span>Sales: Minh · Cập nhật 2h</span>
+                </div>
+                <div class="list-item">
+                    <strong>#Q-2106 · EV2 Touring</strong>
+                    <span>Sales: Diệu · Cập nhật 5h</span>
+                </div>
+            </div>
+        </div>
+        <div class="card-ghost">
+            <h3>Đã gửi khách</h3>
+            <p>8 báo giá chờ phản hồi</p>
+            <div class="list-modern">
+                <div class="list-item">
+                    <strong>#Q-2098 · EV1 Urban</strong>
+                    <span>Gửi: 14/06 · Khách: Đình Tùng</span>
+                </div>
+                <div class="list-item">
+                    <strong>#Q-2101 · Fleet Cargo</strong>
+                    <span>Gửi: 13/06 · Công ty: QuickMove</span>
+                </div>
+            </div>
+        </div>
+        <div class="card-ghost">
+            <h3>Chờ ký kết</h3>
+            <p>3 báo giá đã chốt cấu hình</p>
+            <div class="list-modern">
+                <div class="list-item">
+                    <strong>#Q-2089 · EV3 Sport</strong>
+                    <span>Trạng thái: Đang ký điện tử</span>
+                </div>
+                <div class="list-item">
+                    <strong>#Q-2090 · EV2 Touring</strong>
+                    <span>Trạng thái: Chờ đặt cọc</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="split-2">
+    <div class="panel soft">
+        <div class="panel-header">
+            <div>
+                <h2>Chi tiết báo giá</h2>
+                <p>Kéo thả option để tạo cấu hình phù hợp cho khách hàng.</p>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="form-grid">
+                <div class="form-control-modern">
+                    <label>Khách hàng</label>
+                    <input placeholder="Nhập tên hoặc số điện thoại..." />
+                </div>
+                <div class="form-control-modern">
+                    <label>Mẫu xe</label>
+                    <select>
+                        <option>EcoRide EV3 Sport</option>
+                        <option>EcoRide EV2 Touring</option>
+                        <option>EcoRide EV1 Urban</option>
+                        <option>EcoRide Cargo Fleet</option>
+                    </select>
+                </div>
+                <div class="form-control-modern">
+                    <label>Chương trình khuyến mãi</label>
+                    <select>
+                        <option>Không áp dụng</option>
+                        <option>Voucher sạc 50 triệu ₫</option>
+                        <option>Trả góp 0% 18 tháng</option>
+                        <option>Giảm giá fleet 5%</option>
+                    </select>
+                </div>
+                <div class="form-control-modern">
+                    <label>Phương thức thanh toán</label>
+                    <select>
+                        <option>Trả thẳng</option>
+                        <option>Trả góp qua ngân hàng đối tác</option>
+                        <option>Thuê mua tài chính</option>
+                    </select>
+                </div>
+            </div>
+            <div class="panel-actions">
+                <button class="btn-secondary-soft">Tính toán trả góp</button>
+                <button class="btn-primary-gradient">Xuất PDF báo giá</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-header">
+            <div>
+                <h2>Lịch sử phiên bản</h2>
+                <p>Theo dõi các lần cập nhật báo giá để dễ dàng phục hồi.</p>
+            </div>
+        </div>
+        <div class="panel-body timeline">
+            <div class="timeline-item">
+                <h4>16/06 · V1 · Minh Duy</h4>
+                <p>Tạo báo giá ban đầu · EV3 Sport AWD</p>
+            </div>
+            <div class="timeline-item">
+                <h4>16/06 · V2 · Minh Duy</h4>
+                <p>Thêm option Track Pack · Phí thêm 120 triệu ₫</p>
+            </div>
+            <div class="timeline-item">
+                <h4>17/06 · V3 · Khách Hạnh</h4>
+                <p>Yêu cầu trả góp 60% · Phí hồ sơ 12 triệu ₫</p>
+            </div>
+            <div class="timeline-item">
+                <h4>18/06 · V4 · Minh Duy</h4>
+                <p>Chốt cấu hình · Chuyển sang hợp đồng</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Danh sách hợp đồng gần đây</h2>
+            <p>Các hợp đồng vừa được ký hoặc chờ ký điện tử.</p>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table-modern">
+            <thead>
+                <tr>
+                    <th>Mã hợp đồng</th>
+                    <th>Khách hàng</th>
+                    <th>Mẫu xe</th>
+                    <th>Giá trị</th>
+                    <th>Trạng thái</th>
+                    <th>Nhân viên</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>#HD-0923</td>
+                    <td>Trần Minh Khôi</td>
+                    <td>EV3 Sport</td>
+                    <td>1.92 tỷ ₫</td>
+                    <td class="badge success">Đã ký</td>
+                    <td>Phương</td>
+                </tr>
+                <tr>
+                    <td>#HD-0924</td>
+                    <td>Nguyễn Tường Vy</td>
+                    <td>EV2 Touring</td>
+                    <td>1.45 tỷ ₫</td>
+                    <td class="badge warning">Chờ đặt cọc</td>
+                    <td>Hào</td>
+                </tr>
+                <tr>
+                    <td>#HD-0925</td>
+                    <td>LogiTrans</td>
+                    <td>Cargo Fleet 10 xe</td>
+                    <td>15.8 tỷ ₫</td>
+                    <td class="badge success">Ký điện tử</td>
+                    <td>Đại</td>
+                </tr>
+                <tr>
+                    <td>#HD-0926</td>
+                    <td>Lê Công Hậu</td>
+                    <td>EV1 Urban</td>
+                    <td>820 triệu ₫</td>
+                    <td class="badge danger">Cần rà soát</td>
+                    <td>Trâm</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

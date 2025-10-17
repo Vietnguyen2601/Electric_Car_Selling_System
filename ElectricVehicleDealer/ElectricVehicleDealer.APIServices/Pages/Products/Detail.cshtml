@@ -1,0 +1,115 @@
+﻿@page "/products/detail"
+@model PortalPageModel
+@{
+    Layout = "_StoreLayout";
+    ViewData["Title"] = "Chi tiết sản phẩm EcoRide EV3 Sport";
+}
+
+<section class="store-section">
+    <div class="store-container">
+        <div class="section-header">
+            <div>
+                <h1>EcoRide EV3 Sport</h1>
+                <p>SUV hiệu năng cao với công nghệ pin thể rắn, hệ thống dẫn động AWD và bộ khung khí động học tối ưu.</p>
+            </div>
+            <div class="section-action">
+                <a href="/cart">Thêm vào giỏ hàng</a>
+            </div>
+        </div>
+
+        <div class="store-form">
+            <div class="product-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                <div class="product-card">
+                    <figure>
+                        <img src="/images/bike3.jpg" alt="EcoRide EV3 Sport">
+                    </figure>
+                    <div class="product-tags">
+                        <span class="product-tag">Track Mode</span>
+                        <span class="product-tag">AWD</span>
+                        <span class="product-tag">HUD 3D</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Giá bán lẻ đề xuất</h3>
+                        <p class="price">1.890.000.000 ₫</p>
+                    </div>
+                    <button class="btn-primary" type="button">Đặt cọc online</button>
+                    <button class="btn-secondary" type="button">Tính phương án trả góp</button>
+                </div>
+
+                <div class="product-card">
+                    <h3>Thông số nổi bật</h3>
+                    <div class="list-modern">
+                        <div class="list-item">
+                            <strong>Phạm vi di chuyển</strong>
+                            <span>480 km (WLTP)</span>
+                        </div>
+                        <div class="list-item">
+                            <strong>Công suất tối đa</strong>
+                            <span>320 kW · 0-100 km/h: 4.5s</span>
+                        </div>
+                        <div class="list-item">
+                            <strong>Pin</strong>
+                            <span>95 kWh · Sạc nhanh 20 phút</span>
+                        </div>
+                        <div class="list-item">
+                            <strong>Tự lái</strong>
+                            <span>ADAS 3.0 · Tự động thay đổi làn</span>
+                        </div>
+                        <div class="list-item">
+                            <strong>Nội thất</strong>
+                            <span>Âm thanh 16 loa Quantum · HUD AR</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <h3>Chọn cấu hình</h3>
+                    <div class="form-control-modern">
+                        <label>Màu ngoại thất</label>
+                        <select>
+                            <option>Xanh Aurora</option>
+                            <option>Trắng Glacier</option>
+                            <option>Đen Midnight</option>
+                            <option>Đỏ Phoenix</option>
+                        </select>
+                    </div>
+                    <div class="form-control-modern">
+                        <label>Mâm xe</label>
+                        <select>
+                            <option>19" Aero Performance</option>
+                            <option>20" Track Carbon</option>
+                        </select>
+                    </div>
+                    <div class="form-control-modern">
+                        <label>Gói công nghệ</label>
+                        <select>
+                            <option>Standard Tech Pack</option>
+                            <option>Ultimate Pilot Pack</option>
+                            <option>Signature Luxury Pack</option>
+                        </select>
+                    </div>
+                    <button class="btn-secondary" type="button">Lưu cấu hình</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="store-form" style="margin-top: 40px;">
+            <h2 style="margin:0 0 16px;">Công nghệ dẫn đầu</h2>
+            <p style="margin:0 0 24px;color:var(--store-text-subtle);">EcoRide EV3 Sport tích hợp hệ sinh thái dịch vụ, cập nhật OTA và quản lý xe thông minh qua ứng dụng EcoRide Connect.</p>
+            <div class="product-grid">
+                <div class="product-card">
+                    <h3>Pin thể rắn 95 kWh</h3>
+                    <p>Đạt mật độ năng lượng cao, tuổi thọ pin 1.000.000 km với công nghệ làm mát chủ động.</p>
+                </div>
+                <div class="product-card">
+                    <h3>Driving Intelligence</h3>
+                    <p>Hệ thống ADAS 3.0 với 12 camera và 6 radar, hỗ trợ tự lái cấp 3 trong phố.</p>
+                </div>
+                <div class="product-card">
+                    <h3>Ứng dụng EcoRide</h3>
+                    <p>Điều khiển xe từ xa, theo dõi pin, đặt lịch sạc và cập nhật phần mềm qua OTA.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,47 @@
+﻿@page "/store/register"
+@model PortalPageModel
+@{
+    Layout = "_StoreLayout";
+    ViewData["Title"] = "Đăng ký tài khoản EcoRide";
+}
+
+<section class="store-section">
+    <div class="store-container">
+        <div class="auth-card">
+            <div>
+                <h1>Tạo tài khoản mới</h1>
+                <p>Gia nhập cộng đồng EcoRide để nhận thông báo ưu đãi và quản lý hành trình xe điện của bạn.</p>
+            </div>
+
+            <form class="store-form compact">
+                <div class="form-grid">
+                    <div class="form-control-modern">
+                        <label>Tên đăng nhập</label>
+                        <input placeholder="vd: nguyenvana" />
+                    </div>
+                    <div class="form-control-modern">
+                        <label>Email</label>
+                        <input type="email" placeholder="you@example.com" />
+                    </div>
+                    <div class="form-control-modern">
+                        <label>Số điện thoại</label>
+                        <input placeholder="09xx xxx xxx" />
+                    </div>
+                </div>
+                <div class="form-control-modern">
+                    <label>Mật khẩu</label>
+                    <input type="password" placeholder="Tối thiểu 8 ký tự, bao gồm ký tự đặc biệt" />
+                </div>
+                <div class="form-control-modern">
+                    <label>Nhập lại mật khẩu</label>
+                    <input type="password" placeholder="Nhập lại mật khẩu" />
+                </div>
+                <button type="submit" class="btn-primary">Đăng ký</button>
+            </form>
+
+            <div class="auth-meta">
+                Đã có tài khoản? <a href="/store/login">Đăng nhập</a>
+            </div>
+        </div>
+    </div>
+</section>

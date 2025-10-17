@@ -1,0 +1,171 @@
+﻿@page "/evm/products/pricing"
+@model PortalPageModel
+@{
+    ViewData["Title"] = "Giá sỉ & chiết khấu - EVM";
+    ViewData["PageTitle"] = "Giá sỉ, chiết khấu & khuyến mãi theo đại lý";
+    ViewData["PageDescription"] = "Thiết lập bảng giá sỉ, chính sách chiết khấu và phân bổ khuyến mãi tùy theo đại lý và khu vực.";
+}
+
+@section PageActions {
+    <button class="btn-primary-gradient">Tạo bảng giá mới</button>
+    <button class="btn-secondary-soft">Gửi thông báo đại lý</button>
+}
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Bảng giá sỉ hiện hành</h2>
+            <p>Giá sỉ cho từng dòng xe và mức chiết khấu cơ bản.</p>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table-modern">
+            <thead>
+                <tr>
+                    <th>Mẫu xe</th>
+                    <th>Giá sỉ chuẩn</th>
+                    <th>Giá bán lẻ đề xuất</th>
+                    <th>Chiết khấu chuẩn</th>
+                    <th>Chiết khấu tối đa</th>
+                    <th>Ghi chú</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>EV3 Sport</td>
+                    <td>1.58 tỷ ₫</td>
+                    <td>1.89 tỷ ₫</td>
+                    <td>6%</td>
+                    <td>8% (khi đạt KPI)</td>
+                    <td class="badge success">Hot</td>
+                </tr>
+                <tr>
+                    <td>EV2 Touring</td>
+                    <td>1.12 tỷ ₫</td>
+                    <td>1.38 tỷ ₫</td>
+                    <td>5%</td>
+                    <td>7%</td>
+                    <td>Áp dụng gói trả góp 0%</td>
+                </tr>
+                <tr>
+                    <td>EV1 Urban</td>
+                    <td>640 triệu ₫</td>
+                    <td>780 triệu ₫</td>
+                    <td>4%</td>
+                    <td>6%</td>
+                    <td>Hỗ trợ chiến dịch đô thị</td>
+                </tr>
+                <tr>
+                    <td>Cargo Fleet</td>
+                    <td>1.85 tỷ ₫</td>
+                    <td>2.05 tỷ ₫</td>
+                    <td>7%</td>
+                    <td>9%</td>
+                    <td>Yêu cầu ký hợp đồng Fleet</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="split-2">
+    <div class="panel soft">
+        <div class="panel-header">
+            <div>
+                <h2>Thiết lập chính sách chiết khấu</h2>
+                <p>Gán mức chiết khấu cho từng đại lý dựa trên KPI, thị phần.</p>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="form-grid">
+                <div class="form-control-modern">
+                    <label>Đại lý</label>
+                    <select>
+                        <option>EcoRide Hà Nội</option>
+                        <option>EcoRide Đà Nẵng</option>
+                        <option>EcoRide Sài Gòn</option>
+                        <option>EcoRide Cần Thơ</option>
+                    </select>
+                </div>
+                <div class="form-control-modern">
+                    <label>Dòng xe</label>
+                    <select>
+                        <option>EV3 Sport</option>
+                        <option>EV2 Touring</option>
+                        <option>EV1 Urban</option>
+                        <option>Cargo Fleet</option>
+                    </select>
+                </div>
+                <div class="form-control-modern">
+                    <label>Chiết khấu cơ bản</label>
+                    <input placeholder="%" />
+                </div>
+                <div class="form-control-modern">
+                    <label>Chiết khấu tối đa</label>
+                    <input placeholder="%" />
+                </div>
+            </div>
+            <div class="form-control-modern">
+                <label>Điều kiện áp dụng</label>
+                <textarea placeholder="Ví dụ: Đạt 120% KPI tháng, tỷ lệ nợ quá hạn &lt; 2%..."></textarea>
+            </div>
+            <div class="panel-actions">
+                <button class="btn-secondary-soft">Lưu chính sách</button>
+                <button class="btn-primary-gradient">Thông báo đại lý</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-header">
+            <div>
+                <h2>Phân bổ ngân sách khuyến mãi</h2>
+                <p>Quản lý ngân sách marketing hỗ trợ đại lý theo khu vực.</p>
+            </div>
+        </div>
+        <div class="panel-body list-modern">
+            <div class="list-item">
+                <strong>Miền Bắc</strong>
+                <span>Ngân sách 6 tỷ ₫ · Đã dùng 3.2 tỷ ₫</span>
+            </div>
+            <div class="list-item">
+                <strong>Miền Trung</strong>
+                <span>Ngân sách 3 tỷ ₫ · Đã dùng 1.4 tỷ ₫</span>
+            </div>
+            <div class="list-item">
+                <strong>Miền Nam</strong>
+                <span>Ngân sách 7.5 tỷ ₫ · Đã dùng 4.8 tỷ ₫</span>
+            </div>
+            <div class="list-item">
+                <strong>Tây Nguyên</strong>
+                <span>Ngân sách 1.2 tỷ ₫ · Đã dùng 460 triệu ₫</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel soft">
+    <div class="panel-header">
+        <div>
+            <h2>Dự báo tác động giá</h2>
+            <p>Ước tính doanh số khi thay đổi mức chiết khấu.</p>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="chart-placeholder">Biểu đồ mô phỏng doanh số theo chiết khấu (đang chờ tích hợp)</div>
+        <div class="list-modern">
+            <div class="list-item">
+                <strong>Chiết khấu EV3 từ 6% → 7%</strong>
+                <span>Dự kiến tăng doanh số 8% nhưng giảm lợi nhuận 1.6%</span>
+            </div>
+            <div class="list-item">
+                <strong>Giữ giá EV1</strong>
+                <span>Khuyến nghị duy trì để bảo vệ giá trị thương hiệu</span>
+            </div>
+            <div class="list-item">
+                <strong>Gói hỗ trợ marketing</strong>
+                <span>Tập trung vào EV2 tại miền Trung trong Q3</span>
+            </div>
+        </div>
+    </div>
+</div>

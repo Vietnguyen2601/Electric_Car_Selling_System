@@ -1,0 +1,169 @@
+﻿@page "/dealer/sales/procurement"
+@model PortalPageModel
+@{
+    ViewData["Title"] = "Đặt xe từ hãng - Dealer";
+    ViewData["PageTitle"] = "Đặt xe từ hãng theo nhu cầu";
+    ViewData["PageDescription"] = "Gửi yêu cầu bổ sung xe cho hãng sản xuất, theo dõi trạng thái và hạn giao đảm bảo nguồn cung.";
+}
+
+@section PageActions {
+    <button class="btn-primary-gradient">Yêu cầu phân bổ</button>
+    <button class="btn-secondary-soft">Xem quota</button>
+}
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Yêu cầu đặt xe gần đây</h2>
+            <p>Tổng hợp các yêu cầu đã gửi cho EVM và trạng thái xử lý.</p>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table-modern">
+            <thead>
+                <tr>
+                    <th>Mã yêu cầu</th>
+                    <th>Dòng xe</th>
+                    <th>Số lượng</th>
+                    <th>Ưu tiên</th>
+                    <th>Trạng thái</th>
+                    <th>Ngày dự kiến</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>#REQ-412</td>
+                    <td>EV3 Sport</td>
+                    <td>18</td>
+                    <td class="badge success">Cao</td>
+                    <td class="badge warning">Đang sản xuất</td>
+                    <td>05/07/2025</td>
+                </tr>
+                <tr>
+                    <td>#REQ-413</td>
+                    <td>EV2 Touring</td>
+                    <td>24</td>
+                    <td class="badge">Trung bình</td>
+                    <td class="badge success">Đang vận chuyển</td>
+                    <td>28/06/2025</td>
+                </tr>
+                <tr>
+                    <td>#REQ-414</td>
+                    <td>EV1 Urban</td>
+                    <td>40</td>
+                    <td class="badge">Trung bình</td>
+                    <td class="badge success">Đã duyệt</td>
+                    <td>30/06/2025</td>
+                </tr>
+                <tr>
+                    <td>#REQ-415</td>
+                    <td>Cargo Fleet</td>
+                    <td>12</td>
+                    <td class="badge danger">Khẩn</td>
+                    <td class="badge warning">Chờ xác nhận linh kiện</td>
+                    <td>12/07/2025</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="split-2">
+    <div class="panel soft">
+        <div class="panel-header">
+            <div>
+                <h2>Tạo yêu cầu mới</h2>
+                <p>Chọn mẫu xe và số lượng theo từng tùy chọn màu sắc, cấu hình.</p>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="form-grid">
+                <div class="form-control-modern">
+                    <label>Mẫu xe</label>
+                    <select>
+                        <option>EcoRide EV3 Sport</option>
+                        <option>EcoRide EV2 Touring</option>
+                        <option>EcoRide EV1 Urban</option>
+                        <option>EcoRide Cargo Fleet</option>
+                    </select>
+                </div>
+                <div class="form-control-modern">
+                    <label>Số lượng</label>
+                    <input type="number" placeholder="Nhập số lượng" />
+                </div>
+                <div class="form-control-modern">
+                    <label>Màu sắc ưu tiên</label>
+                    <input placeholder="Ví dụ: Xanh Aurora (10), Trắng Pearl (8)..." />
+                </div>
+                <div class="form-control-modern">
+                    <label>Mức độ ưu tiên</label>
+                    <select>
+                        <option>Trung bình</option>
+                        <option>Cao</option>
+                        <option>Khẩn</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-control-modern">
+                <label>Lý do yêu cầu</label>
+                <textarea placeholder="Phân tích nhu cầu khách hàng, backlog đơn hàng, hoặc sự kiện marketing sắp diễn ra..."></textarea>
+            </div>
+            <div class="panel-actions">
+                <button class="btn-secondary-soft">Lưu nháp</button>
+                <button class="btn-primary-gradient">Gửi hãng</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-header">
+            <div>
+                <h2>Thông tin phản hồi từ EVM</h2>
+                <p>Mẫu phản hồi tự động khi hãng nhận được yêu cầu đặt xe.</p>
+            </div>
+        </div>
+        <div class="panel-body list-modern">
+            <div class="list-item">
+                <strong>Thời gian xử lý dự kiến</strong>
+                <span>2 - 3 ngày làm việc</span>
+            </div>
+            <div class="list-item">
+                <strong>Hạn chót cập nhật cấu hình</strong>
+                <span>Trước khi sản xuất 72 giờ</span>
+            </div>
+            <div class="list-item">
+                <strong>Ưu tiên điều phối</strong>
+                <span>Căn cứ theo tồn kho khu vực & mức độ khẩn</span>
+            </div>
+            <div class="list-item">
+                <strong>Đường dây nóng</strong>
+                <span>1800-8899 · EVM Supply Chain</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Theo dõi logistics</h2>
+            <p>Trạng thái vận chuyển và các mốc kiểm soát chất lượng.</p>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="timeline">
+            <div class="timeline-item">
+                <h4>16/06 · Đã rời nhà máy Hải Phòng</h4>
+                <p>Đơn vị vận chuyển: EcoRide Logistics · ETA kho miền Nam 20/06</p>
+            </div>
+            <div class="timeline-item">
+                <h4>18/06 · Checkpoint Đà Nẵng</h4>
+                <p>Đã hoàn tất kiểm tra nhanh · Không phát sinh lỗi</p>
+            </div>
+            <div class="timeline-item">
+                <h4>20/06 · Nhập kho Bình Dương</h4>
+                <p>QC 1: 20/06 · QC 2: 21/06 · Có thể điều phối về đại lý từ 22/06</p>
+            </div>
+        </div>
+    </div>
+</div>

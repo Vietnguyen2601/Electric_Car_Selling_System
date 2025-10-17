@@ -1,0 +1,100 @@
+﻿@page "/cart"
+@model PortalPageModel
+@{
+    Layout = "_StoreLayout";
+    ViewData["Title"] = "Giỏ hàng của bạn - EcoRide";
+}
+
+<section class="store-section">
+    <div class="store-container">
+        <div class="section-header">
+            <div>
+                <h1>Giỏ hàng</h1>
+                <p>Kiểm tra lại cấu hình xe và các gói dịch vụ trước khi hoàn tất đặt hàng.</p>
+            </div>
+            <div class="section-action">
+                <a href="/products">Tiếp tục mua sắm</a>
+            </div>
+        </div>
+
+        <div class="store-form">
+            <div style="display:grid;grid-template-columns:2fr 1fr;gap:24px;">
+                <div>
+                    <table class="cart-table">
+                        <thead>
+                            <tr>
+                                <th>Sản phẩm</th>
+                                <th>Cấu hình</th>
+                                <th>Số lượng</th>
+                                <th>Giá</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <strong>EcoRide EV3 Sport</strong>
+                                    <p style="margin:6px 0;color:var(--store-text-subtle);font-size:13px;">Xanh Aurora · Track Pack</p>
+                                </td>
+                                <td>
+                                    <span style="display:block;font-size:13px;color:var(--store-text-subtle);">Gói Ultimate Pilot Pack</span>
+                                    <span style="display:block;font-size:13px;color:var(--store-text-subtle);">Bảo hành mở rộng 5 năm</span>
+                                </td>
+                                <td>1</td>
+                                <td>1.980.000.000 ₫</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Gói sạc nhanh tại nhà</strong>
+                                    <p style="margin:6px 0;color:var(--store-text-subtle);font-size:13px;">Wallbox 22kW + lắp đặt</p>
+                                </td>
+                                <td>
+                                    <span style="display:block;font-size:13px;color:var(--store-text-subtle);">Bao gồm bảo trì 24 tháng</span>
+                                </td>
+                                <td>1</td>
+                                <td>45.000.000 ₫</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <aside class="cart-summary">
+                    <div class="summary-row">
+                        <span>Tạm tính</span>
+                        <span>2.025.000.000 ₫</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Ưu đãi</span>
+                        <span>-50.000.000 ₫</span>
+                    </div>
+                    <div class="summary-row summary-total">
+                        <span>Tổng cộng</span>
+                        <span>1.975.000.000 ₫</span>
+                    </div>
+                    <button class="btn-primary" type="button">Tiến hành đặt cọc</button>
+                    <button class="btn-secondary" type="button">Chia sẻ báo giá</button>
+                </aside>
+            </div>
+        </div>
+
+        <div class="store-form" style="margin-top: 32px;">
+            <h2 style="margin:0 0 18px;">Bạn cũng có thể quan tâm</h2>
+            <div class="product-grid">
+                <article class="product-card">
+                    <h3>Bảo hiểm thân vỏ 2 năm</h3>
+                    <p>Giảm 20% cho khách hàng đặt cọc online ngay hôm nay.</p>
+                    <button class="btn-secondary" type="button">Thêm vào giỏ</button>
+                </article>
+                <article class="product-card">
+                    <h3>Gói chăm sóc ceramic</h3>
+                    <p>Bảo vệ ngoại thất với lớp phủ ceramic và chăm sóc định kỳ.</p>
+                    <button class="btn-secondary" type="button">Thêm vào giỏ</button>
+                </article>
+                <article class="product-card">
+                    <h3>Gói bảo dưỡng 5 năm</h3>
+                    <p>Tối ưu chi phí vận hành với lịch bảo dưỡng chuẩn EcoRide.</p>
+                    <button class="btn-secondary" type="button">Thêm vào giỏ</button>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>

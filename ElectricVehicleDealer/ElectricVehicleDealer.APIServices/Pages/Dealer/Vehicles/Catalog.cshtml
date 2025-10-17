@@ -1,0 +1,211 @@
+﻿@page "/dealer/vehicles/catalog"
+@model PortalPageModel
+@{
+    ViewData["Title"] = "Danh mục xe - Dealer Portal";
+    ViewData["PageTitle"] = "Danh mục xe & cấu hình";
+    ViewData["PageDescription"] = "Tìm kiếm nhanh các dòng xe EcoRide, xem thông số chi tiết, giá bán và tình trạng tồn kho theo đại lý.";
+}
+
+@section PageActions {
+    <button class="btn-primary-gradient">Tạo cấu hình mới</button>
+    <button class="btn-secondary-soft">Xuất danh mục</button>
+}
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Bộ lọc nâng cao</h2>
+            <p>Thu hẹp danh sách theo phân khúc, tầm giá, pin và công nghệ hỗ trợ lái.</p>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="form-grid">
+            <div class="form-control-modern">
+                <label>Phân khúc</label>
+                <select>
+                    <option>Tất cả</option>
+                    <option>Urban Smart</option>
+                    <option>Performance</option>
+                    <option>Logistics Fleet</option>
+                </select>
+            </div>
+            <div class="form-control-modern">
+                <label>Tầm giá</label>
+                <select>
+                    <option>Tất cả</option>
+                    <option>Dưới 800 triệu</option>
+                    <option>800 triệu - 1.5 tỷ</option>
+                    <option>Trên 1.5 tỷ</option>
+                </select>
+            </div>
+            <div class="form-control-modern">
+                <label>Công nghệ pin</label>
+                <select>
+                    <option>Tất cả</option>
+                    <option>Pin thể rắn</option>
+                    <option>Pin LFP</option>
+                    <option>Pin NCM</option>
+                </select>
+            </div>
+            <div class="form-control-modern">
+                <label>Trạng thái tồn kho</label>
+                <select>
+                    <option>Từ hãng</option>
+                    <option>Kho đại lý</option>
+                    <option>Đang vận chuyển</option>
+                    <option>Chờ sản xuất</option>
+                </select>
+            </div>
+        </div>
+        <div class="panel-actions">
+            <button class="btn-secondary-soft">Đặt lại bộ lọc</button>
+            <button class="btn-primary-gradient">Áp dụng</button>
+        </div>
+    </div>
+</div>
+
+<div class="grid-3">
+    <div class="card-ghost">
+        <div class="chips">
+            <span class="chip">SUV</span>
+            <span class="chip">Pin 95kWh</span>
+            <span class="chip">ADAS 2.5</span>
+        </div>
+        <h3>EcoRide EV3 Sport 2025</h3>
+        <p>Mẫu SUV hiệu suất cao với khả năng tăng tốc 0-100 km/h trong 4.5 giây, phạm vi 480km.</p>
+        <div class="list-modern">
+            <div class="list-item">
+                <strong>Giá bán lẻ đề xuất</strong>
+                <span>1.89 tỷ ₫</span>
+            </div>
+            <div class="list-item">
+                <strong>Tồn kho đại lý</strong>
+                <span>12 xe · 3 màu</span>
+            </div>
+            <div class="list-item">
+                <strong>Khuyến mãi áp dụng</strong>
+                <span>Voucher sạc 50 triệu ₫</span>
+            </div>
+        </div>
+        <div class="panel-actions">
+            <button class="btn-primary-gradient">Xem chi tiết</button>
+            <button class="btn-ghost">Thêm vào so sánh</button>
+        </div>
+    </div>
+
+    <div class="card-ghost">
+        <div class="chips">
+            <span class="chip">Sedan</span>
+            <span class="chip">Pin 82kWh</span>
+            <span class="chip">Tự lái cấp 2</span>
+        </div>
+        <h3>EcoRide EV2 Touring</h3>
+        <p>Thiết kế thanh lịch, tối ưu đường dài với hệ thống giữ làn thông minh và ghế massage.</p>
+        <div class="list-modern">
+            <div class="list-item">
+                <strong>Giá bán lẻ đề xuất</strong>
+                <span>1.38 tỷ ₫</span>
+            </div>
+            <div class="list-item">
+                <strong>Tồn kho đại lý</strong>
+                <span>22 xe · 4 màu</span>
+            </div>
+            <div class="list-item">
+                <strong>Khuyến mãi áp dụng</strong>
+                <span>Trả góp 0% trong 18 tháng</span>
+            </div>
+        </div>
+        <div class="panel-actions">
+            <button class="btn-primary-gradient">Xem chi tiết</button>
+            <button class="btn-ghost">Thêm vào so sánh</button>
+        </div>
+    </div>
+
+    <div class="card-ghost">
+        <div class="chips">
+            <span class="chip">Hatchback</span>
+            <span class="chip">Pin 62kWh</span>
+            <span class="chip">City Mode</span>
+        </div>
+        <h3>EcoRide EV1 Urban</h3>
+        <p>Xe đô thị thông minh với bán kính quay nhỏ, hỗ trợ đỗ tự động và tiêu thụ điện tối ưu.</p>
+        <div class="list-modern">
+            <div class="list-item">
+                <strong>Giá bán lẻ đề xuất</strong>
+                <span>780 triệu ₫</span>
+            </div>
+            <div class="list-item">
+                <strong>Tồn kho đại lý</strong>
+                <span>38 xe · 5 màu</span>
+            </div>
+            <div class="list-item">
+                <strong>Khuyến mãi áp dụng</strong>
+                <span>Miễn phí gói bảo dưỡng 3 năm</span>
+            </div>
+        </div>
+        <div class="panel-actions">
+            <button class="btn-primary-gradient">Xem chi tiết</button>
+            <button class="btn-ghost">Thêm vào so sánh</button>
+        </div>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Thông số kỹ thuật nổi bật</h2>
+            <p>So sánh nhanh các thông số chính của các phiên bản trong danh mục.</p>
+        </div>
+        <div class="panel-actions">
+            <button class="btn-secondary-soft">Tải PDF spec</button>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table-modern">
+            <thead>
+                <tr>
+                    <th>Phiên bản</th>
+                    <th>Loại pin</th>
+                    <th>Phạm vi</th>
+                    <th>Công suất</th>
+                    <th>Tính năng chính</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>EV3 Sport AWD</td>
+                    <td>Pin thể rắn 95kWh</td>
+                    <td>480 km</td>
+                    <td>320 kW</td>
+                    <td class="chips">
+                        <span class="chip">Track Mode</span>
+                        <span class="chip">Chassis Active</span>
+                        <span class="chip">AR HUD</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>EV2 Touring Premium</td>
+                    <td>Pin NCM 82kWh</td>
+                    <td>510 km</td>
+                    <td>240 kW</td>
+                    <td class="chips">
+                        <span class="chip">Night Vision</span>
+                        <span class="chip">Massage 4 vị trí</span>
+                        <span class="chip">Smart Route</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>EV1 Urban Plus</td>
+                    <td>Pin LFP 62kWh</td>
+                    <td>380 km</td>
+                    <td>150 kW</td>
+                    <td class="chips">
+                        <span class="chip">Smart Parking</span>
+                        <span class="chip">City Pilot</span>
+                        <span class="chip">Digital Key</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

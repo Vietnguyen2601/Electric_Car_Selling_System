@@ -1,0 +1,164 @@
+﻿@page "/evm/dealers/accounts"
+@model PortalPageModel
+@{
+    ViewData["Title"] = "Tài khoản đại lý - EVM";
+    ViewData["PageTitle"] = "Quản lý tài khoản đại lý";
+    ViewData["PageDescription"] = "Cấp quyền truy cập hệ thống, giám sát trạng thái hoạt động và bảo mật tài khoản cho từng đại lý.";
+}
+
+@section PageActions {
+    <button class="btn-primary-gradient">Tạo tài khoản đại lý</button>
+    <button class="btn-secondary-soft">Đặt lại mật khẩu</button>
+}
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Bảng tài khoản đại lý</h2>
+            <p>Danh sách tài khoản truy cập hệ thống hãng dành cho đại lý.</p>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table-modern">
+            <thead>
+                <tr>
+                    <th>Tài khoản</th>
+                    <th>Đại lý</th>
+                    <th>Vai trò</th>
+                    <th>Trạng thái</th>
+                    <th>Lần đăng nhập</th>
+                    <th>Bảo mật</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>hn-manager@ecoride.vn</td>
+                    <td>EcoRide Hà Nội</td>
+                    <td>Dealer Manager</td>
+                    <td class="badge success">Hoạt động</td>
+                    <td>17/06/2025 · 09:12</td>
+                    <td class="badge">MFA</td>
+                </tr>
+                <tr>
+                    <td>sg-logistics@ecoride.vn</td>
+                    <td>EcoRide Sài Gòn</td>
+                    <td>Dealer Staff</td>
+                    <td class="badge success">Hoạt động</td>
+                    <td>17/06/2025 · 16:24</td>
+                    <td class="badge">MFA</td>
+                </tr>
+                <tr>
+                    <td>dn-director@ecoride.vn</td>
+                    <td>EcoRide Đà Nẵng</td>
+                    <td>Dealer Manager</td>
+                    <td class="badge warning">Khoá tạm</td>
+                    <td>15/06/2025 · 18:45</td>
+                    <td class="badge danger">MFA chưa kích hoạt</td>
+                </tr>
+                <tr>
+                    <td>ct-finance@ecoride.vn</td>
+                    <td>EcoRide Cần Thơ</td>
+                    <td>Finance Officer</td>
+                    <td class="badge success">Hoạt động</td>
+                    <td>16/06/2025 · 08:30</td>
+                    <td class="badge">MFA</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="split-2">
+    <div class="panel soft">
+        <div class="panel-header">
+            <div>
+                <h2>Tạo tài khoản mới</h2>
+                <p>Thiết lập thông tin và phân quyền cho người dùng đại lý.</p>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="form-grid">
+                <div class="form-control-modern">
+                    <label>Email đăng nhập</label>
+                    <input placeholder="name@ecoride.vn" />
+                </div>
+                <div class="form-control-modern">
+                    <label>Đại lý</label>
+                    <select>
+                        <option>EcoRide Hà Nội</option>
+                        <option>EcoRide Sài Gòn</option>
+                        <option>EcoRide Đà Nẵng</option>
+                        <option>EcoRide Hải Phòng</option>
+                    </select>
+                </div>
+                <div class="form-control-modern">
+                    <label>Vai trò</label>
+                    <select>
+                        <option>Dealer Manager</option>
+                        <option>Dealer Staff</option>
+                        <option>Finance Officer</option>
+                        <option>Service Advisor</option>
+                    </select>
+                </div>
+                <div class="form-control-modern">
+                    <label>Hiệu lực</label>
+                    <input type="date" />
+                </div>
+            </div>
+            <div class="panel-actions">
+                <button class="btn-secondary-soft">Gửi email kích hoạt</button>
+                <button class="btn-primary-gradient">Tạo tài khoản</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-header">
+            <div>
+                <h2>Cấu hình bảo mật</h2>
+                <p>Kiểm soát các tùy chọn bảo mật bắt buộc.</p>
+            </div>
+        </div>
+        <div class="panel-body list-modern">
+            <div class="list-item">
+                <strong>Bắt buộc MFA</strong>
+                <span>Tất cả tài khoản phải kích hoạt trong 24h</span>
+            </div>
+            <div class="list-item">
+                <strong>Giới hạn đăng nhập</strong>
+                <span>Khóa sau 5 lần sai · Mở lại bằng OTP</span>
+            </div>
+            <div class="list-item">
+                <strong>Quy tắc mật khẩu</strong>
+                <span>Tối thiểu 10 ký tự · Có ký tự đặc biệt</span>
+            </div>
+            <div class="list-item">
+                <strong>Thông báo bảo mật</strong>
+                <span>Email cảnh báo khi đăng nhập từ thiết bị mới</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Nhật ký hoạt động</h2>
+            <p>Theo dõi hành động quan trọng trên hệ thống.</p>
+        </div>
+    </div>
+    <div class="panel-body timeline">
+        <div class="timeline-item">
+            <h4>18/06 · 09:02 · hn-manager</h4>
+            <p>Cập nhật giá sỉ EV3 Sport cho chiến dịch tháng 6</p>
+        </div>
+        <div class="timeline-item">
+            <h4>17/06 · 17:40 · sg-logistics</h4>
+            <p>Thêm yêu cầu điều phối 12 xe EV2 Touring</p>
+        </div>
+        <div class="timeline-item">
+            <h4>17/06 · 16:10 · dn-director</h4>
+            <p>Đổi mật khẩu · Kích hoạt MFA</p>
+        </div>
+    </div>
+</div>

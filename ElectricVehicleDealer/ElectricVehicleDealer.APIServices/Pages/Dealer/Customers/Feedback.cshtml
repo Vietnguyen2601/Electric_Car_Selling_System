@@ -1,0 +1,176 @@
+﻿@page "/dealer/customers/feedback"
+@model PortalPageModel
+@{
+    ViewData["Title"] = "Phản hồi & khiếu nại - Dealer";
+    ViewData["PageTitle"] = "Ghi nhận phản hồi & xử lý khiếu nại";
+    ViewData["PageDescription"] = "Theo dõi phản hồi khách hàng, phân loại mức độ ưu tiên và phân công nhân sự xử lý nhanh chóng.";
+}
+
+@section PageActions {
+    <button class="btn-primary-gradient">Ghi nhận phản hồi</button>
+    <button class="btn-secondary-soft">Xuất báo cáo CSAT</button>
+}
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Chỉ số hài lòng</h2>
+            <p>Tổng hợp điểm CSAT, NPS và tỷ lệ phản hồi đã xử lý.</p>
+        </div>
+    </div>
+    <div class="panel-body grid-3">
+        <div class="stat-card">
+            <span>CSAT tháng</span>
+            <h3>4.7 / 5</h3>
+            <span class="kpi-trend">+0.3 điểm</span>
+        </div>
+        <div class="stat-card">
+            <span>NPS</span>
+            <h3>63</h3>
+            <span class="badge success">Promoter 72%</span>
+        </div>
+        <div class="stat-card">
+            <span>Tỷ lệ phản hồi xử lý</span>
+            <h3>92%</h3>
+            <span class="badge">Mục tiêu: 95%</span>
+        </div>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Bảng phản hồi khách hàng</h2>
+            <p>Danh sách phản hồi mới nhận và trạng thái xử lý.</p>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table-modern">
+            <thead>
+                <tr>
+                    <th>Khách hàng</th>
+                    <th>Dòng xe</th>
+                    <th>Chủ đề</th>
+                    <th>Mức độ</th>
+                    <th>Trạng thái</th>
+                    <th>Nhân sự phụ trách</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Đỗ Song Nguyên</td>
+                    <td>EV3 Sport</td>
+                    <td>Âm thanh khoang lái</td>
+                    <td class="badge">Trung bình</td>
+                    <td class="badge warning">Đang xử lý</td>
+                    <td>Kỹ thuật: Quân</td>
+                </tr>
+                <tr>
+                    <td>Lưu Thị Lan</td>
+                    <td>EV2 Touring</td>
+                    <td>Thủ tục ngân hàng</td>
+                    <td class="badge success">Thấp</td>
+                    <td class="badge success">Đã giải quyết</td>
+                    <td>CSKH: Hương</td>
+                </tr>
+                <tr>
+                    <td>Công ty LogiTrans</td>
+                    <td>Cargo Fleet</td>
+                    <td>Thời gian giao xe</td>
+                    <td class="badge danger">Cao</td>
+                    <td class="badge warning">Chờ phản hồi hãng</td>
+                    <td>Key Account: Đại</td>
+                </tr>
+                <tr>
+                    <td>Huỳnh Quốc Tín</td>
+                    <td>EV1 Urban</td>
+                    <td>Ứng dụng điều khiển</td>
+                    <td class="badge">Trung bình</td>
+                    <td class="badge success">Đã cập nhật</td>
+                    <td>Product: Vy</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="split-2">
+    <div class="panel soft">
+        <div class="panel-header">
+            <div>
+                <h2>Ghi nhận phản hồi</h2>
+                <p>Mẫu form chuẩn để nhập phản hồi từ nhiều kênh.</p>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="form-grid">
+                <div class="form-control-modern">
+                    <label>Khách hàng</label>
+                    <input placeholder="Tên khách hoặc mã khách hàng" />
+                </div>
+                <div class="form-control-modern">
+                    <label>Dòng xe</label>
+                    <select>
+                        <option>EV3 Sport</option>
+                        <option>EV2 Touring</option>
+                        <option>EV1 Urban</option>
+                        <option>Cargo Fleet</option>
+                    </select>
+                </div>
+                <div class="form-control-modern">
+                    <label>Mức độ</label>
+                    <select>
+                        <option>Thấp</option>
+                        <option>Trung bình</option>
+                        <option>Cao</option>
+                        <option>Khẩn cấp</option>
+                    </select>
+                </div>
+                <div class="form-control-modern">
+                    <label>Kênh tiếp nhận</label>
+                    <select>
+                        <option>Hotline</option>
+                        <option>Email</option>
+                        <option>Mạng xã hội</option>
+                        <option>Survey sau bán</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-control-modern">
+                <label>Nội dung</label>
+                <textarea placeholder="Mô tả chi tiết phản hồi, mong muốn của khách hàng..."></textarea>
+            </div>
+            <div class="panel-actions">
+                <button class="btn-secondary-soft">Lưu nháp</button>
+                <button class="btn-primary-gradient">Gửi bộ phận xử lý</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-header">
+            <div>
+                <h2>Quy trình xử lý chuẩn</h2>
+                <p>Các bước cần thực hiện tương ứng mức độ ưu tiên.</p>
+            </div>
+        </div>
+        <div class="panel-body timeline">
+            <div class="timeline-item">
+                <h4>1. Tiếp nhận thông tin</h4>
+                <p>Xác nhận với khách trong vòng 2h · Ghi nhận hệ thống</p>
+            </div>
+            <div class="timeline-item">
+                <h4>2. Phân loại & phân công</h4>
+                <p>Chọn bộ phận phụ trách · SLA theo mức độ</p>
+            </div>
+            <div class="timeline-item">
+                <h4>3. Xử lý & phản hồi</h4>
+                <p>Ghi chú rõ nội dung xử lý, tài liệu đính kèm</p>
+            </div>
+            <div class="timeline-item">
+                <h4>4. Đánh giá sau xử lý</h4>
+                <p>Gọi xác nhận khách hài lòng · Cập nhật điểm CSAT</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,129 @@
+﻿@page "/scheduling/test-drive"
+@model PortalPageModel
+@{
+    ViewData["Title"] = "Đặt lịch lái thử - EcoRide";
+    ViewData["PageTitle"] = "Đặt lịch lái thử EcoRide";
+    ViewData["PageDescription"] = "Chọn dòng xe bạn muốn trải nghiệm, địa điểm và thời gian phù hợp. Đội ngũ tư vấn sẽ xác nhận trong 30 phút.";
+}
+
+@section PageActions {
+    <button class="btn-secondary-soft">Xem lịch đã đặt</button>
+}
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Thông tin khách hàng</h2>
+            <p>Chúng tôi cần một số thông tin cơ bản để hỗ trợ tốt nhất.</p>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="form-grid">
+            <div class="form-control-modern">
+                <label>Họ tên</label>
+                <input placeholder="Họ và tên của bạn" />
+            </div>
+            <div class="form-control-modern">
+                <label>Email</label>
+                <input placeholder="email@example.com" />
+            </div>
+            <div class="form-control-modern">
+                <label>Số điện thoại</label>
+                <input placeholder="09xx xxx xxx" />
+            </div>
+            <div class="form-control-modern">
+                <label>Tỉnh/Thành phố</label>
+                <select>
+                    <option>TP.HCM</option>
+                    <option>Hà Nội</option>
+                    <option>Đà Nẵng</option>
+                    <option>Cần Thơ</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Lựa chọn trải nghiệm</h2>
+            <p>Chọn mẫu xe và địa điểm bạn muốn lái thử.</p>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="form-grid">
+            <div class="form-control-modern">
+                <label>Mẫu xe</label>
+                <select>
+                    <option>EcoRide EV3 Sport</option>
+                    <option>EcoRide EV2 Touring</option>
+                    <option>EcoRide EV1 Urban</option>
+                    <option>EcoRide Cargo Fleet</option>
+                </select>
+            </div>
+            <div class="form-control-modern">
+                <label>Phiên bản quan tâm</label>
+                <input placeholder="Ví dụ: Sport AWD, Touring Premium..." />
+            </div>
+            <div class="form-control-modern">
+                <label>Địa điểm</label>
+                <select>
+                    <option>Showroom Quận 1</option>
+                    <option>Showroom Quận 7</option>
+                    <option>Test Track Bình Dương</option>
+                    <option>EcoRide Hà Nội</option>
+                </select>
+            </div>
+            <div class="form-control-modern">
+                <label>Thời gian mong muốn</label>
+                <input type="datetime-local" />
+            </div>
+        </div>
+        <div class="form-control-modern">
+            <label>Nhu cầu cụ thể</label>
+            <textarea placeholder="Chia sẻ nhu cầu sử dụng, tính năng muốn trải nghiệm, nhu cầu tài chính..."></textarea>
+        </div>
+        <div class="panel-actions">
+            <button class="btn-primary-gradient">Gửi yêu cầu</button>
+        </div>
+    </div>
+</div>
+
+<div class="panel soft">
+    <div class="panel-header">
+        <div>
+            <h2>Gói trải nghiệm gợi ý</h2>
+            <p>Mang đến trải nghiệm sát với nhu cầu thực tế của bạn.</p>
+        </div>
+    </div>
+    <div class="panel-body grid-3">
+        <div class="card-ghost">
+            <h3>Urban Discovery</h3>
+            <p>Lái thử EV1 Urban trong phố, trải nghiệm đỗ xe tự động và City Pilot.</p>
+            <div class="list-modern">
+                <div class="list-item"><strong>Thời lượng</strong><span>45 phút</span></div>
+                <div class="list-item"><strong>Địa điểm</strong><span>Showroom Quận 1</span></div>
+                <div class="list-item"><strong>Ưu đãi</strong><span>Voucher sạc 20 triệu ₫</span></div>
+            </div>
+        </div>
+        <div class="card-ghost">
+            <h3>Performance Track</h3>
+            <p>Demo EV3 Sport trên đường thử, trải nghiệm Track Mode, hệ thống AWD.</p>
+            <div class="list-modern">
+                <div class="list-item"><strong>Thời lượng</strong><span>60 phút</span></div>
+                <div class="list-item"><strong>Địa điểm</strong><span>EcoRide City Loop</span></div>
+                <div class="list-item"><strong>Ưu đãi</strong><span>Miễn phí gói Track Pack</span></div>
+            </div>
+        </div>
+        <div class="card-ghost">
+            <h3>Family Journey</h3>
+            <p>Lái thử EV2 Touring với cả gia đình, khám phá tiện nghi và công nghệ an toàn.</p>
+            <div class="list-modern">
+                <div class="list-item"><strong>Thời lượng</strong><span>75 phút</span></div>
+                <div class="list-item"><strong>Địa điểm</strong><span>Showroom Quận 7</span></div>
+                <div class="list-item"><strong>Ưu đãi</strong><span>Gói bảo dưỡng 3 năm</span></div>
+            </div>
+        </div>
+    </div>
+</div>

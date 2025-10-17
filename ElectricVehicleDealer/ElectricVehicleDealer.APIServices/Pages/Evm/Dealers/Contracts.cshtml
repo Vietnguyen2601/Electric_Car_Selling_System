@@ -1,0 +1,184 @@
+﻿@page "/evm/dealers/contracts"
+@model PortalPageModel
+@{
+    ViewData["Title"] = "Quản lý hợp đồng & công nợ đại lý - EVM";
+    ViewData["PageTitle"] = "Hợp đồng đại lý & công nợ";
+    ViewData["PageDescription"] = "Theo dõi thông tin hợp đồng, chỉ tiêu doanh số và công nợ giữa hãng và các đại lý.";
+}
+
+@section PageActions {
+    <button class="btn-primary-gradient">Tạo hợp đồng mới</button>
+    <button class="btn-secondary-soft">Xuất công nợ</button>
+}
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Tổng quan đại lý</h2>
+            <p>Các chỉ số chính về hiệu suất và công nợ của hệ thống đại lý.</p>
+        </div>
+    </div>
+    <div class="panel-body grid-3">
+        <div class="stat-card">
+            <span>Số đại lý hoạt động</span>
+            <h3>28</h3>
+            <span class="kpi-trend">+3 đại lý năm nay</span>
+        </div>
+        <div class="stat-card">
+            <span>Doanh số YTD</span>
+            <h3>1.240 tỷ ₫</h3>
+            <span class="kpi-trend">+22% YoY</span>
+        </div>
+        <div class="stat-card">
+            <span>Công nợ tổng</span>
+            <h3>68 tỷ ₫</h3>
+            <span class="badge warning">5 đại lý quá hạn</span>
+        </div>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Danh sách hợp đồng</h2>
+            <p>Thông tin hợp đồng hãng - đại lý, gồm chỉ tiêu và hạn mức tín dụng.</p>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table-modern">
+            <thead>
+                <tr>
+                    <th>Đại lý</th>
+                    <th>Số hợp đồng</th>
+                    <th>Thời hạn</th>
+                    <th>Chỉ tiêu năm</th>
+                    <th>Hạn mức tín dụng</th>
+                    <th>Tình trạng</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>EcoRide Hà Nội</td>
+                    <td>DL/2023/001</td>
+                    <td>01/2023 - 12/2025</td>
+                    <td>420 xe</td>
+                    <td>80 tỷ ₫</td>
+                    <td class="badge success">Hiệu lực</td>
+                </tr>
+                <tr>
+                    <td>EcoRide Sài Gòn</td>
+                    <td>DL/2023/008</td>
+                    <td>03/2023 - 03/2026</td>
+                    <td>520 xe</td>
+                    <td>100 tỷ ₫</td>
+                    <td class="badge success">Hiệu lực</td>
+                </tr>
+                <tr>
+                    <td>EcoRide Đà Nẵng</td>
+                    <td>DL/2022/012</td>
+                    <td>07/2022 - 07/2025</td>
+                    <td>260 xe</td>
+                    <td>45 tỷ ₫</td>
+                    <td class="badge warning">Gia hạn</td>
+                </tr>
+                <tr>
+                    <td>EcoRide Cần Thơ</td>
+                    <td>DL/2024/004</td>
+                    <td>02/2024 - 02/2027</td>
+                    <td>180 xe</td>
+                    <td>30 tỷ ₫</td>
+                    <td class="badge success">Hiệu lực</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="split-2">
+    <div class="panel soft">
+        <div class="panel-header">
+            <div>
+                <h2>Tạo hợp đồng</h2>
+                <p>Biểu mẫu khởi tạo hợp đồng và chỉ tiêu doanh số.</p>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="form-grid">
+                <div class="form-control-modern">
+                    <label>Đại lý</label>
+                    <select>
+                        <option>EcoRide Hà Nội</option>
+                        <option>EcoRide Sài Gòn</option>
+                        <option>EcoRide Đà Nẵng</option>
+                        <option>EcoRide Hải Phòng</option>
+                    </select>
+                </div>
+                <div class="form-control-modern">
+                    <label>Ngày hiệu lực</label>
+                    <input type="date" />
+                </div>
+                <div class="form-control-modern">
+                    <label>Ngày hết hạn</label>
+                    <input type="date" />
+                </div>
+                <div class="form-control-modern">
+                    <label>Chỉ tiêu năm</label>
+                    <input placeholder="Số lượng xe" />
+                </div>
+            </div>
+            <div class="form-control-modern">
+                <label>Điều khoản chính</label>
+                <textarea placeholder="Quy định về chỉ tiêu, marketing, thưởng - phạt..."></textarea>
+            </div>
+            <div class="panel-actions">
+                <button class="btn-secondary-soft">Lưu nháp</button>
+                <button class="btn-primary-gradient">Trình ký số</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-header">
+            <div>
+                <h2>Công nợ đại lý</h2>
+                <p>Chi tiết công nợ hiện tại và cảnh báo quá hạn.</p>
+            </div>
+        </div>
+        <div class="panel-body">
+            <table class="table-modern">
+                <thead>
+                    <tr>
+                        <th>Đại lý</th>
+                        <th>Công nợ hiện tại</th>
+                        <th>Quá hạn</th>
+                        <th>Số ngày</th>
+                        <th>Ghi chú</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>EcoRide Đà Nẵng</td>
+                        <td>6.2 tỷ ₫</td>
+                        <td>1.2 tỷ ₫</td>
+                        <td>12</td>
+                        <td class="badge warning">Cần làm việc</td>
+                    </tr>
+                    <tr>
+                        <td>EcoRide Hải Phòng</td>
+                        <td>3.5 tỷ ₫</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td class="badge success">Tốt</td>
+                    </tr>
+                    <tr>
+                        <td>EcoRide Nha Trang</td>
+                        <td>4.8 tỷ ₫</td>
+                        <td>820 triệu ₫</td>
+                        <td>5</td>
+                        <td class="badge warning">Theo sát</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

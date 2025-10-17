@@ -1,0 +1,166 @@
+﻿@page "/evm/products/catalog"
+@model PortalPageModel
+@{
+    ViewData["Title"] = "Quản lý danh mục xe điện - EVM";
+    ViewData["PageTitle"] = "Danh mục xe điện & phiên bản";
+    ViewData["PageDescription"] = "Quản lý dữ liệu sản phẩm, phân loại phiên bản, màu sắc và tính năng để đồng bộ với các đại lý.";
+}
+
+@section PageActions {
+    <button class="btn-primary-gradient">Thêm mẫu xe</button>
+    <button class="btn-secondary-soft">Đồng bộ ERP</button>
+}
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Thông tin chung</h2>
+            <p>Hệ thống sản phẩm hiện đang kinh doanh trong hệ sinh thái EcoRide.</p>
+        </div>
+    </div>
+    <div class="panel-body grid-3">
+        <div class="stat-card">
+            <span>Số mẫu xe</span>
+            <h3>24 phiên bản</h3>
+            <span class="kpi-trend">+6 phiên bản năm 2025</span>
+        </div>
+        <div class="stat-card">
+            <span>Màu sắc</span>
+            <h3>56 tùy chọn</h3>
+            <span class="badge">10 màu mới</span>
+        </div>
+        <div class="stat-card">
+            <span>Cập nhật gần nhất</span>
+            <h3>16/06/2025</h3>
+            <span class="badge success">Đồng bộ đầy đủ</span>
+        </div>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Danh sách mẫu xe</h2>
+            <p>Chi tiết từng dòng với phân khúc, cấu hình và thị trường mục tiêu.</p>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table-modern">
+            <thead>
+                <tr>
+                    <th>Mẫu xe</th>
+                    <th>Phân khúc</th>
+                    <th>Phiên bản</th>
+                    <th>Màu sắc</th>
+                    <th>Tình trạng</th>
+                    <th>Ngày phát hành</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>EcoRide EV3</td>
+                    <td>SUV hiệu năng</td>
+                    <td>Sport AWD, Track Edition, Signature</td>
+                    <td>10 màu</td>
+                    <td class="badge success">Đang bán</td>
+                    <td>04/2024</td>
+                </tr>
+                <tr>
+                    <td>EcoRide EV2</td>
+                    <td>Sedan cao cấp</td>
+                    <td>Touring Premium, Luxury, Executive</td>
+                    <td>12 màu</td>
+                    <td class="badge success">Đang bán</td>
+                    <td>08/2023</td>
+                </tr>
+                <tr>
+                    <td>EcoRide EV1</td>
+                    <td>Đô thị thông minh</td>
+                    <td>Urban, Urban Plus, Art Edition</td>
+                    <td>14 màu</td>
+                    <td class="badge success">Đang bán</td>
+                    <td>03/2023</td>
+                </tr>
+                <tr>
+                    <td>EcoRide Cargo</td>
+                    <td>Logistics</td>
+                    <td>Fleet, Fleet Pro</td>
+                    <td>6 màu</td>
+                    <td class="badge warning">Đang nâng cấp</td>
+                    <td>11/2022</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="split-2">
+    <div class="panel soft">
+        <div class="panel-header">
+            <div>
+                <h2>Cấu hình mẫu xe</h2>
+                <p>Biểu mẫu cập nhật thông số kỹ thuật cho từng phiên bản.</p>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="form-grid">
+                <div class="form-control-modern">
+                    <label>Mẫu xe</label>
+                    <select>
+                        <option>EcoRide EV3</option>
+                        <option>EcoRide EV2</option>
+                        <option>EcoRide EV1</option>
+                        <option>EcoRide Cargo</option>
+                    </select>
+                </div>
+                <div class="form-control-modern">
+                    <label>Phiên bản</label>
+                    <input placeholder="Ví dụ: Track Edition" />
+                </div>
+                <div class="form-control-modern">
+                    <label>Giá đề xuất</label>
+                    <input placeholder="Nhập giá (₫)" />
+                </div>
+                <div class="form-control-modern">
+                    <label>Ngày ra mắt</label>
+                    <input type="date" />
+                </div>
+            </div>
+            <div class="form-control-modern">
+                <label>Tính năng nổi bật</label>
+                <textarea placeholder="Liệt kê nhanh các tính năng mới: ADAS 3.0, pin thể rắn, HUD 3D..."></textarea>
+            </div>
+            <div class="panel-actions">
+                <button class="btn-secondary-soft">Lưu nháp</button>
+                <button class="btn-primary-gradient">Cập nhật catalogue</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-header">
+            <div>
+                <h2>Kiểm duyệt nội dung</h2>
+                <p>Check list trước khi phát hành mẫu xe mới cho đại lý.</p>
+            </div>
+        </div>
+        <div class="panel-body list-modern">
+            <div class="list-item">
+                <strong>Hoàn tất thông số kỹ thuật</strong>
+                <span>Đảm bảo dữ liệu đồng bộ ERP - DMS</span>
+            </div>
+            <div class="list-item">
+                <strong>Tài liệu truyền thông</strong>
+                <span>Brochure, hình ảnh 360°, video</span>
+            </div>
+            <div class="list-item">
+                <strong>Đào tạo sản phẩm</strong>
+                <span>Lên lịch training online/offline</span>
+            </div>
+            <div class="list-item">
+                <strong>Kiểm duyệt pháp lý</strong>
+                <span>Đảm bảo tuân thủ tiêu chuẩn an toàn</span>
+            </div>
+        </div>
+    </div>
+</div>
