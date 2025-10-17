@@ -21,4 +21,12 @@
     <ProjectReference Include="..\ElectricVehicleDealer.Common\ElectricVehicleDealer.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="css\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\Home\home.css" />
+  </ItemGroup>
+
 </Project>

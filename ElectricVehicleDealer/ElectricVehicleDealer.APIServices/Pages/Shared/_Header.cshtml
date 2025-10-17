@@ -1,0 +1,53 @@
+﻿@*
+    Header dành cho website bán xe điện
+*@
+<header class="bg-white shadow-md">
+    <div class="container mx-auto flex justify-between items-center px-6 py-3">
+        <!-- LOGO -->
+        <div class="flex items-center space-x-3">
+            <img src="/images/logo.png" alt="EcoRide Logo" class="w-10 h-10">
+            <span class="text-2xl font-bold text-blue-700 tracking-wide">EcoRide Motors</span>
+        </div>
+
+        <!-- NAVIGATION -->
+        <nav class="hidden md:flex space-x-8 text-gray-800 font-semibold">
+            <a href="/" class="hover:text-blue-600 transition">Trang Chủ</a>
+            <a href="/Products" class="hover:text-blue-600 transition">Xe Đang Bán</a>
+            <a href="/Orders" class="hover:text-blue-600 transition">Đơn Hàng</a>
+            <a href="/Payment" class="hover:text-blue-600 transition">Thanh Toán</a>
+            <a href="/About" class="hover:text-blue-600 transition">Giới Thiệu</a>
+            <a href="/Contact" class="hover:text-blue-600 transition">Liên Hệ</a>
+        </nav>
+
+        <!-- ACTION BUTTONS -->
+        <div class="flex items-center space-x-4">
+            <a href="/Accounts/Login"
+               class="border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-4 py-2 rounded-lg transition">
+                Đăng Nhập
+            </a>
+            <a href="/Accounts/Register"
+               class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition">
+                Đăng Ký
+            </a>
+        </div>
+    </div>
+
+    <!-- SUB HEADER (Hotline / Search) -->
+    <div class="bg-gray-100 border-t border-gray-200 py-2">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center px-6 text-sm text-gray-700">
+            <div class="flex space-x-6 items-center">
+                <span>📞 Hotline 1: <b>0388 888 886</b></span>
+                <span>📞 Hotline 2: <b>0911 777 740</b></span>
+            </div>
+
+            <!-- Search box -->
+            <form method="get" action="/Products" class="mt-2 md:mt-0 flex items-center">
+                <input type="text" name="search" placeholder="Tìm kiếm xe..."
+                       class="border border-gray-300 rounded-l-lg px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-blue-400 w-64">
+                <button type="submit" class="bg-blue-600 text-white px-4 py-1.5 rounded-r-lg hover:bg-blue-700">
+                    🔍
+                </button>
+            </form>
+        </div>
+    </div>
+</header>

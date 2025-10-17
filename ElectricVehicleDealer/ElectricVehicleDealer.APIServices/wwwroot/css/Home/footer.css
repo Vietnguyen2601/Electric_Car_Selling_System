@@ -1,0 +1,19 @@
+﻿/* wwwroot/css/Home/footer.css */
+footer {
+    background-color: #0b0c10;
+    color: #c5c6c7;
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    margin-top: 50px;
+}
+
+    footer a {
+        color: #66fcf1;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
