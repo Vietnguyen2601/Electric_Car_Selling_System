@@ -1,0 +1,173 @@
+﻿@page "/dealer/vehicles/compare"
+@model PortalPageModel
+@{
+    ViewData["Title"] = "So sánh mẫu xe - Dealer Portal";
+    ViewData["PageTitle"] = "So sánh mẫu xe & cấu hình";
+    ViewData["PageDescription"] = "Đặt cạnh nhau tối đa 4 mẫu xe để so sánh chi tiết thông số kỹ thuật, giá bán và ưu đãi hiện hành.";
+}
+
+@section PageActions {
+    <button class="btn-primary-gradient">Xuất bảng so sánh</button>
+}
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Chọn mẫu xe để so sánh</h2>
+            <p>Thêm nhanh từ danh mục hoặc nhập mã cấu hình để lấy đúng phiên bản.</p>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="form-grid">
+            <div class="form-control-modern">
+                <label>Mẫu xe A</label>
+                <input placeholder="Nhập tên hoặc mã cấu hình..." />
+            </div>
+            <div class="form-control-modern">
+                <label>Mẫu xe B</label>
+                <input placeholder="Nhập tên hoặc mã cấu hình..." />
+            </div>
+            <div class="form-control-modern">
+                <label>Mẫu xe C (tuỳ chọn)</label>
+                <input placeholder="Nhập tên hoặc mã cấu hình..." />
+            </div>
+            <div class="form-control-modern">
+                <label>Mẫu xe D (tuỳ chọn)</label>
+                <input placeholder="Nhập tên hoặc mã cấu hình..." />
+            </div>
+        </div>
+        <div class="panel-actions">
+            <button class="btn-secondary-soft">Gợi ý theo nhu cầu</button>
+            <button class="btn-primary-gradient">So sánh ngay</button>
+        </div>
+    </div>
+</div>
+
+<div class="panel soft">
+    <div class="panel-header">
+        <div>
+            <h2>Bảng so sánh chi tiết</h2>
+            <p>Bảng dữ liệu tổng hợp cho khách hàng, hỗ trợ chốt sale nhanh chóng.</p>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table-modern">
+            <thead>
+                <tr>
+                    <th>Thông số</th>
+                    <th>EV3 Sport AWD</th>
+                    <th>EV2 Touring Premium</th>
+                    <th>EV1 Urban Plus</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Mức giá đề xuất</td>
+                    <td>1.89 tỷ ₫</td>
+                    <td>1.38 tỷ ₫</td>
+                    <td>780 triệu ₫</td>
+                </tr>
+                <tr>
+                    <td>Loại pin</td>
+                    <td>Solid-State 95kWh</td>
+                    <td>NCM 82kWh</td>
+                    <td>LFP 62kWh</td>
+                </tr>
+                <tr>
+                    <td>Quãng đường tối đa</td>
+                    <td>480 km</td>
+                    <td>510 km</td>
+                    <td>380 km</td>
+                </tr>
+                <tr>
+                    <td>Công suất cực đại</td>
+                    <td>320 kW</td>
+                    <td>240 kW</td>
+                    <td>150 kW</td>
+                </tr>
+                <tr>
+                    <td>Thời gian sạc nhanh 20-80%</td>
+                    <td>18 phút</td>
+                    <td>22 phút</td>
+                    <td>28 phút</td>
+                </tr>
+                <tr>
+                    <td>Tính năng nổi bật</td>
+                    <td class="chips">
+                        <span class="chip">Track Mode</span>
+                        <span class="chip">Vectoring AWD</span>
+                        <span class="chip">ADAS 3.0</span>
+                    </td>
+                    <td class="chips">
+                        <span class="chip">Massaging seats</span>
+                        <span class="chip">Night Vision</span>
+                        <span class="chip">Auto-lane change</span>
+                    </td>
+                    <td class="chips">
+                        <span class="chip">City Pilot</span>
+                        <span class="chip">Smart Parking</span>
+                        <span class="chip">Digital Key</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Ưu đãi hiện hành</td>
+                    <td>Voucher sạc 50 triệu ₫</td>
+                    <td>Trả góp 0% 18 tháng</td>
+                    <td>Bảo dưỡng 3 năm</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="split-2">
+    <div class="panel">
+        <div class="panel-header">
+            <div>
+                <h2>Gợi ý cấu hình theo nhu cầu</h2>
+                <p>Khuyến nghị mẫu xe phù hợp dựa trên thói quen di chuyển của khách hàng.</p>
+            </div>
+        </div>
+        <div class="panel-body list-modern">
+            <div class="list-item">
+                <strong>Gia đình trẻ sống tại đô thị</strong>
+                <span>EV1 Urban Plus · Tối ưu đỗ xe và chi phí</span>
+            </div>
+            <div class="list-item">
+                <strong>Doanh nhân thường xuyên đi tỉnh</strong>
+                <span>EV2 Touring Premium · Tối ưu tiện nghi đường dài</span>
+            </div>
+            <div class="list-item">
+                <strong>Người yêu tốc độ & công nghệ</strong>
+                <span>EV3 Sport AWD · Hiệu năng & công nghệ tiên tiến</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel soft">
+        <div class="panel-header">
+            <div>
+                <h2>Tài liệu hỗ trợ bán hàng</h2>
+                <p>Chuẩn bị sẵn các tài liệu gửi khách sau buổi tư vấn.</p>
+            </div>
+        </div>
+        <div class="panel-body list-modern">
+            <div class="list-item">
+                <strong>Brochure EV3 Sport</strong>
+                <span>PDF · cập nhật 06/2025 · 8MB</span>
+            </div>
+            <div class="list-item">
+                <strong>Brochure EV2 Touring</strong>
+                <span>PDF · cập nhật 05/2025 · 6MB</span>
+            </div>
+            <div class="list-item">
+                <strong>Bảng giá lăn bánh</strong>
+                <span>Excel · đã bao gồm phí đăng ký</span>
+            </div>
+            <div class="list-item">
+                <strong>Checklist tư vấn</strong>
+                <span>Notion · 12 bước chốt sale hiệu quả</span>
+            </div>
+        </div>
+    </div>
+</div>

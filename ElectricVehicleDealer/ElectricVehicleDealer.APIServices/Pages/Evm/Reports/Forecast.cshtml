@@ -1,0 +1,162 @@
+﻿@page "/evm/reports/forecast"
+@model PortalPageModel
+@{
+    ViewData["Title"] = "AI dự báo nhu cầu - EVM";
+    ViewData["PageTitle"] = "Dự báo nhu cầu & kế hoạch sản xuất";
+    ViewData["PageDescription"] = "Ứng dụng AI để dự báo nhu cầu tương lai, lập kế hoạch sản xuất và phân phối tối ưu.";
+}
+
+@section PageActions {
+    <button class="btn-primary-gradient">Chạy mô hình AI</button>
+    <button class="btn-secondary-soft">Xuất kế hoạch sản xuất</button>
+}
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Dự báo tổng nhu cầu</h2>
+            <p>Ước lượng nhu cầu xe điện 6 tháng tới theo toàn thị trường.</p>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="chart-placeholder">Biểu đồ dự báo nhu cầu tổng (đang chờ tích hợp)</div>
+        <div class="grid-3">
+            <div class="stat-card">
+                <span>Nhu cầu tháng tới</span>
+                <h3>+312 xe</h3>
+                <span class="kpi-trend">+14% so với tháng hiện tại</span>
+            </div>
+            <div class="stat-card">
+                <span>Nhu cầu Q3 ước tính</span>
+                <h3>1.120 xe</h3>
+                <span class="badge success">Đạt 108% target</span>
+            </div>
+            <div class="stat-card">
+                <span>Khoảng tin cậy</span>
+                <h3>±6.5%</h3>
+                <span class="badge">Mô hình ARIMA hybrid</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Dự báo theo dòng xe</h2>
+            <p>Nhu cầu dự báo và đề xuất sản xuất cho từng dòng xe.</p>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table-modern">
+            <thead>
+                <tr>
+                    <th>Mẫu xe</th>
+                    <th>Nhu cầu dự báo</th>
+                    <th>Tăng trưởng</th>
+                    <th>Kế hoạch sản xuất</th>
+                    <th>Đề xuất phân phối</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>EV3 Sport</td>
+                    <td>420 xe</td>
+                    <td>+18%</td>
+                    <td>+160 xe/tháng</td>
+                    <td class="badge success">Ưu tiên miền Nam</td>
+                </tr>
+                <tr>
+                    <td>EV2 Touring</td>
+                    <td>312 xe</td>
+                    <td>+12%</td>
+                    <td>+90 xe/tháng</td>
+                    <td class="badge">Rải đều khu vực lớn</td>
+                </tr>
+                <tr>
+                    <td>EV1 Urban</td>
+                    <td>268 xe</td>
+                    <td>+9%</td>
+                    <td>+70 xe/tháng</td>
+                    <td class="badge warning">Cần chiến dịch đô thị</td>
+                </tr>
+                <tr>
+                    <td>Cargo Fleet</td>
+                    <td>144 xe</td>
+                    <td>+32%</td>
+                    <td>+60 xe/tháng</td>
+                    <td class="badge success">Đẩy mạnh fleet</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="split-2">
+    <div class="panel soft">
+        <div class="panel-header">
+            <div>
+                <h2>Kịch bản dự báo</h2>
+                <p>So sánh ba kịch bản: cơ sở, lạc quan, thận trọng.</p>
+            </div>
+        </div>
+        <div class="panel-body list-modern">
+            <div class="list-item">
+                <strong>Kịch bản cơ sở</strong>
+                <span>Nhu cầu tăng 12%/quý · Bám sát kế hoạch hiện tại</span>
+            </div>
+            <div class="list-item">
+                <strong>Kịch bản lạc quan</strong>
+                <span>Chính sách thuế mới hỗ trợ EV · Nhu cầu +20%</span>
+            </div>
+            <div class="list-item">
+                <strong>Kịch bản thận trọng</strong>
+                <span>Khan hiếm pin · Nhu cầu +5% · Ưu tiên dòng chủ lực</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-header">
+            <div>
+                <h2>Yếu tố ảnh hưởng</h2>
+                <p>Các biến đầu vào chính tác động tới dự báo.</p>
+            </div>
+        </div>
+        <div class="panel-body list-modern">
+            <div class="list-item"><strong>Giá điện & ưu đãi thuế</strong><span>Điểm ảnh hưởng: 0.32</span></div>
+            <div class="list-item"><strong>Chính sách khuyến mãi</strong><span>Điểm ảnh hưởng: 0.24</span></div>
+            <div class="list-item"><strong>Chi phí pin</strong><span>Điểm ảnh hưởng: -0.18</span></div>
+            <div class="list-item"><strong>Số trạm sạc</strong><span>Điểm ảnh hưởng: 0.12</span></div>
+        </div>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Kế hoạch hành động</h2>
+            <p>Đề xuất lịch sản xuất và phân phối theo dự báo.</p>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="timeline">
+            <div class="timeline-item">
+                <h4>Tuần 1</h4>
+                <p>Tăng sản lượng EV3 Sport tại nhà máy Hải Phòng thêm 15%</p>
+            </div>
+            <div class="timeline-item">
+                <h4>Tuần 3</h4>
+                <p>Phát hành chiến dịch marketing đô thị cho EV1 Urban</p>
+            </div>
+            <div class="timeline-item">
+                <h4>Tuần 5</h4>
+                <p>Điều chuyển 40 xe EV2 Touring vào miền Nam</p>
+            </div>
+            <div class="timeline-item">
+                <h4>Tuần 6</h4>
+                <p>Đánh giá lại mô hình theo dữ liệu doanh số thực tế</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+﻿@page "/store/login"
+@model PortalPageModel
+@{
+    Layout = "_StoreLayout";
+    ViewData["Title"] = "Đăng nhập khách hàng - EcoRide";
+}
+
+<section class="store-section">
+    <div class="store-container">
+        <div class="auth-card">
+            <div>
+                <h1>Chào mừng trở lại</h1>
+                <p>Đăng nhập để theo dõi đơn hàng, đặt lịch lái thử và quản lý thông tin xe của bạn.</p>
+            </div>
+
+            <form class="store-form compact">
+                <div class="form-control-modern">
+                    <label>Email</label>
+                    <input type="email" placeholder="you@example.com" />
+                </div>
+                <div class="form-control-modern">
+                    <label>Mật khẩu</label>
+                    <input type="password" placeholder="••••••••" />
+                </div>
+                <div class="form-support">
+                    <a class="btn-ghost" href="/store/register">Tạo tài khoản mới</a>
+                    <a class="support-link" href="#">Quên mật khẩu?</a>
+                </div>
+                <button type="submit" class="btn-primary">Đăng nhập</button>
+            </form>
+        </div>
+    </div>
+</section>

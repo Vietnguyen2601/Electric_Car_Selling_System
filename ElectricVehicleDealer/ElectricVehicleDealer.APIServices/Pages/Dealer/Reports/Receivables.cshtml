@@ -1,0 +1,188 @@
+﻿@page "/dealer/reports/receivables"
+@model PortalPageModel
+@{
+    ViewData["Title"] = "Báo cáo công nợ - Dealer";
+    ViewData["PageTitle"] = "Công nợ khách hàng & hãng xe";
+    ViewData["PageDescription"] = "Theo dõi công nợ phải thu từ khách hàng và phải trả cho hãng, đảm bảo cân đối dòng tiền và tuân thủ chính sách.";
+}
+
+@section PageActions {
+    <button class="btn-primary-gradient">Xuất bảng công nợ</button>
+    <button class="btn-secondary-soft">Lập nhắc nhở</button>
+}
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Tổng quan công nợ</h2>
+            <p>Tình hình công nợ hiện tại và xu hướng 30 ngày gần nhất.</p>
+        </div>
+    </div>
+    <div class="panel-body grid-3">
+        <div class="stat-card">
+            <span>Phải thu khách hàng</span>
+            <h3>32.4 tỷ ₫</h3>
+            <span class="kpi-trend">-6% so với tháng trước</span>
+        </div>
+        <div class="stat-card">
+            <span>Phải trả cho hãng</span>
+            <h3>18.6 tỷ ₫</h3>
+            <span class="kpi-trend">Đang trong hạn</span>
+        </div>
+        <div class="stat-card">
+            <span>Công nợ quá hạn</span>
+            <h3>4.2 tỷ ₫</h3>
+            <span class="badge danger">5 khách hàng · 2 hãng phụ trợ</span>
+        </div>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Công nợ khách hàng</h2>
+            <p>Danh sách chi tiết các khoản phải thu theo tình trạng.</p>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table-modern">
+            <thead>
+                <tr>
+                    <th>Khách hàng</th>
+                    <th>Mẫu xe</th>
+                    <th>Giá trị</th>
+                    <th>Kỳ hạn</th>
+                    <th>Tình trạng</th>
+                    <th>Nhân viên phụ trách</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Công ty LogiTrans</td>
+                    <td>Cargo Fleet x8</td>
+                    <td>5.8 tỷ ₫</td>
+                    <td>30/06/2025</td>
+                    <td class="badge warning">Chờ giải ngân</td>
+                    <td>Đại</td>
+                </tr>
+                <tr>
+                    <td>Nguyễn Nhật Nam</td>
+                    <td>EV3 Sport</td>
+                    <td>960 triệu ₫</td>
+                    <td>25/06/2025</td>
+                    <td class="badge danger">Quá hạn 5 ngày</td>
+                    <td>Minh</td>
+                </tr>
+                <tr>
+                    <td>Lưu Thị Lan</td>
+                    <td>EV2 Touring</td>
+                    <td>1.2 tỷ ₫</td>
+                    <td>28/06/2025</td>
+                    <td class="badge success">Đã nhận 80%</td>
+                    <td>Hải</td>
+                </tr>
+                <tr>
+                    <td>Công ty EcoFarm</td>
+                    <td>EV1 Urban x6</td>
+                    <td>4.5 tỷ ₫</td>
+                    <td>10/07/2025</td>
+                    <td class="badge">Trong hạn</td>
+                    <td>Trâm</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="split-2">
+    <div class="panel soft">
+        <div class="panel-header">
+            <div>
+                <h2>Công nợ với hãng</h2>
+                <p>Các khoản phải trả cho EVM và các nhà cung cấp linh kiện.</p>
+            </div>
+        </div>
+        <div class="panel-body">
+            <table class="table-modern">
+                <thead>
+                    <tr>
+                        <th>Đối tác</th>
+                        <th>Loại chi phí</th>
+                        <th>Giá trị</th>
+                        <th>Ngày đến hạn</th>
+                        <th>Trạng thái</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>EVM Manufacturing</td>
+                        <td>Nhập xe EV3</td>
+                        <td>9.2 tỷ ₫</td>
+                        <td>05/07/2025</td>
+                        <td class="badge">Trong hạn</td>
+                    </tr>
+                    <tr>
+                        <td>EVM Manufacturing</td>
+                        <td>Phí marketing hỗ trợ</td>
+                        <td>1.8 tỷ ₫</td>
+                        <td>28/06/2025</td>
+                        <td class="badge warning">Chờ đối soát</td>
+                    </tr>
+                    <tr>
+                        <td>PinTech Solutions</td>
+                        <td>Linh kiện pin</td>
+                        <td>3.5 tỷ ₫</td>
+                        <td>20/06/2025</td>
+                        <td class="badge danger">Quá hạn 2 ngày</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-header">
+            <div>
+                <h2>Lịch nhắc thanh toán</h2>
+                <p>Tự động gửi thông báo tới nhân sự phụ trách.</p>
+            </div>
+        </div>
+        <div class="panel-body list-modern">
+            <div class="list-item">
+                <strong>Nhắc khách hàng</strong>
+                <span>Gửi SMS + Email trước hạn 3 ngày</span>
+            </div>
+            <div class="list-item">
+                <strong>Nhắc nội bộ</strong>
+                <span>Thông báo Teams cho kế toán & Sales</span>
+            </div>
+            <div class="list-item">
+                <strong>Báo cáo tuần</strong>
+                <span>Xuất báo cáo công nợ mỗi thứ 2</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Đề xuất xử lý</h2>
+            <p>Gợi ý hành động để giảm công nợ quá hạn và tối ưu dòng tiền.</p>
+        </div>
+    </div>
+    <div class="panel-body list-modern">
+        <div class="list-item">
+            <strong>Chương trình ưu đãi thanh toán sớm</strong>
+            <span>Giảm 1% giá trị hợp đồng nếu khách thanh toán trước hạn 7 ngày</span>
+        </div>
+        <div class="list-item">
+            <strong>Họp đối soát với EVM</strong>
+            <span>Đề xuất lịch thứ 5 hàng tuần để rà soát công nợ</span>
+        </div>
+        <div class="list-item">
+            <strong>Tự động hóa email nhắc</strong>
+            <span>Kết nối CRM để gửi email cá nhân hóa</span>
+        </div>
+    </div>
+</div>

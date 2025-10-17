@@ -1,0 +1,161 @@
+﻿@page "/evm/reports/sales"
+@model PortalPageModel
+@{
+    ViewData["Title"] = "Báo cáo doanh số theo khu vực - EVM";
+    ViewData["PageTitle"] = "Doanh số theo khu vực & đại lý";
+    ViewData["PageDescription"] = "Theo dõi doanh số theo từng khu vực, đại lý và kênh bán hàng để tối ưu chiến lược phân phối.";
+}
+
+@section PageActions {
+    <button class="btn-primary-gradient">Xuất báo cáo</button>
+    <button class="btn-secondary-soft">Chia sẻ BI dashboard</button>
+}
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Tổng quan doanh số</h2>
+            <p>Doanh số và số lượng xe bán ra 12 tháng gần nhất.</p>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="chart-placeholder">Biểu đồ đường doanh số theo tháng (đang chờ tích hợp)</div>
+        <div class="grid-4">
+            <div class="stat-card">
+                <span>Doanh số tháng 6</span>
+                <h3>186 tỷ ₫</h3>
+                <span class="kpi-trend">+22% YoY</span>
+            </div>
+            <div class="stat-card">
+                <span>Xe bán ra</span>
+                <h3>364 xe</h3>
+                <span class="kpi-trend">+18% MoM</span>
+            </div>
+            <div class="stat-card">
+                <span>Doanh số Fleet</span>
+                <h3>62 tỷ ₫</h3>
+                <span class="badge success">33% tổng doanh số</span>
+            </div>
+            <div class="stat-card">
+                <span>Lợi nhuận gộp</span>
+                <h3>38%</h3>
+                <span class="badge">Ổn định</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Bảng doanh số theo khu vực</h2>
+            <p>So sánh doanh thu, số xe bán và tốc độ tăng trưởng theo khu vực.</p>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table-modern">
+            <thead>
+                <tr>
+                    <th>Khu vực</th>
+                    <th>Doanh số</th>
+                    <th>Xe bán</th>
+                    <th>Tăng trưởng</th>
+                    <th>Top mẫu xe</th>
+                    <th>Đại lý dẫn đầu</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Miền Bắc</td>
+                    <td>68 tỷ ₫</td>
+                    <td>132</td>
+                    <td>+18%</td>
+                    <td>EV3, EV2</td>
+                    <td class="badge success">EcoRide Hà Nội</td>
+                </tr>
+                <tr>
+                    <td>Miền Nam</td>
+                    <td>86 tỷ ₫</td>
+                    <td>162</td>
+                    <td>+24%</td>
+                    <td>EV2, EV1</td>
+                    <td class="badge success">EcoRide Sài Gòn</td>
+                </tr>
+                <tr>
+                    <td>Miền Trung</td>
+                    <td>18 tỷ ₫</td>
+                    <td>42</td>
+                    <td>+12%</td>
+                    <td>EV1, EV2</td>
+                    <td class="badge">EcoRide Đà Nẵng</td>
+                </tr>
+                <tr>
+                    <td>Tây Nguyên</td>
+                    <td>14 tỷ ₫</td>
+                    <td>28</td>
+                    <td>+9%</td>
+                    <td>EV1, Cargo</td>
+                    <td class="badge">EcoRide Gia Lai</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="split-2">
+    <div class="panel soft">
+        <div class="panel-header">
+            <div>
+                <h2>Top đại lý</h2>
+                <p>Bảng xếp hạng đại lý theo doanh số tháng.</p>
+            </div>
+        </div>
+        <div class="panel-body list-modern">
+            <div class="list-item"><strong>#1 EcoRide Hà Nội</strong><span>24.2 tỷ ₫ · 42 xe</span></div>
+            <div class="list-item"><strong>#2 EcoRide Sài Gòn</strong><span>22.6 tỷ ₫ · 38 xe</span></div>
+            <div class="list-item"><strong>#3 EcoRide Hải Phòng</strong><span>17.8 tỷ ₫ · 28 xe</span></div>
+            <div class="list-item"><strong>#4 EcoRide Đà Nẵng</strong><span>9.2 tỷ ₫ · 16 xe</span></div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-header">
+            <div>
+                <h2>Cơ cấu kênh bán hàng</h2>
+                <p>Tỷ trọng doanh số theo kênh bán lẻ, fleet, online.</p>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="chart-placeholder">Biểu đồ donut cơ cấu kênh bán hàng</div>
+            <div class="list-modern">
+                <div class="list-item"><strong>Bán lẻ showroom</strong><span>45%</span></div>
+                <div class="list-item"><strong>Fleet doanh nghiệp</strong><span>33%</span></div>
+                <div class="list-item"><strong>Kênh online</strong><span>14%</span></div>
+                <div class="list-item"><strong>Đối tác liên kết</strong><span>8%</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Nhận định & hành động</h2>
+            <p>Kết luận và đề xuất hành động cho kỳ tiếp theo.</p>
+        </div>
+    </div>
+    <div class="panel-body list-modern">
+        <div class="list-item">
+            <strong>Tăng trưởng mạnh ở miền Nam</strong>
+            <span>Đề xuất bổ sung 60 xe EV2 + hỗ trợ marketing Q3</span>
+        </div>
+        <div class="list-item">
+            <strong>Miền Trung cần chiến dịch</strong>
+            <span>Triển khai roadshow EV1 và gói vay ưu đãi</span>
+        </div>
+        <div class="list-item">
+            <strong>Fleet doanh nghiệp tiềm năng</strong>
+            <span>Đàm phán hợp tác với 2 tập đoàn logistic mới</span>
+        </div>
+    </div>
+</div>

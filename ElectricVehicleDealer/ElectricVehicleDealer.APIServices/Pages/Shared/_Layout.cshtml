@@ -1,0 +1,139 @@
+﻿@{
+    var pageTitle = ViewData["Title"] as string ?? "EcoRide Portal";
+    var currentPath = ViewContext.HttpContext.Request.Path;
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@pageTitle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/layout/dashboard.css" />
+    @RenderSection("Head", required: false)
+</head>
+<body class="app-body">
+    <div class="app-shell">
+        <aside class="app-sidebar">
+            <div class="sidebar-brand">
+                <span class="brand-mark"></span>
+                <div class="brand-copy">
+                    <a href="/Home" class="brand-title">EcoRide</a>
+                    <p class="brand-subtitle">EV Ecosystem</p>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-block">
+                    <h6>Dealer Portal</h6>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/dashboard/dealer", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/dashboard/dealer">Tổng quan Dealer</a>
+
+                    <p class="nav-label">Truy vấn xe</p>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/dealer/vehicles/catalog", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/dealer/vehicles/catalog">Danh mục & cấu hình</a>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/dealer/vehicles/compare", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/dealer/vehicles/compare">So sánh mẫu xe</a>
+
+                    <p class="nav-label">Quản lý bán hàng</p>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/dealer/sales/quotes", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/dealer/sales/quotes">Báo giá & hợp đồng</a>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/dealer/sales/orders", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/dealer/sales/orders">Đơn hàng & theo dõi</a>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/dealer/sales/promotions", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/dealer/sales/promotions">Chương trình khuyến mãi</a>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/dealer/sales/procurement", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/dealer/sales/procurement">Đặt xe từ hãng</a>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/dealer/sales/deliveries", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/dealer/sales/deliveries">Giao xe cho khách</a>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/dealer/sales/payments", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/dealer/sales/payments">Thanh toán</a>
+
+                    <p class="nav-label">Quản lý khách hàng</p>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/dealer/customers/profiles", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/dealer/customers/profiles">Hồ sơ khách hàng</a>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/dealer/customers/testdrives", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/dealer/customers/testdrives">Lịch lái thử</a>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/dealer/customers/feedback", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/dealer/customers/feedback">Phản hồi & khiếu nại</a>
+
+                    <p class="nav-label">Báo cáo</p>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/dealer/reports/sales-by-staff", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/dealer/reports/sales-by-staff">Doanh số theo nhân viên</a>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/dealer/reports/receivables", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/dealer/reports/receivables">Công nợ khách hàng & hãng</a>
+                </div>
+
+                <div class="nav-block">
+                    <h6>EVM Portal</h6>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/dashboard/evm", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/dashboard/evm">Tổng quan EVM</a>
+
+                    <p class="nav-label">Sản phẩm & phân phối</p>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/evm/products/catalog", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/evm/products/catalog">Danh mục xe điện</a>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/evm/products/inventory", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/evm/products/inventory">Điều phối & tồn kho</a>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/evm/products/pricing", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/evm/products/pricing">Giá sỉ & chiết khấu</a>
+
+                    <p class="nav-label">Quản lý đại lý</p>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/evm/dealers/contracts", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/evm/dealers/contracts">Hợp đồng & công nợ</a>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/evm/dealers/targets", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/evm/dealers/targets">Chỉ tiêu doanh số</a>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/evm/dealers/accounts", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/evm/dealers/accounts">Tài khoản đại lý</a>
+
+                    <p class="nav-label">Báo cáo & phân tích</p>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/evm/reports/sales", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/evm/reports/sales">Doanh số theo khu vực</a>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/evm/reports/inventory-velocity", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/evm/reports/inventory-velocity">Tồn kho & tốc độ tiêu thụ</a>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/evm/reports/forecast", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/evm/reports/forecast">Dự báo nhu cầu (AI)</a>
+                </div>
+
+                <div class="nav-block">
+                    <h6>Hệ thống</h6>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/auth/login", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/auth/login">Đăng nhập</a>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/scheduling/test-drive", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/scheduling/test-drive">Đặt lịch lái thử</a>
+                    <a class="nav-link" href="/Home">Website khách hàng</a>
+                </div>
+            </nav>
+        </aside>
+
+        <div class="app-main">
+            <header class="app-topbar">
+                <div class="topbar-left">
+                    <button class="topbar-icon" type="button" aria-label="Toggle navigation">
+                        <span class="material-dot"></span>
+                    </button>
+                    <div class="topbar-search">
+                        <input type="search" placeholder="Tìm nhanh chức năng, khách hàng, đơn hàng..." />
+                        <span class="search-icon">⌕</span>
+                    </div>
+                </div>
+                <div class="topbar-right">
+                    <div class="topbar-status">
+                        <span class="status-indicator online"></span>
+                        <span>Portal Live</span>
+                    </div>
+                    <a class="topbar-user" href="#">
+                        <span class="user-avatar">EV</span>
+                        <div class="user-meta">
+                            <span class="user-name">EcoRide Admin</span>
+                            <span class="user-role">System Operator</span>
+                        </div>
+                    </a>
+                </div>
+            </header>
+
+            <main class="app-content">
+                <div class="content-header">
+                    <div>
+                        <h1>@(ViewData["PageTitle"] ?? pageTitle)</h1>
+                        @if (ViewData["PageDescription"] is string description)
+                        {
+                            <p>@description</p>
+                        }
+                    </div>
+                    @if (IsSectionDefined("PageActions"))
+                    {
+                        <div class="content-actions">
+                            @RenderSection("PageActions", required: false)
+                        </div>
+                    }
+                </div>
+
+                <div class="content-body">
+                    @RenderBody()
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

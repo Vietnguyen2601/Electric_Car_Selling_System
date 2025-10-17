@@ -1,0 +1,181 @@
+﻿@page "/dealer/sales/payments"
+@model PortalPageModel
+@{
+    ViewData["Title"] = "Quản lý thanh toán - Dealer";
+    ViewData["PageTitle"] = "Thanh toán & phương án tài chính";
+    ViewData["PageDescription"] = "Theo dõi các khoản thanh toán, giải ngân và kế hoạch trả góp để chủ động dòng tiền và chăm sóc khách hàng.";
+}
+
+@section PageActions {
+    <button class="btn-primary-gradient">Ghi nhận thanh toán</button>
+    <button class="btn-secondary-soft">Xuất bảng công nợ</button>
+}
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Tổng quan thanh toán</h2>
+            <p>Dòng tiền theo trạng thái: đặt cọc, thanh toán trung gian, trả góp.</p>
+        </div>
+    </div>
+    <div class="panel-body grid-3">
+        <div class="stat-card">
+            <span>Đã thu trong tuần</span>
+            <h3>28.6 tỷ ₫</h3>
+            <span class="kpi-trend">+12% so với tuần trước</span>
+        </div>
+        <div class="stat-card">
+            <span>Đang chờ giải ngân</span>
+            <h3>14.4 tỷ ₫</h3>
+            <span class="badge warning">18 hồ sơ ngân hàng</span>
+        </div>
+        <div class="stat-card">
+            <span>Công nợ quá hạn</span>
+            <h3>2.1 tỷ ₫</h3>
+            <span class="badge danger">5 khách hàng</span>
+        </div>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Chi tiết giao dịch</h2>
+            <p>Sắp xếp và lọc các khoản thanh toán theo trạng thái.</p>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table-modern">
+            <thead>
+                <tr>
+                    <th>Mã giao dịch</th>
+                    <th>Khách hàng</th>
+                    <th>Loại thanh toán</th>
+                    <th>Số tiền</th>
+                    <th>Trạng thái</th>
+                    <th>Ngày</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>#PAY-7812</td>
+                    <td>Đinh Thái Sơn</td>
+                    <td>Đặt cọc</td>
+                    <td>200 triệu ₫</td>
+                    <td class="badge success">Đã nhận</td>
+                    <td>16/06/2025</td>
+                </tr>
+                <tr>
+                    <td>#PAY-7813</td>
+                    <td>Trần Bích Ngọc</td>
+                    <td>Giải ngân ngân hàng</td>
+                    <td>1.35 tỷ ₫</td>
+                    <td class="badge warning">Chờ đối soát</td>
+                    <td>17/06/2025</td>
+                </tr>
+                <tr>
+                    <td>#PAY-7814</td>
+                    <td>Công ty EverLog</td>
+                    <td>Trả góp kỳ 2</td>
+                    <td>2.4 tỷ ₫</td>
+                    <td class="badge success">Đã nhận</td>
+                    <td>17/06/2025</td>
+                </tr>
+                <tr>
+                    <td>#PAY-7815</td>
+                    <td>Phạm Văn Tùng</td>
+                    <td>Đặt cọc</td>
+                    <td>150 triệu ₫</td>
+                    <td class="badge danger">Quá hạn xác nhận</td>
+                    <td>15/06/2025</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="split-2">
+    <div class="panel soft">
+        <div class="panel-header">
+            <div>
+                <h2>Ghi nhận thanh toán mới</h2>
+                <p>Nhập chi tiết giao dịch, lựa chọn loại thanh toán và chứng từ đính kèm.</p>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="form-grid">
+                <div class="form-control-modern">
+                    <label>Khách hàng</label>
+                    <input placeholder="Tên hoặc số điện thoại" />
+                </div>
+                <div class="form-control-modern">
+                    <label>Loại thanh toán</label>
+                    <select>
+                        <option>Đặt cọc</option>
+                        <option>Thanh toán đợt 1</option>
+                        <option>Thanh toán đợt cuối</option>
+                        <option>Trả góp hàng tháng</option>
+                    </select>
+                </div>
+                <div class="form-control-modern">
+                    <label>Số tiền</label>
+                    <input placeholder="Nhập số tiền (₫)" />
+                </div>
+                <div class="form-control-modern">
+                    <label>Ngày thanh toán</label>
+                    <input type="date" />
+                </div>
+            </div>
+            <div class="panel-actions">
+                <button class="btn-secondary-soft">Đính kèm chứng từ</button>
+                <button class="btn-primary-gradient">Lưu giao dịch</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-header">
+            <div>
+                <h2>Bảng trả góp dự kiến</h2>
+                <p>Tổng hợp lịch thanh toán cho khách lựa chọn phương án tài chính.</p>
+            </div>
+        </div>
+        <div class="panel-body list-modern">
+            <div class="list-item">
+                <strong>Ngân hàng TechBank</strong>
+                <span>Lãi suất 0% trong 18 tháng · Phí hồ sơ 1%</span>
+            </div>
+            <div class="list-item">
+                <strong>Ngân hàng VietFuture</strong>
+                <span>Lãi suất 2.9%/năm · Miễn phí bảo hiểm năm đầu</span>
+            </div>
+            <div class="list-item">
+                <strong>Công ty tài chính EcoFinance</strong>
+                <span>Trả trước 20% · Thời hạn tới 60 tháng</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Nhắc nhở công nợ quá hạn</h2>
+            <p>Tự động gửi thông báo khách hàng và phân công nhân sự xử lý.</p>
+        </div>
+    </div>
+    <div class="panel-body list-modern">
+        <div class="list-item">
+            <strong>Phạm Văn Tùng</strong>
+            <span>Đặt cọc 150 triệu ₫ quá hạn 2 ngày · Nhắc lại 18/06</span>
+        </div>
+        <div class="list-item">
+            <strong>Công ty LogiTrans</strong>
+            <span>Trả góp kỳ 3 · 1.6 tỷ ₫ · Liên hệ kế toán trưởng</span>
+        </div>
+        <div class="list-item">
+            <strong>Nguyễn Thị Kim Anh</strong>
+            <span>Thanh toán đợt cuối · 420 triệu ₫ · Hứa thanh toán 20/06</span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,166 @@
+﻿@page "/evm/reports/inventory-velocity"
+@model PortalPageModel
+@{
+    ViewData["Title"] = "Báo cáo tồn kho & tốc độ tiêu thụ - EVM";
+    ViewData["PageTitle"] = "Tồn kho & tốc độ tiêu thụ";
+    ViewData["PageDescription"] = "Phân tích vòng quay tồn kho, số ngày tồn kho và cảnh báo chậm luân chuyển theo từng dòng xe.";
+}
+
+@section PageActions {
+    <button class="btn-primary-gradient">Xuất báo cáo tồn kho</button>
+    <button class="btn-secondary-soft">Gửi cảnh báo</button>
+}
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Chỉ số tồn kho chính</h2>
+            <p>Tổng quan tốc độ tiêu thụ và vòng quay tồn kho.</p>
+        </div>
+    </div>
+    <div class="panel-body grid-4">
+        <div class="stat-card">
+            <span>Vòng quay tồn kho</span>
+            <h3>6.2 vòng/năm</h3>
+            <span class="kpi-trend">+0.8 so với năm trước</span>
+        </div>
+        <div class="stat-card">
+            <span>Số ngày tồn kho</span>
+            <h3>58 ngày</h3>
+            <span class="badge success">Trong ngưỡng</span>
+        </div>
+        <div class="stat-card">
+            <span>Tồn kho trung tâm</span>
+            <h3>1.284 xe</h3>
+            <span class="badge">Giảm 6% tuần qua</span>
+        </div>
+        <div class="stat-card">
+            <span>Xe luân chuyển chậm</span>
+            <h3>84 xe</h3>
+            <span class="badge danger">Cần chiến dịch</span>
+        </div>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Tốc độ tiêu thụ theo mẫu xe</h2>
+            <p>Số ngày tồn kho trung bình và cảnh báo cho từng dòng.</p>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table-modern">
+            <thead>
+                <tr>
+                    <th>Mẫu xe</th>
+                    <th>Tồn kho</th>
+                    <th>Doanh số 30 ngày</th>
+                    <th>Số ngày tồn</th>
+                    <th>Vòng quay</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>EV3 Sport</td>
+                    <td>320</td>
+                    <td>180</td>
+                    <td>45</td>
+                    <td>8.1</td>
+                    <td class="badge success">Tốt</td>
+                </tr>
+                <tr>
+                    <td>EV2 Touring</td>
+                    <td>420</td>
+                    <td>210</td>
+                    <td>60</td>
+                    <td>6.0</td>
+                    <td class="badge">Ổn định</td>
+                </tr>
+                <tr>
+                    <td>EV1 Urban</td>
+                    <td>380</td>
+                    <td>124</td>
+                    <td>92</td>
+                    <td>4.0</td>
+                    <td class="badge warning">Cần kích cầu</td>
+                </tr>
+                <tr>
+                    <td>Cargo Fleet</td>
+                    <td>164</td>
+                    <td>46</td>
+                    <td>128</td>
+                    <td>2.8</td>
+                    <td class="badge danger">Luân chuyển chậm</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="split-2">
+    <div class="panel soft">
+        <div class="panel-header">
+            <div>
+                <h2>Chỉ số theo khu vực</h2>
+                <p>Tình hình tồn kho tại các kho khu vực.</p>
+            </div>
+        </div>
+        <div class="panel-body list-modern">
+            <div class="list-item"><strong>Kho Bắc Ninh</strong><span>420 xe · 52 ngày · 6.5 vòng</span></div>
+            <div class="list-item"><strong>Kho Bình Dương</strong><span>528 xe · 44 ngày · 7.2 vòng</span></div>
+            <div class="list-item"><strong>Kho Đà Nẵng</strong><span>216 xe · 74 ngày · 4.9 vòng</span></div>
+            <div class="list-item"><strong>Kho Cần Thơ</strong><span>120 xe · 96 ngày · 3.8 vòng</span></div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-header">
+            <div>
+                <h2>Cảnh báo luân chuyển chậm</h2>
+                <p>Chi tiết xe tồn kho lâu cần hành động.</p>
+            </div>
+        </div>
+        <div class="panel-body list-modern">
+            <div class="list-item">
+                <strong>EV1 Urban (Hà Nội)</strong>
+                <span>86 xe > 90 ngày · Đề nghị chạy test-drive tháng 7</span>
+            </div>
+            <div class="list-item">
+                <strong>Cargo Fleet (Đà Nẵng)</strong>
+                <span>42 xe > 120 ngày · Tìm đối tác logistics</span>
+            </div>
+            <div class="list-item">
+                <strong>EV2 Touring (Cần Thơ)</strong>
+                <span>28 xe > 100 ngày · Hỗ trợ khuyến mãi tài chính</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Dự báo tồn kho</h2>
+            <p>Ước tính tồn kho 6 tuần tới dựa trên tốc độ tiêu thụ hiện tại.</p>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="chart-placeholder">Biểu đồ dự báo tồn kho (đang chờ tích hợp)</div>
+        <div class="list-modern">
+            <div class="list-item">
+                <strong>EV3 Sport</strong>
+                <span>Tồn kho còn 180 xe vào tuần 4 · Đề nghị tăng sản xuất</span>
+            </div>
+            <div class="list-item">
+                <strong>EV2 Touring</strong>
+                <span>Ổn định · Duy trì kế hoạch hiện tại</span>
+            </div>
+            <div class="list-item">
+                <strong>EV1 Urban</strong>
+                <span>Tồn kho dư 120 xe · Lên chiến dịch marketing thành phố</span>
+            </div>
+        </div>
+    </div>
+</div>

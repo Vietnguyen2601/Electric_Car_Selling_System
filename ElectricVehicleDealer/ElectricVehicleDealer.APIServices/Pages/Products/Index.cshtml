@@ -1,0 +1,142 @@
+﻿@page "/products"
+@model PortalPageModel
+@{
+    Layout = "_StoreLayout";
+    ViewData["Title"] = "Danh mục xe điện EcoRide";
+}
+
+<section class="store-section">
+    <div class="store-container">
+        <div class="section-header">
+            <div>
+                <h1>Dòng xe EcoRide 2025</h1>
+                <p>Khám phá các mẫu xe điện với công nghệ pin tiên tiến, hiệu suất vượt trội và hệ sinh thái dịch vụ thông minh.</p>
+            </div>
+            <div class="section-action">
+                <a href="/scheduling/test-drive">Đặt lịch lái thử</a>
+            </div>
+        </div>
+
+        <div class="store-form">
+            <div class="form-grid">
+                <div class="form-control-modern">
+                    <label>Phân khúc</label>
+                    <select>
+                        <option>Tất cả</option>
+                        <option>Urban Compact</option>
+                        <option>Executive Sedan</option>
+                        <option>Performance SUV</option>
+                        <option>Logistics Fleet</option>
+                    </select>
+                </div>
+                <div class="form-control-modern">
+                    <label>Tầm giá</label>
+                    <select>
+                        <option>Tất cả</option>
+                        <option>Dưới 1 tỷ</option>
+                        <option>1 - 1.5 tỷ</option>
+                        <option>Trên 1.5 tỷ</option>
+                    </select>
+                </div>
+                <div class="form-control-modern">
+                    <label>Công nghệ pin</label>
+                    <select>
+                        <option>Pin thể rắn</option>
+                        <option>LFP</option>
+                        <option>NCM</option>
+                    </select>
+                </div>
+                <div class="form-control-modern">
+                    <label>Tự lái</label>
+                    <select>
+                        <option>ADAS 2.5</option>
+                        <option>ADAS 3.0</option>
+                        <option>Hỗ trợ cơ bản</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button class="btn-secondary" type="button">Đặt lại</button>
+                <button class="btn-primary" type="button">Áp dụng</button>
+            </div>
+        </div>
+
+        <div class="product-grid">
+            <article class="product-card">
+                <figure>
+                    <img src="/images/bike3.jpg" alt="EcoRide EV3 Sport">
+                </figure>
+                <div class="product-tags">
+                    <span class="product-tag">SUV</span>
+                    <span class="product-tag">Pin 95kWh</span>
+                    <span class="product-tag">ADAS 3.0</span>
+                </div>
+                <div class="product-info">
+                    <h3>EcoRide EV3 Sport</h3>
+                    <p>Hiệu năng đột phá với chế độ Track Mode, hệ dẫn động AWD và HUD 3D thế hệ mới.</p>
+                </div>
+                <div class="product-meta">
+                    <span class="price">1.890.000.000 ₫</span>
+                    <a class="btn-secondary" href="/products/detail">Xem chi tiết</a>
+                </div>
+            </article>
+
+            <article class="product-card">
+                <figure>
+                    <img src="/images/bike2.jpg" alt="EcoRide EV2 Touring">
+                </figure>
+                <div class="product-tags">
+                    <span class="product-tag">Sedan</span>
+                    <span class="product-tag">Pin 82kWh</span>
+                    <span class="product-tag">Trả góp 0%</span>
+                </div>
+                <div class="product-info">
+                    <h3>EcoRide EV2 Touring</h3>
+                    <p>Sang trọng và tiện nghi với ghế massage 4 vùng, Night Vision và Smart Route.</p>
+                </div>
+                <div class="product-meta">
+                    <span class="price">1.380.000.000 ₫</span>
+                    <a class="btn-secondary" href="/products/detail">Xem chi tiết</a>
+                </div>
+            </article>
+
+            <article class="product-card">
+                <figure>
+                    <img src="/images/bike1.jpg" alt="EcoRide EV1 Urban">
+                </figure>
+                <div class="product-tags">
+                    <span class="product-tag">Hatchback</span>
+                    <span class="product-tag">Pin 62kWh</span>
+                    <span class="product-tag">City Pilot</span>
+                </div>
+                <div class="product-info">
+                    <h3>EcoRide EV1 Urban</h3>
+                    <p>Đồng hành cùng nhịp sống đô thị với khả năng đỗ tự động và chi phí vận hành tối ưu.</p>
+                </div>
+                <div class="product-meta">
+                    <span class="price">780.000.000 ₫</span>
+                    <a class="btn-secondary" href="/products/detail">Xem chi tiết</a>
+                </div>
+            </article>
+
+            <article class="product-card">
+                <figure>
+                    <img src="/images/bike3.jpg" alt="EcoRide Cargo Fleet">
+                </figure>
+                <div class="product-tags">
+                    <span class="product-tag">Logistics</span>
+                    <span class="product-tag">Fleet</span>
+                    <span class="product-tag">AI route</span>
+                </div>
+                <div class="product-info">
+                    <h3>EcoRide Cargo Fleet</h3>
+                    <p>Giải pháp vận tải xanh cho doanh nghiệp với AI tối ưu tuyến đường và pin đổi nhanh.</p>
+                </div>
+                <div class="product-meta">
+                    <span class="price">Liên hệ</span>
+                    <a class="btn-secondary" href="/products/detail">Xem chi tiết</a>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>

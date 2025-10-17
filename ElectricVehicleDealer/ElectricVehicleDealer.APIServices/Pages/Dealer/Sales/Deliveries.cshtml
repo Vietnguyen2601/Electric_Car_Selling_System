@@ -1,0 +1,152 @@
+﻿@page "/dealer/sales/deliveries"
+@model PortalPageModel
+@{
+    ViewData["Title"] = "Theo dõi giao xe - Dealer";
+    ViewData["PageTitle"] = "Theo dõi tình trạng giao xe";
+    ViewData["PageDescription"] = "Đảm bảo trải nghiệm bàn giao xe hoàn hảo bằng cách theo dõi checklist và thông báo cho khách hàng theo thời gian thực.";
+}
+
+@section PageActions {
+    <button class="btn-primary-gradient">Tạo lịch giao xe</button>
+    <button class="btn-secondary-soft">Gửi email khách</button>
+}
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Lịch giao xe trong tuần</h2>
+            <p>Kiểm tra các buổi bàn giao đã được xác nhận và trạng thái chuẩn bị.</p>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table-modern">
+            <thead>
+                <tr>
+                    <th>Thời gian</th>
+                    <th>Khách hàng</th>
+                    <th>Mẫu xe</th>
+                    <th>Địa điểm</th>
+                    <th>Trạng thái chuẩn bị</th>
+                    <th>Ghi chú</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Thứ 3 · 09:30</td>
+                    <td>Nguyễn Minh Tài</td>
+                    <td>EV3 Sport</td>
+                    <td>Showroom Quận 7</td>
+                    <td class="badge success">Sẵn sàng</td>
+                    <td>Yêu cầu livestream buổi bàn giao</td>
+                </tr>
+                <tr>
+                    <td>Thứ 3 · 15:00</td>
+                    <td>Doanh nghiệp Vận Tải Xanh</td>
+                    <td>Cargo Fleet x5</td>
+                    <td>Kho Bình Dương</td>
+                    <td class="badge warning">Chuẩn bị quà tặng</td>
+                    <td>Giám đốc hãng tham dự</td>
+                </tr>
+                <tr>
+                    <td>Thứ 5 · 10:00</td>
+                    <td>Trịnh Hoài Phương</td>
+                    <td>EV2 Touring</td>
+                    <td>Showroom Hà Nội</td>
+                    <td class="badge success">Sẵn sàng</td>
+                    <td>Khách yêu cầu trải nghiệm ADAS</td>
+                </tr>
+                <tr>
+                    <td>Thứ 7 · 14:00</td>
+                    <td>Lê Quốc Vũ</td>
+                    <td>EV1 Urban</td>
+                    <td>Giao tại nhà</td>
+                    <td class="badge danger">Chờ xác nhận địa chỉ</td>
+                    <td>Nhắc khách chuẩn bị chỗ sạc</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="split-2">
+    <div class="panel soft">
+        <div class="panel-header">
+            <div>
+                <h2>Checklist bàn giao</h2>
+                <p>Đảm bảo xe và quà tặng được chuẩn bị đầy đủ trước khi bàn giao.</p>
+            </div>
+        </div>
+        <div class="panel-body grid-2">
+            <div class="list-modern">
+                <div class="list-item"><strong>Đã vệ sinh ngoại thất</strong><span class="badge success">OK</span></div>
+                <div class="list-item"><strong>Sạc đầy 100%</strong><span class="badge success">OK</span></div>
+                <div class="list-item"><strong>Update firmware mới nhất</strong><span class="badge warning">Đang chạy</span></div>
+                <div class="list-item"><strong>Chuẩn bị biển số tạm</strong><span class="badge success">OK</span></div>
+            </div>
+            <div class="list-modern">
+                <div class="list-item"><strong>Quà tặng khách hàng</strong><span class="badge warning">Đang gói</span></div>
+                <div class="list-item"><strong>Tài liệu hướng dẫn</strong><span class="badge success">OK</span></div>
+                <div class="list-item"><strong>Ấn phẩm truyền thông</strong><span class="badge">Chờ duyệt</span></div>
+                <div class="list-item"><strong>Đặt lịch bảo dưỡng lần 1</strong><span class="badge danger">Chưa đặt</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-header">
+            <div>
+                <h2>Thông tin khách hàng</h2>
+                <p>Ghi chú nhanh để đội chăm sóc sau bán lưu ý.</p>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="form-grid">
+                <div class="form-control-modern">
+                    <label>Khách hàng</label>
+                    <input value="Nguyễn Minh Tài" />
+                </div>
+                <div class="form-control-modern">
+                    <label>Địa chỉ giao</label>
+                    <input value="120 Nguyễn Văn Linh, Quận 7, TP.HCM" />
+                </div>
+            </div>
+            <div class="form-control-modern">
+                <label>Yêu cầu đặc biệt</label>
+                <textarea placeholder="Ghi nhận các yêu cầu như giới thiệu tính năng, trang trí xe, setup app...">Chuẩn bị demo tính năng Smart Route, cài đặt ứng dụng EcoRide Connect cho cả 2 điện thoại.</textarea>
+            </div>
+            <div class="panel-actions">
+                <button class="btn-secondary-soft">Gửi SMS nhắc</button>
+                <button class="btn-primary-gradient">Xác nhận giao xe</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Khảo sát sau bàn giao</h2>
+            <p>Mẫu câu hỏi để đội CSKH gọi điện chăm sóc khách trong 48h.</p>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="list-modern">
+            <div class="list-item">
+                <strong>Trải nghiệm bàn giao có đáp ứng kỳ vọng?</strong>
+                <span>Đánh giá 1-5 sao · Ưu tiên ghi nhận phản hồi mở</span>
+            </div>
+            <div class="list-item">
+                <strong>Khách hàng đã cài app EcoRide Connect?</strong>
+                <span>Nếu chưa, hướng dẫn cài đặt và kích hoạt OTA</span>
+            </div>
+            <div class="list-item">
+                <strong>Nhu cầu phụ kiện hoặc dịch vụ mở rộng?</strong>
+                <span>Ghi lại để upsell gói bảo dưỡng, sạc nhanh, ceramic...</span>
+            </div>
+            <div class="list-item">
+                <strong>Đặt lịch chăm sóc sau 7 ngày</strong>
+                <span>SMS + Email tự động · Có nhân viên phụ trách</span>
+            </div>
+        </div>
+    </div>
+</div>

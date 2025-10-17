@@ -1,0 +1,125 @@
+﻿@page "/dealer/sales/promotions"
+@model PortalPageModel
+@{
+    ViewData["Title"] = "Quản lý khuyến mãi - Dealer";
+    ViewData["PageTitle"] = "Chương trình khuyến mãi & ưu đãi";
+    ViewData["PageDescription"] = "Thiết lập, phân bổ và theo dõi hiệu quả các chương trình khuyến mãi dành cho khách hàng.";
+}
+
+@section PageActions {
+    <button class="btn-primary-gradient">Tạo chương trình</button>
+    <button class="btn-secondary-soft">Sao chép từ EVM</button>
+}
+
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Tổng quan khuyến mãi</h2>
+            <p>Các chương trình đang chạy tại đại lý và trạng thái phân bổ ngân sách.</p>
+        </div>
+    </div>
+    <div class="panel-body grid-3">
+        <div class="card-ghost">
+            <h3>Voucher sạc 50 triệu ₫</h3>
+            <p>Ưu đãi khi mua EV3 Sport · Thời gian: 05/06 - 30/06.</p>
+            <div class="list-modern">
+                <div class="list-item"><strong>Ngân sách</strong><span>2.5 tỷ ₫ · 70% còn lại</span></div>
+                <div class="list-item"><strong>Số lượt đã dùng</strong><span>32/80 suất</span></div>
+                <div class="list-item"><strong>Hiệu quả</strong><span class="badge success">+28% lead</span></div>
+            </div>
+        </div>
+        <div class="card-ghost">
+            <h3>Trả góp 0% 18 tháng</h3>
+            <p>Áp dụng cho EV2 Touring và EV1 Urban · Đối tác: TechBank.</p>
+            <div class="list-modern">
+                <div class="list-item"><strong>Ngân sách lãi hỗ trợ</strong><span>3.2 tỷ ₫ · 55% còn lại</span></div>
+                <div class="list-item"><strong>Đơn hàng</strong><span>64 khách hàng</span></div>
+                <div class="list-item"><strong>Hiệu quả</strong><span class="badge">+18% chốt đơn</span></div>
+            </div>
+        </div>
+        <div class="card-ghost">
+            <h3>Fleet giảm 5%</h3>
+            <p>Ưu đãi doanh nghiệp mua từ 3 xe trở lên.</p>
+            <div class="list-modern">
+                <div class="list-item"><strong>Ngân sách</strong><span>5 tỷ ₫ · 82% còn lại</span></div>
+                <div class="list-item"><strong>Đơn hàng</strong><span>6 doanh nghiệp</span></div>
+                <div class="list-item"><strong>Hiệu quả</strong><span class="badge warning">Đang tăng trưởng</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="split-2">
+    <div class="panel soft">
+        <div class="panel-header">
+            <div>
+                <h2>Tạo chương trình mới</h2>
+                <p>Định nghĩa điều kiện áp dụng và ngân sách cho chiến dịch mới.</p>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="form-grid">
+                <div class="form-control-modern">
+                    <label>Tên chương trình</label>
+                    <input placeholder="Ví dụ: Mùa hè xanh - Ưu đãi pin" />
+                </div>
+                <div class="form-control-modern">
+                    <label>Áp dụng cho dòng xe</label>
+                    <select>
+                        <option>Tất cả</option>
+                        <option>EcoRide EV3</option>
+                        <option>EcoRide EV2</option>
+                        <option>EcoRide EV1</option>
+                        <option>EcoRide Cargo Fleet</option>
+                    </select>
+                </div>
+                <div class="form-control-modern">
+                    <label>Ngân sách</label>
+                    <input placeholder="Nhập ngân sách (₫)" />
+                </div>
+                <div class="form-control-modern">
+                    <label>Thời gian áp dụng</label>
+                    <input type="date" />
+                </div>
+            </div>
+            <div class="form-control-modern">
+                <label>Điều kiện</label>
+                <textarea placeholder="Ví dụ: Áp dụng cho khách đặt cọc trước 10/07, không cộng dồn với ưu đãi khác..."></textarea>
+            </div>
+            <div class="panel-actions">
+                <button class="btn-secondary-soft">Lưu nháp</button>
+                <button class="btn-primary-gradient">Gửi duyệt</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-header">
+            <div>
+                <h2>Báo cáo hiệu quả</h2>
+                <p>So sánh KPI trước và sau khi triển khai chương trình.</p>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="chart-placeholder">Biểu đồ hiệu quả khuyến mãi (đang chờ tích hợp)</div>
+            <div class="list-modern">
+                <div class="list-item">
+                    <strong>Lead / ngày</strong>
+                    <span>+26% · 32 → 40</span>
+                </div>
+                <div class="list-item">
+                    <strong>Tỷ lệ chuyển đổi</strong>
+                    <span>+12% · 24% → 27%</span>
+                </div>
+                <div class="list-item">
+                    <strong>Chi phí/Lead</strong>
+                    <span>-16% · 1.8 triệu → 1.5 triệu</span>
+                </div>
+                <div class="list-item">
+                    <strong>Net Profit</strong>
+                    <span class="badge success">+5.4 tỷ ₫</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

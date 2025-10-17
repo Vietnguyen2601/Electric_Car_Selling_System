@@ -1,0 +1,41 @@
+﻿@page "/auth/login"
+@model PortalPageModel
+@{
+    Layout = "_AuthLayout";
+    ViewData["Title"] = "Đăng nhập hệ thống EcoRide";
+}
+
+<div class="auth-header">
+    <div class="brand-glow">EV</div>
+    <h1>Đăng nhập EcoRide Portal</h1>
+    <p>Truy cập hệ thống quản lý đại lý và hãng xe để điều hành toàn bộ chuỗi giá trị xe điện.</p>
+</div>
+
+<form class="auth-form">
+    <div class="form-control-modern">
+        <label>Email</label>
+        <input type="email" placeholder="name@ecoride.vn" />
+    </div>
+    <div class="form-control-modern">
+        <label>Mật khẩu</label>
+        <input type="password" placeholder="••••••••" />
+    </div>
+    <div class="form-control-modern">
+        <label>Môi trường làm việc</label>
+        <select>
+            <option>Dealer Portal</option>
+            <option>EVM Portal</option>
+            <option>Hệ thống hỗ trợ</option>
+        </select>
+    </div>
+    <button type="submit" class="btn-primary-gradient">Đăng nhập</button>
+</form>
+
+<div class="auth-footer">
+    <a href="#">Quên mật khẩu?</a>
+    <span>Hotline hỗ trợ: 1800-8899</span>
+</div>
+
+<div class="auth-meta">
+    Chưa có tài khoản? <a href="#">Liên hệ quản trị hệ thống</a>
+</div>
