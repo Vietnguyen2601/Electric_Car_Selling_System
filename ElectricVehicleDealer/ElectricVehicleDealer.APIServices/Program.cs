@@ -40,5 +40,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+app.MapFallbackToPage("/Homepage/Home");
+
 
 app.Run();

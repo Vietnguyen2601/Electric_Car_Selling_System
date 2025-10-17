@@ -1,0 +1,77 @@
+﻿/* wwwroot/css/Home/home.css */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f7f9fa;
+    color: #222;
+    margin: 0;
+    padding: 0;
+}
+
+.hero {
+    background: url('/images/hero-car.jpg') center/cover no-repeat;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+    .hero h2 {
+        font-size: 48px;
+        font-weight: 700;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 20px 40px;
+        border-radius: 10px;
+    }
+
+.container {
+    padding: 50px 80px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 40px;
+    color: #0b0c10;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+    .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+    }
+
+.card-content {
+    padding: 20px;
+}
+
+    .card-content h3 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .card-content p {
+        font-size: 14px;
+        color: #555;
+    }
