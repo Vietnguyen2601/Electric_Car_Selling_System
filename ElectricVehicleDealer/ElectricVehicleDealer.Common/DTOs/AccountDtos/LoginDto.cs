@@ -4,16 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ElectricVehicleDealer.Common.DTOs
+namespace ElectricVehicleDealer.Common.DTOs.AccountDto
 {
-    public class CreateAccountDto
+    public class LoginDto
     {
         public string Username { get; set; } = null!;
 
         public string Password { get; set; } = null!;
-
-        public string Email { get; set; } = null!;
-
-        public string? ContactNumber { get; set; }
     }
 }

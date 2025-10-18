@@ -1,4 +1,4 @@
-﻿using ElectricVehicleDealer.Common.DTOs;
+﻿using ElectricVehicleDealer.Common.DTOs.AccountDto;
 
 
 namespace ElectricVehicleDealer.BLL.IServices

@@ -1,5 +1,5 @@
 ﻿@page "/products"
-@model PortalPageModel
+@model ElectricVehicleDealer.Presentation.Pages.Products.IndexModel
 @{
     Layout = "_StoreLayout";
     ViewData["Title"] = "Danh mục xe điện EcoRide";
@@ -62,81 +62,22 @@
         </div>
 
         <div class="product-grid">
-            <article class="product-card">
-                <figure>
-                    <img src="/images/bike3.jpg" alt="EcoRide EV3 Sport">
-                </figure>
-                <div class="product-tags">
-                    <span class="product-tag">SUV</span>
-                    <span class="product-tag">Pin 95kWh</span>
-                    <span class="product-tag">ADAS 3.0</span>
-                </div>
-                <div class="product-info">
-                    <h3>EcoRide EV3 Sport</h3>
-                    <p>Hiệu năng đột phá với chế độ Track Mode, hệ dẫn động AWD và HUD 3D thế hệ mới.</p>
-                </div>
-                <div class="product-meta">
-                    <span class="price">1.890.000.000 ₫</span>
-                    <a class="btn-secondary" href="/products/detail">Xem chi tiết</a>
-                </div>
-            </article>
-
-            <article class="product-card">
-                <figure>
-                    <img src="/images/bike2.jpg" alt="EcoRide EV2 Touring">
-                </figure>
-                <div class="product-tags">
-                    <span class="product-tag">Sedan</span>
-                    <span class="product-tag">Pin 82kWh</span>
-                    <span class="product-tag">Trả góp 0%</span>
-                </div>
-                <div class="product-info">
-                    <h3>EcoRide EV2 Touring</h3>
-                    <p>Sang trọng và tiện nghi với ghế massage 4 vùng, Night Vision và Smart Route.</p>
-                </div>
-                <div class="product-meta">
-                    <span class="price">1.380.000.000 ₫</span>
-                    <a class="btn-secondary" href="/products/detail">Xem chi tiết</a>
-                </div>
-            </article>
-
-            <article class="product-card">
-                <figure>
-                    <img src="/images/bike1.jpg" alt="EcoRide EV1 Urban">
-                </figure>
-                <div class="product-tags">
-                    <span class="product-tag">Hatchback</span>
-                    <span class="product-tag">Pin 62kWh</span>
-                    <span class="product-tag">City Pilot</span>
-                </div>
-                <div class="product-info">
-                    <h3>EcoRide EV1 Urban</h3>
-                    <p>Đồng hành cùng nhịp sống đô thị với khả năng đỗ tự động và chi phí vận hành tối ưu.</p>
-                </div>
-                <div class="product-meta">
-                    <span class="price">780.000.000 ₫</span>
-                    <a class="btn-secondary" href="/products/detail">Xem chi tiết</a>
-                </div>
-            </article>
-
-            <article class="product-card">
-                <figure>
-                    <img src="/images/bike3.jpg" alt="EcoRide Cargo Fleet">
-                </figure>
-                <div class="product-tags">
-                    <span class="product-tag">Logistics</span>
-                    <span class="product-tag">Fleet</span>
-                    <span class="product-tag">AI route</span>
-                </div>
-                <div class="product-info">
-                    <h3>EcoRide Cargo Fleet</h3>
-                    <p>Giải pháp vận tải xanh cho doanh nghiệp với AI tối ưu tuyến đường và pin đổi nhanh.</p>
-                </div>
-                <div class="product-meta">
-                    <span class="price">Liên hệ</span>
-                    <a class="btn-secondary" href="/products/detail">Xem chi tiết</a>
-                </div>
-            </article>
+            @foreach (var v in Model.Vehicles)
+            {
+                <article class="product-card">
+                    <figure>
+                        <img src="/images/bike3.jpg" alt="@v.Model" />
+                    </figure>
+                    <div class="product-info">
+                        <h3>@v.Model</h3>
+                        <p>Giá khởi điểm</p>
+                    </div>
+                    <div class="product-meta">
+                        <span class="price">@String.Format("{0:N0} ₫", v.Price)</span>
+                        <a class="btn-secondary" href="/products/detail/@v.VehicleId">Xem chi tiết</a>
+                    </div>
+                </article>
+            }
         </div>
     </div>
 </section>
