@@ -1,6 +1,6 @@
 ﻿using ElectricVehicleDealer.BLL.IServices;
 using ElectricVehicleDealer.BLL.Mapper;
-using ElectricVehicleDealer.Common.DTOs;
+using ElectricVehicleDealer.Common.DTOs.AccountDto;
 using ElectricVehicleDealer.DAL.Repositories.IRepository;
 
 

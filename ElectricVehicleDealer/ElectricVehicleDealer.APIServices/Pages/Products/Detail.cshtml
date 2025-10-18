@@ -1,5 +1,5 @@
-﻿@page "/products/detail"
-@model PortalPageModel
+﻿@page "{id:int}"
+@model ElectricVehicleDealer.Presentation.Pages.Products.DetailModel
 @{
     Layout = "_StoreLayout";
     ViewData["Title"] = "Chi tiết sản phẩm EcoRide EV3 Sport";
@@ -9,8 +9,8 @@
     <div class="store-container">
         <div class="section-header">
             <div>
-                <h1>EcoRide EV3 Sport</h1>
-                <p>SUV hiệu năng cao với công nghệ pin thể rắn, hệ thống dẫn động AWD và bộ khung khí động học tối ưu.</p>
+                <h1>@Model.Vehicle?.Model</h1>
+                <p>@Model.Vehicle?.Type</p>
             </div>
             <div class="section-action">
                 <a href="/cart">Thêm vào giỏ hàng</a>
@@ -21,16 +21,14 @@
             <div class="product-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
                 <div class="product-card">
                     <figure>
-                        <img src="/images/bike3.jpg" alt="EcoRide EV3 Sport">
+                        <img src="/images/bike3.jpg" alt="@Model.Vehicle?.Model">
                     </figure>
                     <div class="product-tags">
-                        <span class="product-tag">Track Mode</span>
-                        <span class="product-tag">AWD</span>
-                        <span class="product-tag">HUD 3D</span>
+                        <span class="product-tag">@Model.Vehicle?.Color</span>
                     </div>
                     <div class="product-info">
                         <h3>Giá bán lẻ đề xuất</h3>
-                        <p class="price">1.890.000.000 ₫</p>
+                        <p class="price">@String.Format("{0:N0} ₫", Model.Vehicle?.Price)</p>
                     </div>
                     <button class="btn-primary" type="button">Đặt cọc online</button>
                     <button class="btn-secondary" type="button">Tính phương án trả góp</button>
@@ -40,55 +38,48 @@
                     <h3>Thông số nổi bật</h3>
                     <div class="list-modern">
                         <div class="list-item">
-                            <strong>Phạm vi di chuyển</strong>
-                            <span>480 km (WLTP)</span>
+                            <strong>Mẫu xe:</strong>
+                            <span>@Model.Vehicle?.Model</span>
                         </div>
                         <div class="list-item">
-                            <strong>Công suất tối đa</strong>
-                            <span>320 kW · 0-100 km/h: 4.5s</span>
+                            <strong>Phân khúc:</strong>
+                            <span>@Model.Vehicle?.Type</span>
                         </div>
                         <div class="list-item">
-                            <strong>Pin</strong>
-                            <span>95 kWh · Sạc nhanh 20 phút</span>
-                        </div>
-                        <div class="list-item">
-                            <strong>Tự lái</strong>
-                            <span>ADAS 3.0 · Tự động thay đổi làn</span>
-                        </div>
-                        <div class="list-item">
-                            <strong>Nội thất</strong>
-                            <span>Âm thanh 16 loa Quantum · HUD AR</span>
+                            <strong>Màu sắc:</strong>
+                            <span>@Model.Vehicle?.Color</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="product-card">
-                    <h3>Chọn cấu hình</h3>
-                    <div class="form-control-modern">
-                        <label>Màu ngoại thất</label>
-                        <select>
-                            <option>Xanh Aurora</option>
-                            <option>Trắng Glacier</option>
-                            <option>Đen Midnight</option>
-                            <option>Đỏ Phoenix</option>
-                        </select>
+                    <h3>Phân bổ xe theo trạm</h3>
+                    <div class="station-list">
+                        @if (Model.StationCars != null && Model.StationCars.Any())
+                        {
+                            foreach (var sc in Model.StationCars)
+                            {
+                                <div class="station-item">
+                                    <h4>@sc.StationName</h4>
+                                    <p><strong>Địa điểm:</strong> @sc.Location</p>
+                                    <p><strong>Số lượng còn:</strong> @sc.Quantity</p>
+
+                                    @if (sc.Quantity > 0)
+                                    {
+                                        <button class="btn-secondary" type="button">Đặt xe tại trạm này</button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn-disabled" disabled>Hết xe</button>
+                                    }
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <p>Hiện chưa có trạm nào có xe này trong kho.</p>
+                        }
                     </div>
-                    <div class="form-control-modern">
-                        <label>Mâm xe</label>
-                        <select>
-                            <option>19" Aero Performance</option>
-                            <option>20" Track Carbon</option>
-                        </select>
-                    </div>
-                    <div class="form-control-modern">
-                        <label>Gói công nghệ</label>
-                        <select>
-                            <option>Standard Tech Pack</option>
-                            <option>Ultimate Pilot Pack</option>
-                            <option>Signature Luxury Pack</option>
-                        </select>
-                    </div>
-                    <button class="btn-secondary" type="button">Lưu cấu hình</button>
                 </div>
             </div>
         </div>

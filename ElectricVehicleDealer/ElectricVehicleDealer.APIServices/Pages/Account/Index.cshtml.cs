@@ -1,5 +1,5 @@
 using ElectricVehicleDealer.BLL.IServices;
-using ElectricVehicleDealer.Common.DTOs;
+using ElectricVehicleDealer.Common.DTOs.AccountDto;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ElectricVehicleDealer.Presentation.Pages.Account

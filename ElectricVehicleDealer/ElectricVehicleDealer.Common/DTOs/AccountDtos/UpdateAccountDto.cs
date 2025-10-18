@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ElectricVehicleDealer.Common.DTOs
+namespace ElectricVehicleDealer.Common.DTOs.AccountDto
 {
     public class UpdateAccountDto
     {

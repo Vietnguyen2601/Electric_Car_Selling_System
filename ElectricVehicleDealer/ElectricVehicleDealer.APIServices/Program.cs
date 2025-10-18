@@ -17,9 +17,18 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<ElectricVehicleDContext>();
 
 
-// Đăng ký Repository và Service vào DI container
+// Đăng ký Repository
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
+builder.Services.AddScoped<IStationCarRepository, StationCarRepository>();
+builder.Services.AddScoped<IStationRepository, StationRepository>();
+
+//Đăng Ký Service
+builder.Services.AddScoped<IStationService, StationService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IVehicleService, VehicleService>();
+builder.Services.AddScoped<IStationCarService, StationCarService>();
+
 
 
 
