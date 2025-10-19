@@ -10,5 +10,6 @@ namespace ElectricVehicleDealer.BLL.IServices
         Task AddAccountAsync(CreateAccountDto dto);
         Task UpdateAccountAsync(int accountId, UpdateAccountDto dto);
         Task DeleteAccountAsync(int accountId);
+        Task<AccountDto?> AuthenticateAsync(string email, string password);
     }
 }

@@ -12,9 +12,6 @@
                 <h1>@Model.Vehicle?.Model</h1>
                 <p>@Model.Vehicle?.Type</p>
             </div>
-            <div class="section-action">
-                <a href="/cart">Thêm vào giỏ hàng</a>
-            </div>
         </div>
 
         <div class="store-form">
@@ -30,7 +27,11 @@
                         <h3>Giá bán lẻ đề xuất</h3>
                         <p class="price">@String.Format("{0:N0} ₫", Model.Vehicle?.Price)</p>
                     </div>
-                    <button class="btn-primary" type="button">Đặt cọc online</button>
+                    <button class="btn-primary"
+                            type="button"
+                            onclick="window.location.href='/cart?vehicleId=@Model.Vehicle?.VehicleId'">
+                        Đặt cọc online
+                    </button>
                     <button class="btn-secondary" type="button">Tính phương án trả góp</button>
                 </div>
 

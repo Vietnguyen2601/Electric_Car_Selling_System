@@ -47,5 +47,12 @@ namespace ElectricVehicleDealer.BLL.Services
         {
             await _accountRepository.DeleteAccountAsync(accountId);
         }
+
+        public async Task<AccountDto?> AuthenticateAsync(string email, string password)
+        {
+            var entity = await _accountRepository.GetByEmailAndPasswordAsync(email, password);
+            return entity != null ? AccountMapper.ToDTO(entity) : null;
+        }
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿@page
 @model ElectricVehicleDealer.Presentation.Pages.Homepage.HomeModel
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 @{
     Layout = null;
 }
@@ -26,10 +27,23 @@
             <a href="/About">Về chúng tôi</a>
             <a href="/Contact">Liên hệ</a>
         </nav>
+        @{
+            var username = HttpContextAccessor.HttpContext?.Session.GetString("AccountName");
+        }
+
         <div class="nav-right">
-            <a href="/store/login">Đăng nhập</a>
-            <a href="/store/register" class="btn-register">Đăng ký</a>
+            @if (!string.IsNullOrEmpty(username))
+            {
+                <span>Xin chào, @username!</span>
+                <a href="/store/logout" class="btn-logout">Đăng xuất</a>
+            }
+            else
+            {
+                <a href="/store/login">Đăng nhập</a>
+                <a href="/store/register" class="btn-register">Đăng ký</a>
+            }
         </div>
+
     </header>
 
     <main>
