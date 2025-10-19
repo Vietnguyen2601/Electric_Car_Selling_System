@@ -11,7 +11,7 @@ namespace ElectricVehicleDealer.Common.DTOs.OrderDtos
         public decimal TotalPrice { get; set; }
         public string Status { get; set; } = string.Empty;
         public int? PromotionId { get; set; }
-        public int StaffId { get; set; }
+        public int? StaffId { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public bool IsActive { get; set; }

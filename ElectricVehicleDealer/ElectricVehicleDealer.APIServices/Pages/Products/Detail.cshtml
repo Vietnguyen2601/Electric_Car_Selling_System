@@ -1,12 +1,35 @@
-﻿@page "{id:int}"
+@page "{id:int}"
+@using System.Collections.Generic
+@using System.Linq
+@using ElectricVehicleDealer.Common.DTOs.StationDtos
 @model ElectricVehicleDealer.Presentation.Pages.Products.DetailModel
 @{
     Layout = "_StoreLayout";
-    ViewData["Title"] = "Chi tiết sản phẩm EcoRide EV3 Sport";
+    ViewData["Title"] = $"Chi Tiết Sản Phẩm {Model.Vehicle?.Model ?? "EcoRide"}";
+
+    var stationCars = Model.StationCars ?? new List<StationCarDTO>();
+    var availableStations = stationCars.Where(sc => sc.Quantity > 0).ToList();
+    var hasAvailableStation = availableStations.Any();
 }
 
 <section class="store-section">
     <div class="store-container">
+        @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @Model.SuccessMessage
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
+        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                @Model.ErrorMessage
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
         <div class="section-header">
             <div>
                 <h1>@Model.Vehicle?.Model</h1>
@@ -25,21 +48,31 @@
                     </div>
                     <div class="product-info">
                         <h3>Giá bán lẻ đề xuất</h3>
-                        <p class="price">@String.Format("{0:N0} ₫", Model.Vehicle?.Price)</p>
+                        <p class="price">@Model.Vehicle?.Price.ToString("N0") VND</p>
+                        @if (Model.CalculatedDeposit.HasValue)
+                        {
+                            <small class="text-muted d-block">Tiền đặt cọc dự kiến: @Model.CalculatedDeposit.Value.ToString("N0") VND</small>
+                        }
                     </div>
                     <button class="btn-primary"
                             type="button"
-                            onclick="window.location.href='/cart?vehicleId=@Model.Vehicle?.VehicleId'">
+                            data-bs-toggle="modal"
+                            data-bs-target="#depositModal"
+                            @(hasAvailableStation ? "" : "disabled")>
                         Đặt cọc online
                     </button>
-                    <button class="btn-secondary" type="button">Tính phương án trả góp</button>
+                    @if (!hasAvailableStation)
+                    {
+                        <small class="text-danger d-block mt-2">Chưa có trạm còn xe để đặt cọc.</small>
+                    }
+                    <button class="btn-secondary mt-3" type="button">Tính phương án trả góp</button>
                 </div>
 
                 <div class="product-card">
                     <h3>Thông số nổi bật</h3>
                     <div class="list-modern">
                         <div class="list-item">
-                            <strong>Mẫu xe:</strong>
+                            <strong>Màu xe:</strong>
                             <span>@Model.Vehicle?.Model</span>
                         </div>
                         <div class="list-item">
@@ -56,18 +89,23 @@
                 <div class="product-card">
                     <h3>Phân bổ xe theo trạm</h3>
                     <div class="station-list">
-                        @if (Model.StationCars != null && Model.StationCars.Any())
+                        @if (stationCars.Any())
                         {
-                            foreach (var sc in Model.StationCars)
+                            foreach (var sc in stationCars)
                             {
                                 <div class="station-item">
                                     <h4>@sc.StationName</h4>
-                                    <p><strong>Địa điểm:</strong> @sc.Location</p>
-                                    <p><strong>Số lượng còn:</strong> @sc.Quantity</p>
+                                    <p><strong>Dia diem:</strong> @sc.Location</p>
+                                    <p><strong>So luong con:</strong> @sc.Quantity</p>
 
                                     @if (sc.Quantity > 0)
                                     {
-                                        <button class="btn-secondary" type="button">Đặt xe tại trạm này</button>
+                                        <form method="post"
+                                              asp-page-handler="Reserve"
+                                              asp-route-id="@Model.Vehicle?.VehicleId">
+                                            <input type="hidden" name="SelectedStationCarId" value="@sc.StationCarId" />
+                                            <button class="btn-secondary" type="submit">Đặt xe tại trạm này</button>
+                                        </form>
                                     }
                                     else
                                     {
@@ -90,8 +128,8 @@
             <p style="margin:0 0 24px;color:var(--store-text-subtle);">EcoRide EV3 Sport tích hợp hệ sinh thái dịch vụ, cập nhật OTA và quản lý xe thông minh qua ứng dụng EcoRide Connect.</p>
             <div class="product-grid">
                 <div class="product-card">
-                    <h3>Pin thể rắn 95 kWh</h3>
-                    <p>Đạt mật độ năng lượng cao, tuổi thọ pin 1.000.000 km với công nghệ làm mát chủ động.</p>
+                    <h3>Pin lithium-ion 95 kWh</h3>
+                    <p>Đạt mức dự trữ năng lượng cao, tuổi thọ pin 1.000.000 km với công nghệ làm mát chủ động.</p>
                 </div>
                 <div class="product-card">
                     <h3>Driving Intelligence</h3>
@@ -105,3 +143,63 @@
         </div>
     </div>
 </section>
+
+<div class="modal fade" id="depositModal" tabindex="-1" aria-labelledby="depositModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form method="post" asp-page-handler="Reserve" asp-route-id="@Model.Vehicle?.VehicleId">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="depositModalLabel">Đặt cọc tại trạm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @if (hasAvailableStation)
+                    {
+                        <div class="mb-3">
+                            <label asp-for="SelectedStationCarId" class="form-label">Chọn trạm đang còn xe</label>
+                            <select class="form-select" asp-for="SelectedStationCarId">
+                                @foreach (var station in availableStations)
+                                {
+                                    <option value="@station.StationCarId">
+                                        @station.StationName - còn @station.Quantity xe
+                                    </option>
+                                }
+                            </select>
+                            <span asp-validation-for="SelectedStationCarId" class="text-danger"></span>
+                        </div>
+                        @if (Model.CalculatedDeposit.HasValue)
+                        {
+                            <div class="alert alert-info mb-0">
+                                <strong>Tiền đặt cọc:</strong> @Model.CalculatedDeposit.Value.ToString("N0") VND
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p class="mb-0">Chưa có trạm nào còn xe để đặt cọc ngay lúc này.</p>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-primary" @(hasAvailableStation ? "" : "disabled")>Xác nhận đặt cọc</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        (function () {
+            var hasValidationError = @(ViewData.ModelState.TryGetValue(nameof(Model.SelectedStationCarId), out var entry) && entry.Errors.Count > 0 ? "true" : "false");
+            if (hasValidationError === "true") {
+                var modalElement = document.getElementById('depositModal');
+                if (modalElement) {
+                    var depositModal = new bootstrap.Modal(modalElement);
+                    depositModal.show();
+                }
+            }
+        })();
+    </script>
+}

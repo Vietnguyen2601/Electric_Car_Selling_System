@@ -42,7 +42,7 @@
                     <tr>
                         <td>@order.OrderId</td>
                         <td>@order.CustomerUsername</td>
-                        <td>@order.StaffUsername</td>
+                        <td>@(string.IsNullOrWhiteSpace(order.StaffUsername) ? "Chua phan cong" : order.StaffUsername)</td>
                         <td>@order.StationName</td>
                         <td>@order.Status</td>
                         <td>@order.TotalPrice.ToString("N0") ₫</td>
