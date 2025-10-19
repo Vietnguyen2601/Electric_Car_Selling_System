@@ -1,0 +1,228 @@
+.crud-page {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.crud-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1.25rem;
+    padding: 1.75rem 2rem;
+    border-radius: 22px;
+    background: linear-gradient(135deg, rgba(15, 69, 115, 0.08), rgba(12, 173, 204, 0.08));
+    border: 1px solid rgba(15, 40, 80, 0.08);
+}
+
+.crud-header h2 {
+    margin: 0;
+    font-size: 1.85rem;
+    font-weight: 600;
+    color: #0f2342;
+}
+
+.crud-header p {
+    margin: 0.35rem 0 0;
+    font-size: 0.95rem;
+    color: #4b5b71;
+    max-width: 560px;
+}
+
+.crud-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.crud-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.25rem;
+    border-radius: 14px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #1c6ce0, #36a6ff);
+    color: #ffffff !important;
+    border: none;
+    transition: transform 140ms ease, box-shadow 160ms ease;
+    box-shadow: 0 10px 25px -18px rgba(28, 108, 224, 0.7);
+}
+
+.crud-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 28px -18px rgba(28, 108, 224, 0.55);
+    text-decoration: none;
+}
+
+.crud-btn--ghost {
+    background: transparent;
+    color: #1c6ce0 !important;
+    border: 1px solid rgba(28, 108, 224, 0.4);
+    box-shadow: none;
+}
+
+.crud-btn--ghost:hover {
+    background: rgba(28, 108, 224, 0.08);
+}
+
+.crud-btn--danger {
+    background: linear-gradient(135deg, #d94c4d, #f17f81);
+    box-shadow: 0 12px 26px -20px rgba(217, 76, 77, 0.8);
+}
+
+.crud-btn--danger:hover {
+    box-shadow: 0 16px 30px -20px rgba(217, 76, 77, 0.7);
+}
+
+.crud-table {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 1.5rem;
+    box-shadow: 0 18px 40px -30px rgba(17, 24, 39, 0.4);
+    border: 1px solid rgba(15, 40, 80, 0.06);
+}
+
+.crud-table__table {
+    margin-bottom: 0;
+}
+
+.crud-table__table thead th {
+    border-bottom-width: 1px;
+    font-weight: 600;
+    color: #0f2342;
+}
+
+.crud-table__table tbody tr {
+    transition: background-color 120ms ease;
+}
+
+.crud-table__table tbody tr:hover {
+    background-color: rgba(15, 69, 115, 0.05);
+}
+
+.crud-table__actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.crud-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.crud-tag--success {
+    background-color: rgba(10, 157, 119, 0.15);
+    color: #0a9d77;
+}
+
+.crud-tag--danger {
+    background-color: rgba(217, 76, 77, 0.15);
+    color: #d94c4d;
+}
+
+.crud-form {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 18px 40px -30px rgba(17, 24, 39, 0.38);
+    border: 1px solid rgba(15, 40, 80, 0.08);
+    display: grid;
+    gap: 1.75rem;
+}
+
+
+.crud-form__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem 1.5rem;
+}
+
+.crud-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.crud-field label {
+    font-weight: 600;
+    color: #0f2342;
+    margin-bottom: 0.4rem;
+}
+
+.crud-field input,
+.crud-field select,
+.crud-field textarea {
+    border-radius: 14px;
+    border: 1px solid rgba(15, 40, 80, 0.15);
+    padding: 0.6rem 0.75rem;
+}
+
+.crud-field input:focus,
+.crud-field select:focus,
+.crud-field textarea:focus {
+    border-color: rgba(28, 108, 224, 0.6);
+    box-shadow: 0 0 0 0.15rem rgba(28, 108, 224, 0.08);
+}
+
+.crud-form__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: flex-end;
+}
+
+.crud-confirm {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 2rem;
+    border: 1px solid rgba(217, 76, 77, 0.2);
+    box-shadow: 0 18px 38px -28px rgba(217, 76, 77, 0.4);
+    display: grid;
+    gap: 1.25rem;
+}
+
+.crud-confirm__alert {
+    background: rgba(217, 76, 77, 0.1);
+    border-radius: 18px;
+    padding: 1rem 1.25rem;
+    color: #a23233;
+    font-weight: 500;
+}
+
+.crud-empty {
+    padding: 1.5rem;
+    border-radius: 18px;
+    background: rgba(15, 69, 115, 0.06);
+    text-align: center;
+    color: #4b5b71;
+}
+
+@media (max-width: 720px) {
+    .crud-header {
+        padding: 1.5rem;
+    }
+
+    .crud-actions {
+        width: 100%;
+        justify-content: stretch;
+    }
+
+    .crud-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .crud-form__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .crud-form__actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

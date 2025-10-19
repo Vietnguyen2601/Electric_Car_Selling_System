@@ -1,38 +1,64 @@
 @page
 @model ElectricVehicleDealer.Presentation.Pages.Vehicles.IndexModel
 
-<div class="d-flex justify-content-between align-items-center mb-3">
-    <h2>Vehicles</h2>
-    <a asp-page="Create" class="btn btn-primary">Add Vehicle</a>
-</div>
+@section Head {
+    <link rel="stylesheet" href="~/css/manage/crud.css" />
+}
 
-<table class="table table-striped table-bordered">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Model</th>
-        <th>Type</th>
-        <th>Color</th>
-        <th>Price</th>
-        <th>Active</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var vehicle in Model.Vehicles)
-    {
-        <tr>
-            <td>@vehicle.VehicleId</td>
-            <td>@vehicle.Model</td>
-            <td>@vehicle.Type</td>
-            <td>@vehicle.Color</td>
-            <td>@vehicle.Price.ToString("C")</td>
-            <td>@(vehicle.IsActive ? "Yes" : "No")</td>
-            <td class="text-nowrap">
-                <a class="btn btn-sm btn-outline-secondary" asp-page="Edit" asp-route-id="@vehicle.VehicleId">Edit</a>
-                <a class="btn btn-sm btn-outline-danger" asp-page="Delete" asp-route-id="@vehicle.VehicleId">Delete</a>
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
+<section class="crud-page">
+    <header class="crud-header">
+        <div>
+            <h2>Danh mục xe điện</h2>
+            <p>Kiểm soát cấu hình sản phẩm, màu sắc và trạng thái kinh doanh của từng mẫu xe.</p>
+        </div>
+        <div class="crud-actions">
+            <a asp-page="Create" class="crud-btn">+ Thêm xe</a>
+        </div>
+    </header>
+
+    <div class="crud-table">
+        @if (!Model.Vehicles.Any())
+        {
+            <div class="crud-empty">Chưa có xe nào trong hệ thống.</div>
+        }
+        else
+        {
+            <table class="table table-hover align-middle crud-table__table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Model</th>
+                    <th>Loại</th>
+                    <th>Màu sắc</th>
+                    <th>Giá bán</th>
+                    <th>Trạng thái</th>
+                    <th class="text-end">Thao tác</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var vehicle in Model.Vehicles)
+                {
+                    <tr>
+                        <td>@vehicle.VehicleId</td>
+                        <td>@vehicle.Model</td>
+                        <td>@vehicle.Type</td>
+                        <td>@vehicle.Color</td>
+                        <td>@vehicle.Price.ToString("N0") ₫</td>
+                        <td>
+                            <span class="crud-tag @(vehicle.IsActive ? "crud-tag--success" : "crud-tag--danger")">
+                                @(vehicle.IsActive ? "Đang kinh doanh" : "Ngưng")
+                            </span>
+                        </td>
+                        <td class="text-end">
+                            <div class="crud-table__actions">
+                                <a class="btn btn-sm btn-outline-secondary" asp-page="Edit" asp-route-id="@vehicle.VehicleId">Sửa</a>
+                                <a class="btn btn-sm btn-outline-danger" asp-page="Delete" asp-route-id="@vehicle.VehicleId">Xoá</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        }
+    </div>
+</section>

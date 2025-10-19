@@ -1,25 +1,43 @@
 @page "{id:int}"
 @model ElectricVehicleDealer.Presentation.Pages.Stations.DeleteModel
 
-<h2>Delete Station</h2>
+@section Head {
+    <link rel="stylesheet" href="~/css/manage/crud.css" />
+}
 
 @if (Model.Station is null)
 {
-    <div class="alert alert-warning">Station not found.</div>
+    <section class="crud-page">
+        <div class="crud-empty">Không tìm thấy thông tin trạm.</div>
+    </section>
 }
 else
 {
-    <div class="alert alert-danger">
-        Are you sure you want to delete station <strong>@Model.Station.StationName</strong>?
-    </div>
-    <dl class="row">
-        <dt class="col-sm-3">Location</dt>
-        <dd class="col-sm-9">@Model.Station.Location</dd>
-        <dt class="col-sm-3">Contact</dt>
-        <dd class="col-sm-9">@Model.Station.ContactNumber</dd>
-    </dl>
-    <form method="post">
-        <button type="submit" class="btn btn-danger">Delete</button>
-        <a asp-page="Index" class="btn btn-secondary ms-2">Cancel</a>
-    </form>
+    <section class="crud-page">
+        <header class="crud-header">
+            <div>
+                <h2>Xoá trạm</h2>
+                <p>Bạn sắp xoá trạm <strong>@Model.Station.StationName</strong> khỏi hệ thống quản lý.</p>
+            </div>
+            <div class="crud-actions">
+                <a asp-page="Index" class="crud-btn crud-btn--ghost">Quay lại danh sách</a>
+            </div>
+        </header>
+
+        <div class="crud-confirm">
+            <div class="crud-confirm__alert">
+                Xác nhận xoá? Trạm sẽ không còn xuất hiện trong danh mục phân phối.
+            </div>
+            <dl class="row">
+                <dt class="col-sm-3">Địa điểm</dt>
+                <dd class="col-sm-9">@Model.Station.Location</dd>
+                <dt class="col-sm-3">Liên hệ</dt>
+                <dd class="col-sm-9">@Model.Station.ContactNumber</dd>
+            </dl>
+            <form method="post" class="crud-form__actions">
+                <button type="submit" class="crud-btn crud-btn--danger">Xoá trạm</button>
+                <a asp-page="Index" class="crud-btn crud-btn--ghost">Huỷ</a>
+            </form>
+        </div>
+    </section>
 }

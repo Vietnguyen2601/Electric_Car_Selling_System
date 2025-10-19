@@ -1,25 +1,45 @@
 @page "{id:int}"
 @model ElectricVehicleDealer.Presentation.Pages.Account.DeleteModel
 
-<h2>Delete Account</h2>
+@section Head {
+    <link rel="stylesheet" href="~/css/manage/crud.css" />
+}
 
 @if (Model.Account is null)
 {
-    <div class="alert alert-warning">Account not found.</div>
+    <section class="crud-page">
+        <div class="crud-empty">Không tìm thấy tài khoản.</div>
+    </section>
 }
 else
 {
-    <div class="alert alert-danger">
-        Are you sure you want to delete account <strong>@Model.Account.Username</strong>?
-    </div>
-    <dl class="row">
-        <dt class="col-sm-2">Email</dt>
-        <dd class="col-sm-10">@Model.Account.Email</dd>
-        <dt class="col-sm-2">Contact</dt>
-        <dd class="col-sm-10">@Model.Account.ContactNumber</dd>
-    </dl>
-    <form method="post">
-        <button type="submit" class="btn btn-danger">Delete</button>
-        <a asp-page="Index" class="btn btn-secondary ms-2">Cancel</a>
-    </form>
+    <section class="crud-page">
+        <header class="crud-header">
+            <div>
+                <h2>Xoá tài khoản</h2>
+                <p>Thao tác sẽ ngưng quyền truy cập của <strong>@Model.Account.Username</strong> khỏi hệ thống.</p>
+            </div>
+            <div class="crud-actions">
+                <a asp-page="Index" class="crud-btn crud-btn--ghost">Quay lại danh sách</a>
+            </div>
+        </header>
+
+        <div class="crud-confirm">
+            <div class="crud-confirm__alert">
+                Bạn có chắc chắn muốn xoá tài khoản này? Hành động không thể hoàn tác.
+            </div>
+            <dl class="row">
+                <dt class="col-sm-3">Email</dt>
+                <dd class="col-sm-9">@Model.Account.Email</dd>
+                <dt class="col-sm-3">Liên hệ</dt>
+                <dd class="col-sm-9">@Model.Account.ContactNumber</dd>
+                <dt class="col-sm-3">Trạng thái</dt>
+                <dd class="col-sm-9">@((Model.Account.IsActive ? "Đang hoạt động" : "Đã ngưng"))</dd>
+            </dl>
+            <form method="post" class="crud-form__actions">
+                <button type="submit" class="crud-btn crud-btn--danger">Xoá tài khoản</button>
+                <a asp-page="Index" class="crud-btn crud-btn--ghost">Huỷ</a>
+            </form>
+        </div>
+    </section>
 }

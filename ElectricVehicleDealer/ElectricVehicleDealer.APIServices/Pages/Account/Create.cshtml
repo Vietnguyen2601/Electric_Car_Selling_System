@@ -1,31 +1,50 @@
 @page
 @model ElectricVehicleDealer.Presentation.Pages.Account.CreateModel
 
-<h2>Create Account</h2>
+@section Head {
+    <link rel="stylesheet" href="~/css/manage/crud.css" />
+}
 
-<form method="post" class="mt-3">
-    <div class="mb-3">
-        <label asp-for="Input.Username" class="form-label"></label>
-        <input asp-for="Input.Username" class="form-control" />
-        <span asp-validation-for="Input.Username" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="Input.Password" class="form-label"></label>
-        <input asp-for="Input.Password" type="password" class="form-control" />
-        <span asp-validation-for="Input.Password" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="Input.Email" class="form-label"></label>
-        <input asp-for="Input.Email" class="form-control" />
-        <span asp-validation-for="Input.Email" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="Input.ContactNumber" class="form-label"></label>
-        <input asp-for="Input.ContactNumber" class="form-control" />
-        <span asp-validation-for="Input.ContactNumber" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">Create</button>
-    <a asp-page="Index" class="btn btn-secondary ms-2">Cancel</a>
-</form>
+<section class="crud-page">
+    <header class="crud-header">
+        <div>
+            <h2>Tạo tài khoản mới</h2>
+            <p>Nhập thông tin cơ bản để cấp quyền truy cập cho nhân viên hoặc khách hàng.</p>
+        </div>
+        <div class="crud-actions">
+            <a asp-page="Index" class="crud-btn crud-btn--ghost">Quay lại danh sách</a>
+        </div>
+    </header>
+
+    <form method="post" class="crud-form">
+        <div class="crud-form__grid">
+            <div class="crud-field">
+                <label asp-for="Input.Username"></label>
+                <input asp-for="Input.Username" class="form-control" />
+                <span asp-validation-for="Input.Username" class="text-danger"></span>
+            </div>
+            <div class="crud-field">
+                <label asp-for="Input.Password"></label>
+                <input asp-for="Input.Password" type="password" class="form-control" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="crud-field">
+                <label asp-for="Input.Email"></label>
+                <input asp-for="Input.Email" class="form-control" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="crud-field">
+                <label asp-for="Input.ContactNumber"></label>
+                <input asp-for="Input.ContactNumber" class="form-control" />
+                <span asp-validation-for="Input.ContactNumber" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="crud-form__actions">
+            <button type="submit" class="crud-btn">Lưu tài khoản</button>
+            <a asp-page="Index" class="crud-btn crud-btn--ghost">Huỷ</a>
+        </div>
+    </form>
+</section>
 
 <partial name="_ValidationScriptsPartial" />

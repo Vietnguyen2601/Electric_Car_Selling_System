@@ -1,36 +1,62 @@
 @page
 @model ElectricVehicleDealer.Presentation.Pages.Stations.IndexModel
 
-<div class="d-flex justify-content-between align-items-center mb-3">
-    <h2>Stations</h2>
-    <a asp-page="Create" class="btn btn-primary">Create Station</a>
-</div>
+@section Head {
+    <link rel="stylesheet" href="~/css/manage/crud.css" />
+}
 
-<table class="table table-striped table-bordered">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Location</th>
-        <th>Contact</th>
-        <th>Active</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var station in Model.Stations)
-    {
-        <tr>
-            <td>@station.StationId</td>
-            <td>@station.StationName</td>
-            <td>@station.Location</td>
-            <td>@station.ContactNumber</td>
-            <td>@(station.IsActive ? "Yes" : "No")</td>
-            <td class="text-nowrap">
-                <a class="btn btn-sm btn-outline-secondary" asp-page="Edit" asp-route-id="@station.StationId">Edit</a>
-                <a class="btn btn-sm btn-outline-danger" asp-page="Delete" asp-route-id="@station.StationId">Delete</a>
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
+<section class="crud-page">
+    <header class="crud-header">
+        <div>
+            <h2>Quản lý trạm trưng bày</h2>
+            <p>Theo dõi vị trí, thông tin liên hệ và trạng thái hoạt động của các trạm/đại lý.</p>
+        </div>
+        <div class="crud-actions">
+            <a asp-page="Create" class="crud-btn">+ Thêm trạm</a>
+        </div>
+    </header>
+
+    <div class="crud-table">
+        @if (!Model.Stations.Any())
+        {
+            <div class="crud-empty">Chưa có trạm nào được cấu hình.</div>
+        }
+        else
+        {
+            <table class="table table-hover align-middle crud-table__table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên trạm</th>
+                    <th>Địa điểm</th>
+                    <th>Liên hệ</th>
+                    <th>Trạng thái</th>
+                    <th class="text-end">Thao tác</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var station in Model.Stations)
+                {
+                    <tr>
+                        <td>@station.StationId</td>
+                        <td>@station.StationName</td>
+                        <td>@station.Location</td>
+                        <td>@station.ContactNumber</td>
+                        <td>
+                            <span class="crud-tag @(station.IsActive ? "crud-tag--success" : "crud-tag--danger")">
+                                @(station.IsActive ? "Đang mở bán" : "Tạm ngưng")
+                            </span>
+                        </td>
+                        <td class="text-end">
+                            <div class="crud-table__actions">
+                                <a class="btn btn-sm btn-outline-secondary" asp-page="Edit" asp-route-id="@station.StationId">Sửa</a>
+                                <a class="btn btn-sm btn-outline-danger" asp-page="Delete" asp-route-id="@station.StationId">Xoá</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        }
+    </div>
+</section>
