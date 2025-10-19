@@ -29,7 +29,6 @@
                 <td>@account.CreatedAt.ToString("yyyy-MM-dd")</td>
                 <td>@(account.IsActive ? "Yes" : "No")</td>
                 <td class="text-nowrap">
-                    <a class="btn btn-sm btn-outline-secondary" asp-page="Edit" asp-route-id="@account.AccountId">Edit</a>
                     <a class="btn btn-sm btn-outline-danger" asp-page="Delete" asp-route-id="@account.AccountId">Delete</a>
                 </td>
             </tr>
