@@ -16,7 +16,6 @@ namespace ElectricVehicleDealer.Common.DTOs.AccountDto
         public string? ContactNumber { get; set; }
 
         public bool? IsActive { get; set; }
-        //public string? NewPassword { get; set; }
-
+        public List<int> RoleIds { get; set; } = new();
     }
 }

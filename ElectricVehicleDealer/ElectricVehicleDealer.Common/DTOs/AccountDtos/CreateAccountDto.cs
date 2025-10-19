@@ -15,5 +15,7 @@ namespace ElectricVehicleDealer.Common.DTOs.AccountDto
         public string Email { get; set; } = null!;
 
         public string? ContactNumber { get; set; }
+
+        public List<int> RoleIds { get; set; } = new();
     }
 }

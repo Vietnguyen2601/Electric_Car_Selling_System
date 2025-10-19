@@ -24,6 +24,8 @@ namespace ElectricVehicleDealer.Common.DTOs.AccountDto
         public bool IsActive { get; set; }
 
         // Nếu cần hiển thị vai trò
-        public List<string>? Roles { get; set; }
+        public List<string> Roles { get; set; } = new();
+
+        public List<int> RoleIds { get; set; } = new();
     }
 }

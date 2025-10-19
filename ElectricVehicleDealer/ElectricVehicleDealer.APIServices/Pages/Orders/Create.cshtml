@@ -1,0 +1,79 @@
+@page
+@model ElectricVehicleDealer.Presentation.Pages.Orders.CreateModel
+
+@section Head {
+    <link rel="stylesheet" href="~/css/manage/crud.css" />
+}
+
+<section class="crud-page">
+    <header class="crud-header">
+        <div>
+            <h2>Tạo đơn hàng</h2>
+            <p>Chọn khách hàng, nhân viên phụ trách và cấu hình xe để ghi nhận đơn hàng mới.</p>
+        </div>
+        <div class="crud-actions">
+            <a asp-page="Index" class="crud-btn crud-btn--ghost">Quay lại danh sách</a>
+        </div>
+    </header>
+
+    <form method="post" class="crud-form">
+        <div class="crud-form__grid">
+            <div class="crud-field">
+                <label asp-for="Input.CustomerId"></label>
+                <select asp-for="Input.CustomerId" class="form-select" asp-items="Model.CustomerOptions">
+                    <option value="">-- Chọn khách hàng --</option>
+                </select>
+                <span asp-validation-for="Input.CustomerId" class="text-danger"></span>
+            </div>
+            <div class="crud-field">
+                <label asp-for="Input.StaffId"></label>
+                <select asp-for="Input.StaffId" class="form-select" asp-items="Model.StaffOptions">
+                    <option value="">-- Chọn nhân viên --</option>
+                </select>
+                <span asp-validation-for="Input.StaffId" class="text-danger"></span>
+            </div>
+            <div class="crud-field">
+                <label asp-for="Input.StationCarId"></label>
+                <select asp-for="Input.StationCarId" class="form-select" asp-items="Model.StationCarOptions">
+                    <option value="">-- Chọn xe/trạm --</option>
+                </select>
+                <span asp-validation-for="Input.StationCarId" class="text-danger"></span>
+            </div>
+            <div class="crud-field">
+                <label asp-for="Input.PromotionId"></label>
+                <select asp-for="Input.PromotionId" class="form-select" asp-items="Model.PromotionOptions">
+                    <option value="">-- Không áp dụng --</option>
+                </select>
+                <span asp-validation-for="Input.PromotionId" class="text-danger"></span>
+            </div>
+            <div class="crud-field">
+                <label asp-for="Input.OrderDate"></label>
+                <input asp-for="Input.OrderDate" type="datetime-local" class="form-control" />
+                <span asp-validation-for="Input.OrderDate" class="text-danger"></span>
+            </div>
+            <div class="crud-field">
+                <label asp-for="Input.TotalPrice"></label>
+                <input asp-for="Input.TotalPrice" class="form-control" />
+                <span asp-validation-for="Input.TotalPrice" class="text-danger"></span>
+            </div>
+            <div class="crud-field">
+                <label asp-for="Input.Status"></label>
+                <input asp-for="Input.Status" class="form-control" />
+                <span asp-validation-for="Input.Status" class="text-danger"></span>
+            </div>
+            <div class="crud-field">
+                <div class="form-check mt-4">
+                    <input asp-for="Input.IsActive" class="form-check-input" />
+                    <label asp-for="Input.IsActive" class="form-check-label"></label>
+                </div>
+            </div>
+        </div>
+
+        <div class="crud-form__actions">
+            <button type="submit" class="crud-btn">Lưu đơn hàng</button>
+            <a asp-page="Index" class="crud-btn crud-btn--ghost">Huỷ</a>
+        </div>
+    </form>
+</section>
+
+<partial name="_ValidationScriptsPartial" />

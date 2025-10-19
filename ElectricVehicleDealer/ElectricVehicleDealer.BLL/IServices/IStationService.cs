@@ -9,6 +9,6 @@ namespace ElectricVehicleDealer.BLL.IServices
         Task<StationDTO?> GetByIdAsync(int id);
         Task<StationDTO> CreateAsync(StationDTO dto);
         Task<bool> UpdateAsync(int id, StationDTO dto);
-        //Task<bool> DeleteAsync(int id);
+        Task<bool> DeleteAsync(int id);
     }
 }

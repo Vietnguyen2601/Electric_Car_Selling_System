@@ -1,0 +1,62 @@
+@page
+@model ElectricVehicleDealer.Presentation.Pages.Orders.IndexModel
+
+@section Head {
+    <link rel="stylesheet" href="~/css/manage/crud.css" />
+}
+
+<section class="crud-page">
+    <header class="crud-header">
+        <div>
+            <h2>Quản lý đơn hàng</h2>
+            <p>Theo dõi khách hàng, nhân sự phụ trách, trạng thái xử lý và giá trị từng đơn hàng.</p>
+        </div>
+        <div class="crud-actions">
+            <a asp-page="Create" class="crud-btn">+ Tạo đơn hàng</a>
+        </div>
+    </header>
+
+    <div class="crud-table">
+        @if (!Model.Orders.Any())
+        {
+            <div class="crud-empty">Chưa có đơn hàng nào được tạo.</div>
+        }
+        else
+        {
+            <table class="table table-hover align-middle crud-table__table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Khách hàng</th>
+                    <th>Nhân viên</th>
+                    <th>Trạm</th>
+                    <th>Trạng thái</th>
+                    <th>Tổng tiền</th>
+                    <th>Ngày đặt</th>
+                    <th class="text-end">Thao tác</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var order in Model.Orders)
+                {
+                    <tr>
+                        <td>@order.OrderId</td>
+                        <td>@order.CustomerUsername</td>
+                        <td>@order.StaffUsername</td>
+                        <td>@order.StationName</td>
+                        <td>@order.Status</td>
+                        <td>@order.TotalPrice.ToString("N0") ₫</td>
+                        <td>@order.OrderDate.ToString("dd/MM/yyyy")</td>
+                        <td class="text-end">
+                            <div class="crud-table__actions">
+                                <a class="btn btn-sm btn-outline-secondary" asp-page="Edit" asp-route-id="@order.OrderId">Sửa</a>
+                                <a class="btn btn-sm btn-outline-danger" asp-page="Delete" asp-route-id="@order.OrderId">Xoá</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        }
+    </div>
+</section>

@@ -1,0 +1,45 @@
+@page "{id:int}"
+@model ElectricVehicleDealer.Presentation.Pages.Vehicles.DeleteModel
+
+@section Head {
+    <link rel="stylesheet" href="~/css/manage/crud.css" />
+}
+
+@if (Model.Vehicle is null)
+{
+    <section class="crud-page">
+        <div class="crud-empty">Không tìm thấy thông tin xe.</div>
+    </section>
+}
+else
+{
+    <section class="crud-page">
+        <header class="crud-header">
+            <div>
+                <h2>Xoá xe khỏi danh mục</h2>
+                <p>Thao tác sẽ ngưng kinh doanh model <strong>@Model.Vehicle.Model</strong> khỏi hệ thống.</p>
+            </div>
+            <div class="crud-actions">
+                <a asp-page="Index" class="crud-btn crud-btn--ghost">Quay lại danh sách</a>
+            </div>
+        </header>
+
+        <div class="crud-confirm">
+            <div class="crud-confirm__alert">
+                Bạn có chắc chắn muốn xoá sản phẩm này? Thao tác không thể hoàn tác.
+            </div>
+            <dl class="row">
+                <dt class="col-sm-3">Loại</dt>
+                <dd class="col-sm-9">@Model.Vehicle.Type</dd>
+                <dt class="col-sm-3">Màu</dt>
+                <dd class="col-sm-9">@Model.Vehicle.Color</dd>
+                <dt class="col-sm-3">Giá bán</dt>
+                <dd class="col-sm-9">@Model.Vehicle.Price.ToString("N0") ₫</dd>
+            </dl>
+            <form method="post" class="crud-form__actions">
+                <button type="submit" class="crud-btn crud-btn--danger">Xoá xe</button>
+                <a asp-page="Index" class="crud-btn crud-btn--ghost">Huỷ</a>
+            </form>
+        </div>
+    </section>
+}

@@ -33,6 +33,14 @@ namespace ElectricVehicleDealer.DAL.Repositories.Repository
                 .FirstOrDefaultAsync(ar => ar.AccountRoleId == id && ar.IsActive);
         }
 
+        public async Task<List<AccountRole>> GetByAccountIdAsync(int accountId)
+        {
+            return await _context.AccountRoles
+                .Include(ar => ar.Role)
+                .Where(ar => ar.AccountId == accountId)
+                .ToListAsync();
+        }
+
         public async Task<AccountRole> CreateAsync(AccountRole entity)
         {
             entity.CreatedAt = DateTime.UtcNow;
@@ -51,6 +59,7 @@ namespace ElectricVehicleDealer.DAL.Repositories.Repository
             existing.IsActive = entity.IsActive;
             existing.UpdatedAt = DateTime.UtcNow;
 
+            _context.AccountRoles.Update(existing);
             await _context.SaveChangesAsync();
             return existing;
         }
@@ -62,6 +71,7 @@ namespace ElectricVehicleDealer.DAL.Repositories.Repository
 
             existing.IsActive = false;
             existing.UpdatedAt = DateTime.UtcNow;
+            _context.AccountRoles.Update(existing);
             await _context.SaveChangesAsync();
             return true;
         }

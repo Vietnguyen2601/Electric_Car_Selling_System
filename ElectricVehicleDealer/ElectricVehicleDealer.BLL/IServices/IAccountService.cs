@@ -8,6 +8,8 @@ namespace ElectricVehicleDealer.BLL.IServices
         Task<IEnumerable<AccountDto>> GetAllAccountsAsync();
         Task<AccountDto?> GetAccountByIdAsync(int accountId);
         Task AddAccountAsync(CreateAccountDto dto);
+        Task<bool> UpdateAccountAsync(int accountId, UpdateAccountDto dto);
+        Task<bool> DeleteAccountAsync(int accountId);
         Task UpdateAccountAsync(int accountId, UpdateAccountDto dto);
         Task DeleteAccountAsync(int accountId);
         Task<AccountDto?> AuthenticateAsync(string email, string password);

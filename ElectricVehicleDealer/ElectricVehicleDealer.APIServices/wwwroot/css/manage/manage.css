@@ -1,0 +1,254 @@
+.manage-page {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.manage-intro {
+    display: grid;
+    gap: 1.5rem;
+    padding: 2.5rem;
+    border-radius: 24px;
+    background: linear-gradient(135deg, #0f4573 0%, #1c7dd9 100%);
+    color: #ffffff;
+    box-shadow: 0 20px 35px -25px rgba(12, 60, 103, 0.55);
+}
+
+.manage-intro__content {
+    max-width: 560px;
+}
+
+.manage-intro__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.15rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.manage-intro h2 {
+    margin-top: 0.75rem;
+    font-size: 2.25rem;
+    font-weight: 600;
+}
+
+.manage-intro p {
+    margin: 0.75rem 0 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.manage-intro__stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.manage-stat {
+    min-width: 150px;
+    padding: 1rem 1.25rem;
+    border-radius: 18px;
+    background-color: rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(6px);
+    display: grid;
+    gap: 0.35rem;
+}
+
+.manage-stat__label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.manage-stat__value {
+    font-size: 1.75rem;
+    font-weight: 600;
+}
+
+.manage-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.75rem;
+}
+
+.manage-card {
+    position: relative;
+    padding: 2rem 1.75rem;
+    border-radius: 22px;
+    background: #ffffff;
+    box-shadow: 0 18px 35px -24px rgba(17, 24, 39, 0.35);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: transform 160ms ease, box-shadow 180ms ease;
+    border: 1px solid rgba(15, 40, 80, 0.06);
+}
+
+.manage-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 22px 45px -25px rgba(17, 24, 39, 0.45);
+}
+
+.manage-card__icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.manage-card__title {
+    margin: 0;
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: #0f2342;
+}
+
+.manage-card__description {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #4b5b71;
+    flex: 1;
+}
+
+.manage-card__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.manage-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    background-color: rgba(15, 40, 80, 0.06);
+    color: #0f2850;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.manage-chip__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background-color: currentColor;
+    display: inline-block;
+}
+
+.manage-link {
+    font-weight: 600;
+    color: inherit;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    transition: color 150ms ease, border-color 150ms ease, background-color 150ms ease;
+}
+
+.manage-link:hover {
+    text-decoration: none;
+    border-color: currentColor;
+    background-color: rgba(15, 40, 80, 0.05);
+}
+
+.manage-card--accounts .manage-card__icon {
+    background-color: #e4f1ff;
+    color: #1c6ce0;
+}
+
+.manage-card--accounts .manage-link {
+    color: #1c6ce0;
+}
+
+.manage-card--accounts .manage-chip {
+    background-color: rgba(28, 108, 224, 0.14);
+    color: #1c6ce0;
+}
+
+.manage-card--vehicles .manage-card__icon {
+    background-color: #e1f9f1;
+    color: #0a9d77;
+}
+
+.manage-card--vehicles .manage-link {
+    color: #0a9d77;
+}
+
+.manage-card--vehicles .manage-chip {
+    background-color: rgba(10, 157, 119, 0.14);
+    color: #0a9d77;
+}
+
+.manage-card--orders .manage-card__icon {
+    background-color: #fff2da;
+    color: #d97700;
+}
+
+.manage-card--orders .manage-link {
+    color: #d97700;
+}
+
+.manage-card--orders .manage-chip {
+    background-color: rgba(217, 119, 0, 0.14);
+    color: #d97700;
+}
+
+.manage-card--stations .manage-card__icon {
+    background-color: #e9e8ff;
+    color: #5342d6;
+}
+
+.manage-card--stations .manage-link {
+    color: #5342d6;
+}
+
+.manage-card--stations .manage-chip {
+    background-color: rgba(83, 66, 214, 0.14);
+    color: #5342d6;
+}
+
+@media (max-width: 900px) {
+    .manage-intro {
+        padding: 2rem;
+    }
+
+    .manage-intro h2 {
+        font-size: 2rem;
+    }
+
+    .manage-card {
+        padding: 1.75rem 1.5rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .manage-intro {
+        padding: 1.75rem;
+    }
+
+    .manage-intro__stats {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .manage-stat {
+        width: 100%;
+    }
+
+    .manage-card__meta {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

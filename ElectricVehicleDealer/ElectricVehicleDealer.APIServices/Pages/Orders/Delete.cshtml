@@ -1,0 +1,45 @@
+@page "{id:int}"
+@model ElectricVehicleDealer.Presentation.Pages.Orders.DeleteModel
+
+@section Head {
+    <link rel="stylesheet" href="~/css/manage/crud.css" />
+}
+
+@if (Model.Order is null)
+{
+    <section class="crud-page">
+        <div class="crud-empty">Không tìm thấy đơn hàng.</div>
+    </section>
+}
+else
+{
+    <section class="crud-page">
+        <header class="crud-header">
+            <div>
+                <h2>Xoá đơn hàng</h2>
+                <p>Bạn sắp xoá đơn hàng <strong>#@Model.Order.OrderId</strong> của khách <strong>@Model.Order.CustomerUsername</strong>.</p>
+            </div>
+            <div class="crud-actions">
+                <a asp-page="Index" class="crud-btn crud-btn--ghost">Quay lại danh sách</a>
+            </div>
+        </header>
+
+        <div class="crud-confirm">
+            <div class="crud-confirm__alert">
+                Xác nhận xoá đơn hàng này? Thao tác sẽ ngưng theo dõi đơn và không thể khôi phục.
+            </div>
+            <dl class="row">
+                <dt class="col-sm-3">Trạng thái</dt>
+                <dd class="col-sm-9">@Model.Order.Status</dd>
+                <dt class="col-sm-3">Tổng tiền</dt>
+                <dd class="col-sm-9">@Model.Order.TotalPrice.ToString("N0") ₫</dd>
+                <dt class="col-sm-3">Ngày đặt</dt>
+                <dd class="col-sm-9">@Model.Order.OrderDate.ToString("dd/MM/yyyy")</dd>
+            </dl>
+            <form method="post" class="crud-form__actions">
+                <button type="submit" class="crud-btn crud-btn--danger">Xoá đơn hàng</button>
+                <a asp-page="Index" class="crud-btn crud-btn--ghost">Huỷ</a>
+            </form>
+        </div>
+    </section>
+}

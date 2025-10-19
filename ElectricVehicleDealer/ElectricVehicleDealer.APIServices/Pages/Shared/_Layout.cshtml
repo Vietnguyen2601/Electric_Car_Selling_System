@@ -77,6 +77,7 @@
                 <div class="nav-block">
                     <h6>Hệ thống</h6>
                     <a class="nav-link @(currentPath.StartsWithSegments("/auth/login", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/auth/login">Đăng nhập</a>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/manage", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/manage">Trang quản lý</a>
                     <a class="nav-link @(currentPath.StartsWithSegments("/scheduling/test-drive", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/scheduling/test-drive">Đặt lịch lái thử</a>
                     <a class="nav-link" href="/Home">Website khách hàng</a>
                 </div>
