@@ -1,6 +1,7 @@
 ﻿using ElectricVehicleDealer.DAL.DBContext;
 using ElectricVehicleDealer.DAL.Models;
 using ElectricVehicleDealer.DAL.Repositories.IRepository;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace ElectricVehicleDealer.DAL.Repositories.Repository
@@ -46,5 +47,10 @@ namespace ElectricVehicleDealer.DAL.Repositories.Repository
             }
         }
 
+        public async Task<Account?> GetByEmailAndPasswordAsync(string email, string password)
+        {
+            return await _context.Accounts
+                .FirstOrDefaultAsync(a => a.Email == email && a.Password == password && a.IsActive == true);
+        }
     }
 }

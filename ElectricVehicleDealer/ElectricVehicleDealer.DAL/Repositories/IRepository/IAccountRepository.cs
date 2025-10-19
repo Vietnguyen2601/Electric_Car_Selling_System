@@ -14,6 +14,6 @@ namespace ElectricVehicleDealer.DAL.Repositories.IRepository
         Task AddAccountAsync(Account account);
         Task UpdateAccountAsync(Account account);
         Task DeleteAccountAsync(int accountId);
-
+        Task<Account?> GetByEmailAndPasswordAsync(string email, string password);
     }
 }
