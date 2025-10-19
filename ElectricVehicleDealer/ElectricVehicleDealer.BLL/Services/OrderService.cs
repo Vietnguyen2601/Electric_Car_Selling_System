@@ -16,6 +16,10 @@ namespace ElectricVehicleDealer.BLL.Services
             _repository = repository;
         }
 
+
+
+
+
         public async Task<IEnumerable<OrderDto>> GetAllAsync()
         {
             var entities = await _repository.GetAllAsync();
