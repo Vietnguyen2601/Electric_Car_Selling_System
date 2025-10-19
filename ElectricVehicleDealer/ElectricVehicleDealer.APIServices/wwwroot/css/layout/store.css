@@ -528,6 +528,28 @@ a {
     box-shadow: 0 16px 35px rgba(64, 224, 255, 0.25);
 }
 
+.store-nav__welcome {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--store-text);
+    padding: 8px 12px;
+    background: rgba(64, 224, 255, 0.12);
+    border-radius: 999px;
+}
+
+.store-nav__logout {
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    background: rgba(12, 22, 45, 0.65);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.store-nav__logout:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(64, 224, 255, 0.25);
+}
+
 @media (max-width: 992px) {
     .store-nav {
         gap: 16px;

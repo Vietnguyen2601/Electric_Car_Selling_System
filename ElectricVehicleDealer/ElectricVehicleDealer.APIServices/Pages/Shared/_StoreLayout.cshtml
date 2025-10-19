@@ -1,5 +1,8 @@
-﻿@{
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
     var pageTitle = ViewData["Title"] as string ?? "EcoRide Store";
+    var username = HttpContextAccessor.HttpContext?.Session.GetString("AccountName");
 }
 
 <!DOCTYPE html>
@@ -27,8 +30,17 @@
                 <a href="/products">Sản phẩm</a>
                 <a href="/products/detail">Công nghệ</a>
                 <a href="/cart">Giỏ hàng</a>
-                <a href="/store/login">Đăng nhập</a>
-                <a class="store-cta" href="/store/register">Đăng ký</a>
+
+                @if (!string.IsNullOrEmpty(username))
+                {
+                    <span class="store-nav__welcome">Xin chào, @username!</span>
+                    <a class="store-nav__logout" href="/store/logout">Đăng xuất</a>
+                }
+                else
+                {
+                    <a href="/store/login">Đăng nhập</a>
+                    <a class="store-cta" href="/store/register">Đăng ký</a>
+                }
             </nav>
         </div>
     </header>

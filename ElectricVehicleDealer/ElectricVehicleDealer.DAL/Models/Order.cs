@@ -19,7 +19,7 @@ public partial class Order
 
     public int? PromotionId { get; set; }
 
-    public int StaffId { get; set; }
+    public int? StaffId { get; set; }
 
     public DateTime CreatedAt { get; set; }
 
@@ -35,7 +35,7 @@ public partial class Order
 
     public virtual Promotion? Promotion { get; set; }
 
-    public virtual Account Staff { get; set; } = null!;
+    public virtual Account? Staff { get; set; }
 
     public virtual StationCar StationCar { get; set; } = null!;
 }

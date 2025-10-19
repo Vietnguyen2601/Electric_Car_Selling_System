@@ -56,7 +56,7 @@ namespace ElectricVehicleDealer.Presentation.Pages.Orders
                 ModelState.AddModelError(nameof(Input.CustomerId), "Customer is required.");
             }
 
-            if (Input.StaffId <= 0)
+            if (!Input.StaffId.HasValue || Input.StaffId.Value <= 0)
             {
                 ModelState.AddModelError(nameof(Input.StaffId), "Staff is required.");
             }

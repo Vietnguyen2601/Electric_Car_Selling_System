@@ -67,7 +67,7 @@ namespace ElectricVehicleDealer.Presentation.Pages.Orders
                 return NotFound();
             }
 
-            if (!Input.StaffId.HasValue || Input.StaffId <= 0)
+            if (!Input.StaffId.HasValue || Input.StaffId.Value <= 0)
             {
                 ModelState.AddModelError(nameof(Input.StaffId), "Staff is required.");
             }
