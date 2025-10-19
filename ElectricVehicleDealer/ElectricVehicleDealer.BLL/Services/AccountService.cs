@@ -33,19 +33,29 @@ namespace ElectricVehicleDealer.BLL.Services
             await _accountRepository.AddAccountAsync(entity);
         }
 
-        public async Task UpdateAccountAsync(int accountId, UpdateAccountDto dto)
+        public async Task<bool> UpdateAccountAsync(int accountId, UpdateAccountDto dto)
         {
             var existing = await _accountRepository.GetAccountByIdAsync(accountId);
-            if (existing != null)
+            if (existing == null)
             {
-                AccountMapper.UpdateEntity(existing, dto);
-                await _accountRepository.UpdateAccountAsync(existing);
+                return false;
             }
+
+            AccountMapper.UpdateEntity(existing, dto);
+            await _accountRepository.UpdateAccountAsync(existing);
+            return true;
         }
 
-        public async Task DeleteAccountAsync(int accountId)
+        public async Task<bool> DeleteAccountAsync(int accountId)
         {
+            var existing = await _accountRepository.GetAccountByIdAsync(accountId);
+            if (existing == null)
+            {
+                return false;
+            }
+
             await _accountRepository.DeleteAccountAsync(accountId);
+            return true;
         }
     }
 }

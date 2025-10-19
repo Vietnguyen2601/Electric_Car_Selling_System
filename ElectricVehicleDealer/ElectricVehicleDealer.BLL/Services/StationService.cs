@@ -49,14 +49,9 @@ namespace ElectricVehicleDealer.BLL.Services
             return true;
         }
 
-        //public async Task<bool> DeleteAsync(int id)
-        //{
-        //    var existing = await _stationRepository.GetByIdAsync(id);
-        //    if (existing == null)
-        //        return false;
-
-        //    await _stationRepository.DeleteAsync(existing);
-        //    return true;
-        //}
+        public async Task<bool> DeleteAsync(int id)
+        {
+            return await _stationRepository.DeleteAsync(id);
+        }
     }
 }

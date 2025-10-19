@@ -1,0 +1,38 @@
+@page
+@model ElectricVehicleDealer.Presentation.Pages.Vehicles.IndexModel
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Vehicles</h2>
+    <a asp-page="Create" class="btn btn-primary">Add Vehicle</a>
+</div>
+
+<table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Model</th>
+        <th>Type</th>
+        <th>Color</th>
+        <th>Price</th>
+        <th>Active</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var vehicle in Model.Vehicles)
+    {
+        <tr>
+            <td>@vehicle.VehicleId</td>
+            <td>@vehicle.Model</td>
+            <td>@vehicle.Type</td>
+            <td>@vehicle.Color</td>
+            <td>@vehicle.Price.ToString("C")</td>
+            <td>@(vehicle.IsActive ? "Yes" : "No")</td>
+            <td class="text-nowrap">
+                <a class="btn btn-sm btn-outline-secondary" asp-page="Edit" asp-route-id="@vehicle.VehicleId">Edit</a>
+                <a class="btn btn-sm btn-outline-danger" asp-page="Delete" asp-route-id="@vehicle.VehicleId">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

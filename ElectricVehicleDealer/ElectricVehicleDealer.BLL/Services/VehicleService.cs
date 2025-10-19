@@ -26,5 +26,37 @@ namespace ElectricVehicleDealer.BLL.Services
             var v = await _repository.GetVehicleByIdAsync(id);
             return v?.ToDTO();
         }
+
+        public async Task<VehicleDTO> CreateAsync(CreateVehicleDto dto)
+        {
+            var entity = dto.ToEntity();
+            await _repository.AddVehicleAsync(entity);
+            return entity.ToDTO();
+        }
+
+        public async Task<bool> UpdateAsync(int id, UpdateVehicleDto dto)
+        {
+            var existing = await _repository.GetVehicleByIdAsync(id);
+            if (existing == null)
+            {
+                return false;
+            }
+
+            dto.MapToEntity(existing);
+            await _repository.UpdateVehicleAsync(existing);
+            return true;
+        }
+
+        public async Task<bool> DeleteAsync(int id)
+        {
+            var existing = await _repository.GetVehicleByIdAsync(id);
+            if (existing == null)
+            {
+                return false;
+            }
+
+            await _repository.DeleteVehicleAsync(id);
+            return true;
+        }
     }
 }

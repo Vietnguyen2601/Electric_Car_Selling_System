@@ -1,0 +1,25 @@
+@page "{id:int}"
+@model ElectricVehicleDealer.Presentation.Pages.Stations.DeleteModel
+
+<h2>Delete Station</h2>
+
+@if (Model.Station is null)
+{
+    <div class="alert alert-warning">Station not found.</div>
+}
+else
+{
+    <div class="alert alert-danger">
+        Are you sure you want to delete station <strong>@Model.Station.StationName</strong>?
+    </div>
+    <dl class="row">
+        <dt class="col-sm-3">Location</dt>
+        <dd class="col-sm-9">@Model.Station.Location</dd>
+        <dt class="col-sm-3">Contact</dt>
+        <dd class="col-sm-9">@Model.Station.ContactNumber</dd>
+    </dl>
+    <form method="post">
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-page="Index" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+}
