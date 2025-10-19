@@ -146,6 +146,12 @@
     letter-spacing: 0.04em;
 }
 
+.crud-tag--neutral {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--text-secondary, var(--manage-text-secondary));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
 .crud-tag--success {
     background: rgba(64, 224, 255, 0.16);
     color: var(--accent, var(--manage-accent));

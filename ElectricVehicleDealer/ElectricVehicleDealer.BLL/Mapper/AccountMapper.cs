@@ -1,5 +1,7 @@
 ﻿using ElectricVehicleDealer.Common.DTOs.AccountDto;
 using ElectricVehicleDealer.DAL.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 
 namespace ElectricVehicleDealer.BLL.Mapper
@@ -17,7 +19,15 @@ namespace ElectricVehicleDealer.BLL.Mapper
                 ContactNumber = entity.ContactNumber,
                 CreatedAt = entity.CreatedAt,
                 UpdatedAt = entity.UpdatedAt,
-                IsActive = entity.IsActive
+                IsActive = entity.IsActive,
+                Roles = entity.AccountRoles?
+                    .Where(ar => ar.IsActive && ar.Role != null)
+                    .Select(ar => ar.Role!.RoleName)
+                    .ToList() ?? new List<string>(),
+                RoleIds = entity.AccountRoles?
+                    .Where(ar => ar.IsActive)
+                    .Select(ar => ar.RoleId)
+                    .ToList() ?? new List<int>()
             };
         }
 

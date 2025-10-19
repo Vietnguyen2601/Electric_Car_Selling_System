@@ -1,6 +1,7 @@
 ﻿using ElectricVehicleDealer.DAL.DBContext;
 using ElectricVehicleDealer.DAL.Models;
 using ElectricVehicleDealer.DAL.Repositories.IRepository;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace ElectricVehicleDealer.DAL.Repositories.Repository
@@ -16,12 +17,18 @@ namespace ElectricVehicleDealer.DAL.Repositories.Repository
 
         public async Task<IEnumerable<Account>> GetAllAccountsAsync()
         {
-            return _context.Accounts.ToList();
+            return await _context.Accounts
+                .Include(a => a.AccountRoles)
+                    .ThenInclude(ar => ar.Role)
+                .ToListAsync();
         }
 
         public async Task<Account?> GetAccountByIdAsync(int accountId)
         {
-            return _context.Accounts.FirstOrDefault(a => a.AccountId == accountId);
+            return await _context.Accounts
+                .Include(a => a.AccountRoles)
+                    .ThenInclude(ar => ar.Role)
+                .FirstOrDefaultAsync(a => a.AccountId == accountId);
         }
 
         public async Task AddAccountAsync(Account account)
@@ -38,7 +45,7 @@ namespace ElectricVehicleDealer.DAL.Repositories.Repository
 
         public async Task DeleteAccountAsync(int accountId)
         {
-            var account = await GetAccountByIdAsync(accountId);
+            var account = await _context.Accounts.FindAsync(accountId);
             if (account != null)
             {
                 _context.Accounts.Remove(account);

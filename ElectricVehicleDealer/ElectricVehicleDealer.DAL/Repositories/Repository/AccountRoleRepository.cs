@@ -33,6 +33,14 @@ namespace ElectricVehicleDealer.DAL.Repositories.Repository
                 .FirstOrDefaultAsync(ar => ar.AccountRoleId == id && ar.IsActive);
         }
 
+        public async Task<List<AccountRole>> GetByAccountIdAsync(int accountId)
+        {
+            return await _context.AccountRoles
+                .Include(ar => ar.Role)
+                .Where(ar => ar.AccountId == accountId)
+                .ToListAsync();
+        }
+
         public async Task<AccountRole> CreateAsync(AccountRole entity)
         {
             entity.CreatedAt = DateTime.UtcNow;

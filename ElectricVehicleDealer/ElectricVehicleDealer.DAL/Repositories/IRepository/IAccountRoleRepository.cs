@@ -8,6 +8,7 @@ namespace ElectricVehicleDealer.DAL.Repositories.IRepository
     {
         Task<List<AccountRole>> GetAllAsync();
         Task<AccountRole?> GetByIdAsync(int id);
+        Task<List<AccountRole>> GetByAccountIdAsync(int accountId);
         Task<AccountRole> CreateAsync(AccountRole entity);
         Task<AccountRole?> UpdateAsync(AccountRole entity);
         Task<bool> DeleteAsync(int id);

@@ -35,6 +35,22 @@ else
                 <dd class="col-sm-9">@Model.Account.ContactNumber</dd>
                 <dt class="col-sm-3">Trạng thái</dt>
                 <dd class="col-sm-9">@((Model.Account.IsActive ? "Đang hoạt động" : "Đã ngưng"))</dd>
+                <dt class="col-sm-3">Vai trò</dt>
+                <dd class="col-sm-9">
+                    @if (Model.Account.Roles.Any())
+                    {
+                        <div class="d-flex flex-wrap gap-2">
+                            @foreach (var role in Model.Account.Roles)
+                            {
+                                <span class="crud-tag crud-tag--neutral">@role</span>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <span class="text-muted">Chưa gán vai trò</span>
+                    }
+                </dd>
             </dl>
             <form method="post" class="crud-form__actions">
                 <button type="submit" class="crud-btn crud-btn--danger">Xoá tài khoản</button>

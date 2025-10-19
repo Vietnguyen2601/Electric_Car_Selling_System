@@ -38,6 +38,11 @@
                 <input asp-for="Input.ContactNumber" class="form-control" />
                 <span asp-validation-for="Input.ContactNumber" class="text-danger"></span>
             </div>
+            <div class="crud-field">
+                <label asp-for="Input.RoleIds">Vai trò</label>
+                <select asp-for="Input.RoleIds" asp-items="Model.RoleOptions" class="form-select" multiple size="4"></select>
+                <small class="text-muted d-block mt-1">Giữ Ctrl/Command để chọn nhiều vai trò.</small>
+            </div>
         </div>
 
         <div class="crud-form__actions">

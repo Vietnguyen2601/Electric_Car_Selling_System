@@ -47,6 +47,11 @@ else
                     <span asp-validation-for="Input.ContactNumber" class="text-danger"></span>
                 </div>
                 <div class="crud-field">
+                    <label asp-for="Input.RoleIds">Vai trò</label>
+                    <select asp-for="Input.RoleIds" asp-items="Model.RoleOptions" class="form-select" multiple size="4"></select>
+                    <small class="text-muted d-block mt-1">Giữ Ctrl/Command để chọn nhiều vai trò.</small>
+                </div>
+                <div class="crud-field">
                     <div class="form-check mt-4">
                         <input asp-for="Input.IsActive" class="form-check-input" />
                         <label asp-for="Input.IsActive" class="form-check-label"></label>

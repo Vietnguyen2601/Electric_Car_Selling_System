@@ -30,6 +30,7 @@
                     <th>Username</th>
                     <th>Email</th>
                     <th>Liên hệ</th>
+                    <th>Vai trò</th>
                     <th>Ngày tạo</th>
                     <th>Trạng thái</th>
                     <th class="text-end">Thao tác</th>
@@ -43,6 +44,21 @@
                         <td>@account.Username</td>
                         <td>@account.Email</td>
                         <td>@account.ContactNumber</td>
+                        <td>
+                            @if (account.Roles.Any())
+                            {
+                                <div class="d-flex flex-wrap gap-2">
+                                    @foreach (var role in account.Roles)
+                                    {
+                                        <span class="crud-tag crud-tag--neutral">@role</span>
+                                    }
+                                </div>
+                            }
+                            else
+                            {
+                                <span class="text-muted">Chưa gán</span>
+                            }
+                        </td>
                         <td>@account.CreatedAt.ToString("dd/MM/yyyy")</td>
                         <td>
                             <span class="crud-tag @(account.IsActive ? "crud-tag--success" : "crud-tag--danger")">
