@@ -2,58 +2,83 @@
 @model ElectricVehicleDealer.Presentation.Pages.Manage.IndexModel
 @{
     ViewData["PageTitle"] = "Trang quản lý";
-    ViewData["PageDescription"] = "Quản trị nhanh các phân hệ Accounts, Vehicles, Orders và Stations.";
+    ViewData["PageDescription"] = "Control Center – quản trị nhanh Accounts, Vehicles, Orders và Stations.";
 }
 
-<h1 class="mb-4">Management Dashboard</h1>
+@section Head {
+    <link rel="stylesheet" href="~/css/manage/manage.css" />
+}
 
-<div class="row g-4">
-    <div class="col-md-6 col-xl-3">
-        <div class="card shadow-sm h-100 border-primary">
-            <div class="card-body d-flex flex-column">
-                <h5 class="card-title">Accounts</h5>
-                <p class="text-muted flex-grow-1">Quản lý thông tin tài khoản nhân viên và khách hàng.</p>
-                <div class="d-flex justify-content-between align-items-end">
-                    <span class="badge bg-primary fs-6">@Model.AccountCount tổng</span>
-                    <a asp-page="/Account/Index" class="btn btn-outline-primary btn-sm">Manage</a>
-                </div>
+<section class="manage-page">
+    <section class="manage-intro">
+        <div class="manage-intro__content">
+            <span class="manage-intro__label">Control Center</span>
+            <h2>Quản trị hệ thống</h2>
+            <p>Chọn phân hệ để cập nhật dữ liệu, kiểm tra trạng thái hoạt động và điều phối quy trình vận hành.</p>
+        </div>
+        <div class="manage-intro__stats">
+            <div class="manage-stat">
+                <span class="manage-stat__label">Tổng bản ghi</span>
+                <span class="manage-stat__value">@Model.TotalManaged</span>
+            </div>
+            <div class="manage-stat">
+                <span class="manage-stat__label">Module đang quản lý</span>
+                <span class="manage-stat__value">4</span>
             </div>
         </div>
-    </div>
-    <div class="col-md-6 col-xl-3">
-        <div class="card shadow-sm h-100 border-success">
-            <div class="card-body d-flex flex-column">
-                <h5 class="card-title">Vehicles</h5>
-                <p class="text-muted flex-grow-1">Theo dõi danh mục xe điện, tình trạng và giá bán.</p>
-                <div class="d-flex justify-content-between align-items-end">
-                    <span class="badge bg-success fs-6">@Model.VehicleCount tổng</span>
-                    <a asp-page="/Vehicles/Index" class="btn btn-outline-success btn-sm">Manage</a>
-                </div>
+    </section>
+
+    <section class="manage-grid">
+        <article class="manage-card manage-card--accounts">
+            <div class="manage-card__icon">AC</div>
+            <h3 class="manage-card__title">Accounts</h3>
+            <p class="manage-card__description">Theo dõi tài khoản nội bộ & khách hàng, trạng thái hoạt động và quyền truy cập.</p>
+            <div class="manage-card__meta">
+                <span class="manage-chip">
+                    <span class="manage-chip__dot"></span>
+                    @Model.AccountCount bản ghi
+                </span>
+                <a asp-page="/Account/Index" class="manage-link">Đi tới</a>
             </div>
-        </div>
-    </div>
-    <div class="col-md-6 col-xl-3">
-        <div class="card shadow-sm h-100 border-warning">
-            <div class="card-body d-flex flex-column">
-                <h5 class="card-title">Orders</h5>
-                <p class="text-muted flex-grow-1">Quản lý đơn hàng, trạng thái xử lý và khuyến mãi áp dụng.</p>
-                <div class="d-flex justify-content-between align-items-end">
-                    <span class="badge bg-warning text-dark fs-6">@Model.OrderCount tổng</span>
-                    <a asp-page="/Orders/Index" class="btn btn-outline-warning btn-sm text-dark">Manage</a>
-                </div>
+        </article>
+
+        <article class="manage-card manage-card--vehicles">
+            <div class="manage-card__icon">VH</div>
+            <h3 class="manage-card__title">Vehicles</h3>
+            <p class="manage-card__description">Quản lý danh mục xe điện, giá bán và tình trạng hoạt động tại từng trạm.</p>
+            <div class="manage-card__meta">
+                <span class="manage-chip">
+                    <span class="manage-chip__dot"></span>
+                    @Model.VehicleCount bản ghi
+                </span>
+                <a asp-page="/Vehicles/Index" class="manage-link">Đi tới</a>
             </div>
-        </div>
-    </div>
-    <div class="col-md-6 col-xl-3">
-        <div class="card shadow-sm h-100 border-info">
-            <div class="card-body d-flex flex-column">
-                <h5 class="card-title">Stations</h5>
-                <p class="text-muted flex-grow-1">Quản lý trạm trưng bày, thông tin liên hệ và trạng thái hoạt động.</p>
-                <div class="d-flex justify-content-between align-items-end">
-                    <span class="badge bg-info text-dark fs-6">@Model.StationCount tổng</span>
-                    <a asp-page="/Stations/Index" class="btn btn-outline-info btn-sm">Manage</a>
-                </div>
+        </article>
+
+        <article class="manage-card manage-card--orders">
+            <div class="manage-card__icon">OD</div>
+            <h3 class="manage-card__title">Orders</h3>
+            <p class="manage-card__description">Theo dõi tiến độ xử lý đơn hàng, áp dụng khuyến mãi và nhân sự phụ trách.</p>
+            <div class="manage-card__meta">
+                <span class="manage-chip">
+                    <span class="manage-chip__dot"></span>
+                    @Model.OrderCount bản ghi
+                </span>
+                <a asp-page="/Orders/Index" class="manage-link">Đi tới</a>
             </div>
-        </div>
-    </div>
-</div>
+        </article>
+
+        <article class="manage-card manage-card--stations">
+            <div class="manage-card__icon">ST</div>
+            <h3 class="manage-card__title">Stations</h3>
+            <p class="manage-card__description">Giám sát thông tin trạm, địa điểm, hotline và trạng thái mở bán.</p>
+            <div class="manage-card__meta">
+                <span class="manage-chip">
+                    <span class="manage-chip__dot"></span>
+                    @Model.StationCount bản ghi
+                </span>
+                <a asp-page="/Stations/Index" class="manage-link">Đi tới</a>
+            </div>
+        </article>
+    </section>
+</section>

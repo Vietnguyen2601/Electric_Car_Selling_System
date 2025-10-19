@@ -47,6 +47,7 @@ namespace ElectricVehicleDealer.DAL.Repositories.Repository
             if (vehicle != null)
             {
                 vehicle.IsActive = false;
+                _context.Vehicles.Update(vehicle);
                 await _context.SaveChangesAsync();
             }
         }

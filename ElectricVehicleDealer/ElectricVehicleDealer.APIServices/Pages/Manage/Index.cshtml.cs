@@ -28,6 +28,7 @@ namespace ElectricVehicleDealer.Presentation.Pages.Manage
         public int VehicleCount { get; private set; }
         public int OrderCount { get; private set; }
         public int StationCount { get; private set; }
+        public int TotalManaged => AccountCount + VehicleCount + OrderCount + StationCount;
 
         public async Task OnGetAsync()
         {

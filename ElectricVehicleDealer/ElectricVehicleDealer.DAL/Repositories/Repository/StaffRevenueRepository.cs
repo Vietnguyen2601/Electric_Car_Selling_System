@@ -53,6 +53,7 @@ namespace ElectricVehicleDealer.DAL.Repositories.Repository
             existing.IsActive = entity.IsActive;
             existing.UpdatedAt = DateTime.UtcNow;
 
+            _context.StaffRevenues.Update(existing);
             await _context.SaveChangesAsync();
             return existing;
         }
@@ -64,6 +65,7 @@ namespace ElectricVehicleDealer.DAL.Repositories.Repository
 
             existing.IsActive = false;
             existing.UpdatedAt = DateTime.UtcNow;
+            _context.StaffRevenues.Update(existing);
             await _context.SaveChangesAsync();
             return true;
         }
