@@ -14,5 +14,7 @@ namespace ElectricVehicleDealer.Common.DTOs.ScheduleDtos
         public bool IsActive { get; set; }
         public string? CustomerUsername { get; set; }
         public string? StationName { get; set; }
+        public string? StationLocation { get; set; }
+        public string? VehicleModel { get; set; }
     }
 }

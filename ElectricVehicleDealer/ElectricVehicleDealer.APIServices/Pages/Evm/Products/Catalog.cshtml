@@ -1,166 +1,249 @@
-﻿@page "/evm/products/catalog"
-@model PortalPageModel
-@{
-    ViewData["Title"] = "Quản lý danh mục xe điện - EVM";
-    ViewData["PageTitle"] = "Danh mục xe điện & phiên bản";
-    ViewData["PageDescription"] = "Quản lý dữ liệu sản phẩm, phân loại phiên bản, màu sắc và tính năng để đồng bộ với các đại lý.";
+﻿@page
+@model ElectricVehicleDealer.Presentation.Pages.Evm.Products.CatalogModel
+@using System.Linq
+
+@section Head {
+    <link rel="stylesheet" href="~/css/manage/crud.css" />
 }
 
-@section PageActions {
-    <button class="btn-primary-gradient">Thêm mẫu xe</button>
-    <button class="btn-secondary-soft">Đồng bộ ERP</button>
+<section class="crud-page" id="catalog">
+    <header class="crud-header">
+        <div>
+            <h2>Danh mục xe điện</h2>
+            <p>Kiểm soát cấu hình sản phẩm, màu sắc và trạng thái kinh doanh của từng mẫu xe.</p>
+        </div>
+        <div class="crud-actions">
+            <a asp-page="/Evm/Products/Catalog/Create" class="crud-btn">+ Thêm xe</a>
+        </div>
+    </header>
+
+    <div class="crud-table">
+        @if (!Model.Vehicles.Any())
+        {
+            <div class="crud-empty">Chưa có xe nào trong hệ thống.</div>
+        }
+        else
+        {
+            <table class="crud-table__table">
+                <thead>
+                    <tr>
+                        <th class="crud-table__col-id">Mã</th>
+                        <th>Model</th>
+                        <th>Loại</th>
+                        <th>Màu sắc</th>
+                        <th class="text-end">Giá bán</th>
+                        <th>Trạng thái</th>
+                        <th class="text-end">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var vehicle in Model.Vehicles)
+                {
+                    var colorTokens = (vehicle.Color ?? string.Empty)
+                        .Split(',', System.StringSplitOptions.RemoveEmptyEntries)
+                        .Select(token => token.Trim())
+                        .Where(token => !string.IsNullOrWhiteSpace(token))
+                        .ToArray();
+                    <tr class="crud-table__row">
+                        <td class="crud-table__cell crud-table__cell--id">
+                            <span class="crud-id-badge">#@vehicle.VehicleId</span>
+                        </td>
+                        <td class="crud-table__cell crud-table__cell--model">
+                            <div class="crud-model">
+                                <span class="crud-model__name">@vehicle.Model</span>
+                                <span class="crud-model__meta">Mã nội bộ: @vehicle.VehicleId</span>
+                            </div>
+                        </td>
+                        <td class="crud-table__cell crud-table__cell--type">
+                            <span class="crud-chip">@vehicle.Type</span>
+                        </td>
+                        <td class="crud-table__cell crud-table__cell--colors">
+                            @if (colorTokens.Length == 0)
+                            {
+                                <span class="crud-chip crud-chip--muted">Không rõ</span>
+                            }
+                            else
+                            {
+                                foreach (var color in colorTokens)
+                                {
+                                    <span class="crud-chip crud-chip--muted">@color</span>
+                                }
+                            }
+                        </td>
+                        <td class="crud-table__cell crud-table__cell--price text-end">
+                            <span class="crud-price">@vehicle.Price.ToString("N0") ₫</span>
+                        </td>
+                        <td class="crud-table__cell crud-table__cell--status">
+                            <span class="crud-tag @(vehicle.IsActive ? "crud-tag--success" : "crud-tag--danger")">
+                                @(vehicle.IsActive ? "Đang kinh doanh" : "Ngưng")
+                            </span>
+                        </td>
+                        <td class="crud-table__cell crud-table__cell--actions text-end">
+                            <div class="crud-table__actions">
+                                <a class="crud-icon-btn" asp-page="Edit" asp-route-id="@vehicle.VehicleId">
+                                    <span class="crud-icon crud-icon--edit" aria-hidden="true"></span>
+                                    <span>Sửa</span>
+                                </a>
+                                <a class="crud-icon-btn crud-icon-btn--danger" asp-page="Delete" asp-route-id="@vehicle.VehicleId">
+                                    <span class="crud-icon crud-icon--delete" aria-hidden="true"></span>
+                                    <span>Xoá</span>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        }
+    </div>
+
+    <section class="vehicle-distribution" id="distribution">
+        <header class="vehicle-distribution__header">
+            <div>
+                <h3>Phân bổ xe theo trạm</h3>
+                <p>Gán xe vào các trạm hoạt động và cập nhật nhanh số lượng kho thực tế.</p>
+            </div>
+        </header>
+
+        @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+        {
+            <div class="vehicle-feedback vehicle-feedback--success">@Model.SuccessMessage</div>
+        }
+
+        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+        {
+            <div class="vehicle-feedback vehicle-feedback--error">@Model.ErrorMessage</div>
+        }
+
+        <div class="vehicle-distribution__grid">
+            <article class="vehicle-distribution__card">
+                <h4>Gán xe vào trạm</h4>
+                <p class="vehicle-distribution__hint">Chọn xe, trạm và số lượng để phân bổ. Khi cập nhật lại, hệ thống sẽ thay số lượng mới.</p>
+
+                <form method="post" asp-page-handler="Assign" class="vehicle-distribution__form">
+                    <div asp-validation-summary="ModelOnly" class="vehicle-validation"></div>
+
+                    <div class="vehicle-field">
+                        <label asp-for="SelectedVehicleId">Xe điện</label>
+                        <select class="vehicle-select" asp-for="SelectedVehicleId">
+                            <option value="0">-- Chọn xe --</option>
+                            @foreach (var vehicle in Model.Vehicles)
+                            {
+                                <option value="@vehicle.VehicleId">@vehicle.Model</option>
+                            }
+                        </select>
+                        <span asp-validation-for="SelectedVehicleId" class="vehicle-validation__message"></span>
+                    </div>
+
+                    <div class="vehicle-field">
+                        <label asp-for="SelectedStationId">Trạm</label>
+                        <select class="vehicle-select" asp-for="SelectedStationId">
+                            <option value="0">-- Chọn trạm --</option>
+                            @foreach (var station in Model.Stations)
+                            {
+                                <option value="@station.StationId">@station.StationName</option>
+                            }
+                        </select>
+                        <span asp-validation-for="SelectedStationId" class="vehicle-validation__message"></span>
+                    </div>
+
+                    <div class="vehicle-field">
+                        <label asp-for="Quantity">Số lượng</label>
+                        <input class="vehicle-input" asp-for="Quantity" type="number" min="1" />
+                        <span asp-validation-for="Quantity" class="vehicle-validation__message"></span>
+                    </div>
+
+                    <button type="submit" class="crud-btn vehicle-distribution__submit">Lưu phân bổ</button>
+
+                    @if (!Model.Vehicles.Any() || !Model.Stations.Any())
+                    {
+                        <p class="vehicle-distribution__note">Cần có ít nhất 1 xe và 1 trạm đang hoạt động để thực hiện phân bổ.</p>
+                    }
+                </form>
+            </article>
+
+            <article class="vehicle-distribution__card vehicle-distribution__card--list">
+                <h4>Danh sách phân bổ</h4>
+                @if (Model.StationAssignments.Any())
+                {
+                    <div class="vehicle-table-wrapper">
+                        <table class="vehicle-table">
+                            <thead>
+                                <tr>
+                                    <th>Xe</th>
+                                    <th>Trạm</th>
+                                    <th>Địa điểm</th>
+                                    <th>Số lượng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var assignment in Model.StationAssignments)
+                                {
+                                    <tr>
+                                        <td>@assignment.VehicleModel</td>
+                                        <td>@assignment.StationName</td>
+                                        <td>@assignment.Location</td>
+                                        <td>@assignment.Quantity</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <p class="vehicle-distribution__empty">Chưa có phân bổ nào.</p>
+                }
+            </article>
+        </div>
+    </section>
+</section>
+
+<section class="vehicle-pricing" id="pricing">
+    <header class="vehicle-distribution__header">
+        <div>
+            <h3>Giá sỉ & chiết khấu</h3>
+            <p>Xem nhanh giá niêm yết và đề xuất mức chiết khấu dành cho từng phiên bản xe điện.</p>
+        </div>
+    </header>
+
+    @if (Model.Vehicles.Any())
+    {
+        <div class="vehicle-table-wrapper">
+            <table class="vehicle-table vehicle-table--pricing">
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>Loại</th>
+                        <th>Giá niêm yết</th>
+                        <th>Chiết khấu đề xuất</th>
+                        <th>Giá sỉ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var vehicle in Model.Vehicles)
+                {
+                    var suggestedDiscount = vehicle.Price * 0.05m;
+                    var wholesalePrice = vehicle.Price - suggestedDiscount;
+                    <tr>
+                        <td>@vehicle.Model</td>
+                        <td>@vehicle.Type</td>
+                        <td>@vehicle.Price.ToString("N0") ₫</td>
+                        <td>@suggestedDiscount.ToString("N0") ₫</td>
+                        <td>@wholesalePrice.ToString("N0") ₫</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <p class="vehicle-distribution__empty">Chưa có dữ liệu giá sỉ. Vui lòng thêm xe vào danh mục trước.</p>
+    }
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 }
 
-<div class="panel">
-    <div class="panel-header">
-        <div>
-            <h2>Thông tin chung</h2>
-            <p>Hệ thống sản phẩm hiện đang kinh doanh trong hệ sinh thái EcoRide.</p>
-        </div>
-    </div>
-    <div class="panel-body grid-3">
-        <div class="stat-card">
-            <span>Số mẫu xe</span>
-            <h3>24 phiên bản</h3>
-            <span class="kpi-trend">+6 phiên bản năm 2025</span>
-        </div>
-        <div class="stat-card">
-            <span>Màu sắc</span>
-            <h3>56 tùy chọn</h3>
-            <span class="badge">10 màu mới</span>
-        </div>
-        <div class="stat-card">
-            <span>Cập nhật gần nhất</span>
-            <h3>16/06/2025</h3>
-            <span class="badge success">Đồng bộ đầy đủ</span>
-        </div>
-    </div>
-</div>
-
-<div class="panel">
-    <div class="panel-header">
-        <div>
-            <h2>Danh sách mẫu xe</h2>
-            <p>Chi tiết từng dòng với phân khúc, cấu hình và thị trường mục tiêu.</p>
-        </div>
-    </div>
-    <div class="panel-body">
-        <table class="table-modern">
-            <thead>
-                <tr>
-                    <th>Mẫu xe</th>
-                    <th>Phân khúc</th>
-                    <th>Phiên bản</th>
-                    <th>Màu sắc</th>
-                    <th>Tình trạng</th>
-                    <th>Ngày phát hành</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>EcoRide EV3</td>
-                    <td>SUV hiệu năng</td>
-                    <td>Sport AWD, Track Edition, Signature</td>
-                    <td>10 màu</td>
-                    <td class="badge success">Đang bán</td>
-                    <td>04/2024</td>
-                </tr>
-                <tr>
-                    <td>EcoRide EV2</td>
-                    <td>Sedan cao cấp</td>
-                    <td>Touring Premium, Luxury, Executive</td>
-                    <td>12 màu</td>
-                    <td class="badge success">Đang bán</td>
-                    <td>08/2023</td>
-                </tr>
-                <tr>
-                    <td>EcoRide EV1</td>
-                    <td>Đô thị thông minh</td>
-                    <td>Urban, Urban Plus, Art Edition</td>
-                    <td>14 màu</td>
-                    <td class="badge success">Đang bán</td>
-                    <td>03/2023</td>
-                </tr>
-                <tr>
-                    <td>EcoRide Cargo</td>
-                    <td>Logistics</td>
-                    <td>Fleet, Fleet Pro</td>
-                    <td>6 màu</td>
-                    <td class="badge warning">Đang nâng cấp</td>
-                    <td>11/2022</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<div class="split-2">
-    <div class="panel soft">
-        <div class="panel-header">
-            <div>
-                <h2>Cấu hình mẫu xe</h2>
-                <p>Biểu mẫu cập nhật thông số kỹ thuật cho từng phiên bản.</p>
-            </div>
-        </div>
-        <div class="panel-body">
-            <div class="form-grid">
-                <div class="form-control-modern">
-                    <label>Mẫu xe</label>
-                    <select>
-                        <option>EcoRide EV3</option>
-                        <option>EcoRide EV2</option>
-                        <option>EcoRide EV1</option>
-                        <option>EcoRide Cargo</option>
-                    </select>
-                </div>
-                <div class="form-control-modern">
-                    <label>Phiên bản</label>
-                    <input placeholder="Ví dụ: Track Edition" />
-                </div>
-                <div class="form-control-modern">
-                    <label>Giá đề xuất</label>
-                    <input placeholder="Nhập giá (₫)" />
-                </div>
-                <div class="form-control-modern">
-                    <label>Ngày ra mắt</label>
-                    <input type="date" />
-                </div>
-            </div>
-            <div class="form-control-modern">
-                <label>Tính năng nổi bật</label>
-                <textarea placeholder="Liệt kê nhanh các tính năng mới: ADAS 3.0, pin thể rắn, HUD 3D..."></textarea>
-            </div>
-            <div class="panel-actions">
-                <button class="btn-secondary-soft">Lưu nháp</button>
-                <button class="btn-primary-gradient">Cập nhật catalogue</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="panel">
-        <div class="panel-header">
-            <div>
-                <h2>Kiểm duyệt nội dung</h2>
-                <p>Check list trước khi phát hành mẫu xe mới cho đại lý.</p>
-            </div>
-        </div>
-        <div class="panel-body list-modern">
-            <div class="list-item">
-                <strong>Hoàn tất thông số kỹ thuật</strong>
-                <span>Đảm bảo dữ liệu đồng bộ ERP - DMS</span>
-            </div>
-            <div class="list-item">
-                <strong>Tài liệu truyền thông</strong>
-                <span>Brochure, hình ảnh 360°, video</span>
-            </div>
-            <div class="list-item">
-                <strong>Đào tạo sản phẩm</strong>
-                <span>Lên lịch training online/offline</span>
-            </div>
-            <div class="list-item">
-                <strong>Kiểm duyệt pháp lý</strong>
-                <span>Đảm bảo tuân thủ tiêu chuẩn an toàn</span>
-            </div>
-        </div>
-    </div>
-</div>

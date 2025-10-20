@@ -8,35 +8,28 @@ namespace ElectricVehicleDealer.Presentation.Pages.Manage
     public class IndexModel : PageModel
     {
         private readonly IAccountService _accountService;
-        private readonly IVehicleService _vehicleService;
         private readonly IOrderService _orderService;
         private readonly IStationService _stationService;
 
         public IndexModel(
             IAccountService accountService,
-            IVehicleService vehicleService,
             IOrderService orderService,
             IStationService stationService)
         {
             _accountService = accountService;
-            _vehicleService = vehicleService;
             _orderService = orderService;
             _stationService = stationService;
         }
 
         public int AccountCount { get; private set; }
-        public int VehicleCount { get; private set; }
         public int OrderCount { get; private set; }
         public int StationCount { get; private set; }
-        public int TotalManaged => AccountCount + VehicleCount + OrderCount + StationCount;
+        public int TotalManaged => AccountCount + OrderCount + StationCount;
 
         public async Task OnGetAsync()
         {
             var accounts = await _accountService.GetAllAccountsAsync();
             AccountCount = accounts.Count();
-
-            var vehicles = await _vehicleService.GetAllAsync();
-            VehicleCount = vehicles.Count;
 
             var orders = await _orderService.GetAllAsync();
             OrderCount = orders.Count();

@@ -1,10 +1,10 @@
-using ElectricVehicleDealer.BLL.IServices;
+﻿using ElectricVehicleDealer.BLL.IServices;
 using ElectricVehicleDealer.Common.DTOs.VehicleDtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Threading.Tasks;
 
-namespace ElectricVehicleDealer.Presentation.Pages.Vehicles
+namespace ElectricVehicleDealer.Presentation.Pages.Evm.Products.Catalog
 {
     public class DeleteModel : PageModel
     {
@@ -36,7 +36,7 @@ namespace ElectricVehicleDealer.Presentation.Pages.Vehicles
                 return NotFound();
             }
 
-            return RedirectToPage("Index");
+            return RedirectToPage("/Evm/Products/Catalog");
         }
     }
 }

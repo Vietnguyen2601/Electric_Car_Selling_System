@@ -1,4 +1,4 @@
-using ElectricVehicleDealer.BLL.IServices;
+﻿using ElectricVehicleDealer.BLL.IServices;
 using ElectricVehicleDealer.Common.DTOs.StationDtos;
 using ElectricVehicleDealer.Common.DTOs.VehicleDtos;
 using Microsoft.AspNetCore.Mvc;
@@ -7,15 +7,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ElectricVehicleDealer.Presentation.Pages.Vehicles
+namespace ElectricVehicleDealer.Presentation.Pages.Evm.Products
 {
-    public class IndexModel : PageModel
+    public class CatalogModel : PageModel
     {
         private readonly IVehicleService _vehicleService;
         private readonly IStationService _stationService;
         private readonly IStationCarService _stationCarService;
 
-        public IndexModel(
+        public CatalogModel(
             IVehicleService vehicleService,
             IStationService stationService,
             IStationCarService stationCarService)
@@ -55,17 +55,17 @@ namespace ElectricVehicleDealer.Presentation.Pages.Vehicles
 
             if (SelectedVehicleId <= 0)
             {
-                ModelState.AddModelError(nameof(SelectedVehicleId), "Vui l�ng ch?n xe.");
+                ModelState.AddModelError(nameof(SelectedVehicleId), "Vui lòng chọn xe.");
             }
 
             if (SelectedStationId <= 0)
             {
-                ModelState.AddModelError(nameof(SelectedStationId), "Vui l�ng ch?n tr?m.");
+                ModelState.AddModelError(nameof(SelectedStationId), "Vui lòng chọn trạm.");
             }
 
             if (Quantity <= 0)
             {
-                ModelState.AddModelError(nameof(Quantity), "S? lu?ng ph?i l?n h?n 0.");
+                ModelState.AddModelError(nameof(Quantity), "Số lượng phải lớn hơn 0.");
             }
 
             if (!ModelState.IsValid)
@@ -84,7 +84,7 @@ namespace ElectricVehicleDealer.Presentation.Pages.Vehicles
                     existing.Quantity = Quantity;
                     existing.IsActive = true;
                     await _stationCarService.UpdateAsync(existing.StationCarId, existing);
-                    SuccessMessage = "C?p nh?t ph�n b? xe th�nh c�ng.";
+                    SuccessMessage = "Cập nhật phân bổ xe thành công.";
                 }
                 else
                 {
@@ -97,12 +97,12 @@ namespace ElectricVehicleDealer.Presentation.Pages.Vehicles
                     };
 
                     await _stationCarService.CreateAsync(createDto);
-                    SuccessMessage = "Th�m ph�n b? xe m?i th�nh c�ng.";
+                    SuccessMessage = "Thêm phân bổ xe mới thành công.";
                 }
             }
             catch
             {
-                ErrorMessage = "Kh�ng th? l?u ph�n b? xe. Vui l�ng th? l?i.";
+                ErrorMessage = "Không thể lưu phân bổ xe. Vui lòng thử lại.";
                 return Page();
             }
 

@@ -24,6 +24,8 @@ namespace ElectricVehicleDealer.DAL.Repositories.Repository
                 .Include(s => s.Customer)
                 .Include(s => s.StationCar)
                     .ThenInclude(sc => sc.Station)
+                .Include(s => s.StationCar)
+                    .ThenInclude(sc => sc.Vehicle)
                 .Where(s => s.IsActive)
                 .ToListAsync();
         }
@@ -34,6 +36,8 @@ namespace ElectricVehicleDealer.DAL.Repositories.Repository
                 .Include(s => s.Customer)
                 .Include(s => s.StationCar)
                     .ThenInclude(sc => sc.Station)
+                .Include(s => s.StationCar)
+                    .ThenInclude(sc => sc.Vehicle)
                 .FirstOrDefaultAsync(s => s.ScheduleId == id && s.IsActive);
         }
 

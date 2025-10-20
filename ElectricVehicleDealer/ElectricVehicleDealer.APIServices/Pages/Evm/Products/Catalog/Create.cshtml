@@ -1,5 +1,5 @@
-@page
-@model ElectricVehicleDealer.Presentation.Pages.Vehicles.CreateModel
+﻿@page
+@model ElectricVehicleDealer.Presentation.Pages.Evm.Products.Catalog.CreateModel
 
 @section Head {
     <link rel="stylesheet" href="~/css/manage/crud.css" />
@@ -12,7 +12,7 @@
             <p>Nhập thông tin cấu hình và giá để đưa sản phẩm lên danh mục kinh doanh.</p>
         </div>
         <div class="crud-actions">
-            <a asp-page="Index" class="crud-btn crud-btn--ghost">Quay lại danh sách</a>
+            <a asp-page="/Evm/Products/Catalog" class="crud-btn crud-btn--ghost">Quay lại danh sách</a>
         </div>
     </header>
 
@@ -48,7 +48,7 @@
 
         <div class="crud-form__actions">
             <button type="submit" class="crud-btn">Lưu xe</button>
-            <a asp-page="Index" class="crud-btn crud-btn--ghost">Huỷ</a>
+            <a asp-page="/Evm/Products/Catalog" class="crud-btn crud-btn--ghost">Hủy</a>
         </div>
     </form>
 </section>

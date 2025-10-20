@@ -1,169 +1,91 @@
-﻿@page "/dealer/sales/orders"
-@model PortalPageModel
-@{
-    ViewData["Title"] = "Đơn hàng & Theo dõi - Dealer";
-    ViewData["PageTitle"] = "Quản lý đơn hàng & tiến độ";
-    ViewData["PageDescription"] = "Theo dõi đầy đủ vòng đời đơn hàng từ lúc đặt cọc đến khi bàn giao xe cho khách.";
+@page "/dealer/sales/orders"
+@model ElectricVehicleDealer.Presentation.Pages.Dealer.Sales.OrdersModel
+@using System.Linq
+
+@section Head {
+    <link rel="stylesheet" href="~/css/manage/crud.css" />
 }
 
-@section PageActions {
-    <button class="btn-primary-gradient">Tạo đơn hàng</button>
-    <button class="btn-secondary-soft">Import từ báo giá</button>
-}
-
-<div class="panel">
-    <div class="panel-header">
+<section class="crud-page" id="dealer-orders">
+    <header class="crud-header">
         <div>
-            <h2>Bảng điều khiển đơn hàng</h2>
-            <p>Danh sách đơn hàng đang xử lý cùng các chỉ số quan trọng.</p>
+            <h2>Đơn hàng & tiến độ</h2>
+            <p>Theo dõi hành trình xử lý và trạng thái thanh toán của từng đơn hàng đại lý.</p>
         </div>
-    </div>
-    <div class="panel-body">
-        <table class="table-modern">
-            <thead>
-                <tr>
-                    <th>Mã đơn</th>
-                    <th>Khách hàng</th>
-                    <th>Mẫu xe</th>
-                    <th>Giá trị</th>
-                    <th>Tiến độ</th>
-                    <th>Thanh toán</th>
-                    <th>Người phụ trách</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>#ORD-5231</td>
-                    <td>Đinh Thái Sơn</td>
-                    <td>EV2 Touring</td>
-                    <td>1.42 tỷ ₫</td>
-                    <td class="badge success">Chuẩn bị giao xe</td>
-                    <td>Đã thanh toán 80%</td>
-                    <td>Sales: Hải</td>
-                </tr>
-                <tr>
-                    <td>#ORD-5232</td>
-                    <td>Trần Bích Ngọc</td>
-                    <td>EV3 Sport</td>
-                    <td>1.95 tỷ ₫</td>
-                    <td class="badge warning">Chờ kiểm tra chất lượng</td>
-                    <td>Đã thanh toán 50%</td>
-                    <td>Sales: Duy</td>
-                </tr>
-                <tr>
-                    <td>#ORD-5233</td>
-                    <td>Công ty EverLog</td>
-                    <td>Cargo Fleet x8</td>
-                    <td>12.4 tỷ ₫</td>
-                    <td class="badge">Đặt hàng từ hãng</td>
-                    <td>Đặt cọc 30%</td>
-                    <td>Key Account: Hà</td>
-                </tr>
-                <tr>
-                    <td>#ORD-5234</td>
-                    <td>Phạm Văn Tùng</td>
-                    <td>EV1 Urban</td>
-                    <td>820 triệu ₫</td>
-                    <td class="badge danger">Tạm dừng</td>
-                    <td>Đã thanh toán 20%</td>
-                    <td>Sales: Thảo</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+        <div class="crud-actions">
+            <a class="crud-btn" asp-page="/Orders/Create">+ Tạo đơn hàng</a>
+        </div>
+    </header>
 
-<div class="split-2">
-    <div class="panel soft">
-        <div class="panel-header">
-            <div>
-                <h2>Cập nhật tiến độ</h2>
-                <p>Điều chỉnh trạng thái đơn hàng và ghi chú xử lý.</p>
-            </div>
-        </div>
-        <div class="panel-body">
-            <div class="form-grid">
-                <div class="form-control-modern">
-                    <label>Mã đơn hàng</label>
-                    <input placeholder="Nhập ORD-xxxx" />
-                </div>
-                <div class="form-control-modern">
-                    <label>Trạng thái</label>
-                    <select>
-                        <option>Đang đặt hàng</option>
-                        <option>Chờ kiểm tra chất lượng</option>
-                        <option>Chuẩn bị giao xe</option>
-                        <option>Đã bàn giao</option>
-                        <option>Tạm dừng</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-control-modern">
-                <label>Ghi chú</label>
-                <textarea placeholder="Nhập nội dung cập nhật cho đội vận hành và khách hàng..."></textarea>
-            </div>
-            <div class="panel-actions">
-                <button class="btn-secondary-soft">Đính kèm biên bản</button>
-                <button class="btn-primary-gradient">Lưu cập nhật</button>
-            </div>
-        </div>
+    <div class="crud-table">
+        @if (!Model.Orders.Any())
+        {
+            <div class="crud-empty">Chưa có đơn hàng nào được ghi nhận.</div>
+        }
+        else
+        {
+            <table class="crud-table__table crud-table__table--orders">
+                <thead>
+                    <tr>
+                        <th class="crud-table__col-id">Mã</th>
+                        <th>Khách hàng</th>
+                        <th>Sales phụ trách</th>
+                        <th class="text-end">Giá trị</th>
+                        <th>Ngày đặt</th>
+                        <th>Trạng thái</th>
+                        <th class="text-end">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var order in Model.Orders)
+                {
+                    <tr class="crud-table__row">
+                        <td class="crud-table__cell crud-table__cell--id">
+                            <span class="crud-id-badge">#@order.OrderId</span>
+                        </td>
+                        <td class="crud-table__cell crud-table__cell--model">
+                            <div class="crud-model">
+                                <span class="crud-model__name">@order.CustomerUsername</span>
+                                <span class="crud-model__meta">@(!string.IsNullOrWhiteSpace(order.StationName) ? order.StationName : "Chưa gán trạm")</span>
+                            </div>
+                        </td>
+                        <td class="crud-table__cell crud-table__cell--sales">
+                            @if (string.IsNullOrWhiteSpace(order.StaffUsername))
+                            {
+                                <span class="crud-chip crud-chip--muted">Chưa phân công</span>
+                            }
+                            else
+                            {
+                                <span class="crud-chip">@order.StaffUsername</span>
+                            }
+                        </td>
+                        <td class="crud-table__cell crud-table__cell--price text-end">
+                            <span class="crud-price">@order.TotalPrice.ToString("N0") ₫</span>
+                        </td>
+                        <td class="crud-table__cell crud-table__cell--date text-end">
+                            <span class="crud-meta">@order.OrderDate.ToString("dd/MM/yyyy")</span>
+                        </td>
+                        <td class="crud-table__cell crud-table__cell--status">
+                            <span class="crud-tag @Model.GetStatusClass(order.Status)">
+                                @Model.GetStatusLabel(order.Status)
+                            </span>
+                        </td>
+                        <td class="crud-table__cell crud-table__cell--actions text-end">
+                            <div class="crud-table__actions">
+                                <a class="crud-icon-btn" asp-page="/Orders/Edit" asp-route-id="@order.OrderId">
+                                    <span class="crud-icon crud-icon--edit" aria-hidden="true"></span>
+                                    <span>Sửa</span>
+                                </a>
+                                <a class="crud-icon-btn crud-icon-btn--danger" asp-page="/Orders/Delete" asp-route-id="@order.OrderId">
+                                    <span class="crud-icon crud-icon--delete" aria-hidden="true"></span>
+                                    <span>Xoá</span>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        }
     </div>
-
-    <div class="panel">
-        <div class="panel-header">
-            <div>
-                <h2>Dòng thời gian xử lý</h2>
-                <p>Tự động ghi nhận các mốc quan trọng của mỗi đơn hàng.</p>
-            </div>
-        </div>
-        <div class="panel-body timeline">
-            <div class="timeline-item">
-                <h4>17/06 · Hoàn tất QC</h4>
-                <p>Kho: Bình Tân · Người kiểm tra: Anh Khoa</p>
-            </div>
-            <div class="timeline-item">
-                <h4>18/06 · Chờ đăng ký biển số</h4>
-                <p>Nộp hồ sơ: 18/06 · Dự kiến hoàn tất: 21/06</p>
-            </div>
-            <div class="timeline-item">
-                <h4>19/06 · Đặt lịch bàn giao</h4>
-                <p>Thời gian: 22/06 09:00 · Địa điểm: Showroom Quận 7</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="panel soft">
-    <div class="panel-header">
-        <div>
-            <h2>Kiểm tra checklist bàn giao</h2>
-            <p>Bảo đảm xe đáp ứng đủ tiêu chuẩn trước khi giao khách.</p>
-        </div>
-    </div>
-    <div class="panel-body grid-3">
-        <div class="card-ghost">
-            <h3>Hồ sơ giấy tờ</h3>
-            <div class="list-modern">
-                <div class="list-item"><strong>Giấy chứng nhận đăng ký</strong><span class="badge success">Hoàn tất</span></div>
-                <div class="list-item"><strong>Bảo hiểm vật chất</strong><span class="badge warning">Chờ ký</span></div>
-                <div class="list-item"><strong>Hợp đồng tín dụng</strong><span class="badge success">Đã duyệt</span></div>
-            </div>
-        </div>
-        <div class="card-ghost">
-            <h3>Tình trạng xe</h3>
-            <div class="list-modern">
-                <div class="list-item"><strong>Kiểm tra ngoại thất</strong><span class="badge success">OK</span></div>
-                <div class="list-item"><strong>Kiểm tra nội thất</strong><span class="badge success">OK</span></div>
-                <div class="list-item"><strong>Kiểm tra pin & sạc</strong><span class="badge warning">Cần sạc đầy</span></div>
-            </div>
-        </div>
-        <div class="card-ghost">
-            <h3>Chuẩn bị bàn giao</h3>
-            <div class="list-modern">
-                <div class="list-item"><strong>Quà tặng khách hàng</strong><span class="badge success">Sẵn sàng</span></div>
-                <div class="list-item"><strong>Video hướng dẫn</strong><span class="badge success">Đã gửi</span></div>
-                <div class="list-item"><strong>Lịch bảo dưỡng</strong><span class="badge warning">Chưa xác nhận</span></div>
-            </div>
-        </div>
-    </div>
-</div>
+</section>
