@@ -1,5 +1,5 @@
-@page "{id:int}"
-@model ElectricVehicleDealer.Presentation.Pages.Vehicles.EditModel
+﻿@page "{id:int}"
+@model ElectricVehicleDealer.Presentation.Pages.Evm.Products.Catalog.EditModel
 
 @section Head {
     <link rel="stylesheet" href="~/css/manage/crud.css" />
@@ -20,7 +20,7 @@ else
                 <p>Điều chỉnh cấu hình, giá bán hoặc trạng thái kinh doanh cho model <strong>@Model.Vehicle.Model</strong>.</p>
             </div>
             <div class="crud-actions">
-                <a asp-page="Index" class="crud-btn crud-btn--ghost">Quay lại danh sách</a>
+                <a asp-page="/Evm/Products/Catalog" class="crud-btn crud-btn--ghost">Quay lại danh sách</a>
             </div>
         </header>
 
@@ -56,7 +56,7 @@ else
 
             <div class="crud-form__actions">
                 <button type="submit" class="crud-btn">Lưu thay đổi</button>
-                <a asp-page="Index" class="crud-btn crud-btn--ghost">Huỷ</a>
+                <a asp-page="/Evm/Products/Catalog" class="crud-btn crud-btn--ghost">Hủy</a>
             </div>
         </form>
     </section>

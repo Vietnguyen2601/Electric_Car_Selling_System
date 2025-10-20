@@ -59,9 +59,9 @@
                     <a class="nav-link @(currentPath.StartsWithSegments("/dashboard/evm", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/dashboard/evm">Tổng quan EVM</a>
 
                     <p class="nav-label">Sản phẩm & phân phối</p>
-                    <a class="nav-link @(currentPath.StartsWithSegments("/evm/products/catalog", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/evm/products/catalog">Danh mục xe điện</a>
-                    <a class="nav-link @(currentPath.StartsWithSegments("/evm/products/inventory", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/evm/products/inventory">Điều phối & tồn kho</a>
-                    <a class="nav-link @(currentPath.StartsWithSegments("/evm/products/pricing", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/evm/products/pricing">Giá sỉ & chiết khấu</a>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/Evm/Products/Catalog", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/Evm/Products/Catalog">Danh mục xe điện</a>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/Evm/Products/Catalog", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/Evm/Products/Catalog#distribution">Điều phối & tồn kho</a>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/Evm/Products/Catalog", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/Evm/Products/Catalog#pricing">Giá sỉ & chiết khấu</a>
 
                     <p class="nav-label">Quản lý đại lý</p>
                     <a class="nav-link @(currentPath.StartsWithSegments("/evm/dealers/contracts", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/evm/dealers/contracts">Hợp đồng & công nợ</a>
@@ -138,3 +138,8 @@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
+
+
+
+
+

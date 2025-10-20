@@ -21,7 +21,9 @@ namespace ElectricVehicleDealer.BLL.Mapper
                 UpdatedAt = entity.UpdatedAt,
                 IsActive = entity.IsActive,
                 CustomerUsername = entity.Customer?.Username,
-                StationName = entity.StationCar?.Station?.StationName
+                StationName = entity.StationCar?.Station?.StationName,
+                StationLocation = entity.StationCar?.Station?.Location,
+                VehicleModel = entity.StationCar?.Vehicle?.Model
             };
         }
 

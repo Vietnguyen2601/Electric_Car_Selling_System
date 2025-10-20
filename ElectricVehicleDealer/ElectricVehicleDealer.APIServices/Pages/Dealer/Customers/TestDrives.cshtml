@@ -1,175 +1,118 @@
-﻿@page "/dealer/customers/testdrives"
-@model PortalPageModel
-@{
-    ViewData["Title"] = "Lịch lái thử - Dealer";
-    ViewData["PageTitle"] = "Quản lý lịch hẹn lái thử";
-    ViewData["PageDescription"] = "Đặt lịch lái thử cho khách hàng, phân công nhân viên phụ trách và tối ưu trải nghiệm trước bán.";
+@page "/dealer/customers/testdrives"
+@model ElectricVehicleDealer.Presentation.Pages.Dealer.Customers.TestDrivesModel
+@using System.Globalization
+
+@section Head {
+    <link rel="stylesheet" href="~/css/manage/crud.css" />
 }
 
-@section PageActions {
-    <button class="btn-primary-gradient">Đặt lịch mới</button>
-    <button class="btn-secondary-soft">Đồng bộ lịch</button>
-}
-
-<div class="panel">
-    <div class="panel-header">
+<section class="crud-page" id="testdrives">
+    <header class="crud-header">
         <div>
-            <h2>Lịch hẹn sắp tới</h2>
-            <p>Danh sách các buổi lái thử đã xác nhận.</p>
+            <h2>Quản lý lịch lái thử</h2>
+            <p>Theo dõi yêu cầu lái thử từ khách hàng, xác nhận và hoàn tất trải nghiệm tại trạm.</p>
         </div>
-    </div>
-    <div class="panel-body">
-        <table class="table-modern">
-            <thead>
-                <tr>
-                    <th>Thời gian</th>
-                    <th>Khách hàng</th>
-                    <th>Mẫu xe</th>
-                    <th>Địa điểm</th>
-                    <th>Nhân viên phụ trách</th>
-                    <th>Trạng thái</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>18/06 · 09:30</td>
-                    <td>Phạm Thu Hà</td>
-                    <td>EV1 Urban</td>
-                    <td>Showroom Quận 1</td>
-                    <td>Sales: Trâm</td>
-                    <td class="badge success">Đã xác nhận</td>
-                </tr>
-                <tr>
-                    <td>18/06 · 15:00</td>
-                    <td>Nguyễn Nhật Nam</td>
-                    <td>EV3 Sport</td>
-                    <td>Đường test EcoRide City</td>
-                    <td>Sales: Minh</td>
-                    <td class="badge warning">Chờ xác nhận</td>
-                </tr>
-                <tr>
-                    <td>19/06 · 10:00</td>
-                    <td>Lê Thủy Tiên</td>
-                    <td>EV2 Touring</td>
-                    <td>Showroom Hà Nội</td>
-                    <td>Sales: Hải</td>
-                    <td class="badge success">Đã xác nhận</td>
-                </tr>
-                <tr>
-                    <td>19/06 · 16:30</td>
-                    <td>Công ty Thành Đạt</td>
-                    <td>Cargo Fleet</td>
-                    <td>Test track Bình Dương</td>
-                    <td>Key Account: Đại</td>
-                    <td class="badge">Đang chuẩn bị</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+        <div class="crud-actions">
+            <span class="crud-chip crud-chip--muted">Chờ xử lý: @Model.PendingCount</span>
+            <span class="crud-chip">Đã xác nhận: @Model.ConfirmedCount</span>
+            <span class="crud-chip">Hoàn tất: @Model.CompletedCount</span>
+        </div>
+    </header>
 
-<div class="split-2">
-    <div class="panel soft">
-        <div class="panel-header">
-            <div>
-                <h2>Đặt lịch lái thử</h2>
-                <p>Form đặt lịch cho khách hàng cá nhân và doanh nghiệp.</p>
-            </div>
-        </div>
-        <div class="panel-body">
-            <div class="form-grid">
-                <div class="form-control-modern">
-                    <label>Khách hàng</label>
-                    <input placeholder="Tên khách hoặc doanh nghiệp" />
-                </div>
-                <div class="form-control-modern">
-                    <label>Mẫu xe</label>
-                    <select>
-                        <option>EcoRide EV3 Sport</option>
-                        <option>EcoRide EV2 Touring</option>
-                        <option>EcoRide EV1 Urban</option>
-                        <option>EcoRide Cargo Fleet</option>
-                    </select>
-                </div>
-                <div class="form-control-modern">
-                    <label>Ngày và giờ</label>
-                    <input type="datetime-local" />
-                </div>
-                <div class="form-control-modern">
-                    <label>Địa điểm</label>
-                    <select>
-                        <option>Showroom Quận 1</option>
-                        <option>Showroom Quận 7</option>
-                        <option>Test track Bình Dương</option>
-                        <option>EcoRide City Loop</option>
-                    </select>
-                </div>
-            </div>
-            <div class="panel-actions">
-                <button class="btn-secondary-soft">Gửi email mời</button>
-                <button class="btn-primary-gradient">Xác nhận lịch</button>
-            </div>
-        </div>
-    </div>
+    @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+    {
+        <div class="alert alert-success">@Model.SuccessMessage</div>
+    }
 
-    <div class="panel">
-        <div class="panel-header">
-            <div>
-                <h2>Checklist trải nghiệm</h2>
-                <p>Những hạng mục cần chuẩn bị trước khi khách đến lái thử.</p>
-            </div>
-        </div>
-        <div class="panel-body list-modern">
-            <div class="list-item">
-                <strong>Chuẩn bị xe demo</strong>
-                <span>Vệ sinh, sạc đầy, cập nhật phần mềm</span>
-            </div>
-            <div class="list-item">
-                <strong>Tài liệu trình bày</strong>
-                <span>Brochure, bảng giá, ưu đãi</span>
-            </div>
-            <div class="list-item">
-                <strong>Lộ trình test gợi ý</strong>
-                <span>Đường cao tốc, đô thị, thao tác tính năng</span>
-            </div>
-            <div class="list-item">
-                <strong>After drive follow-up</strong>
-                <span>Gọi sau 4 giờ · Gửi khảo sát hài lòng</span>
-            </div>
-        </div>
-    </div>
-</div>
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <div class="alert alert-danger">@Model.ErrorMessage</div>
+    }
 
-<div class="panel">
-    <div class="panel-header">
-        <div>
-            <h2>Đánh giá sau lái thử</h2>
-            <p>Nhập nhanh cảm nhận khách hàng để cá nhân hoá bước tư vấn tiếp theo.</p>
-        </div>
+    <div class="crud-table">
+        @if (!Model.Schedules.Any())
+        {
+            <div class="crud-empty">Chưa có lịch lái thử nào được ghi nhận.</div>
+        }
+        else
+        {
+            <table class="crud-table__table crud-table__table--orders">
+                <thead>
+                    <tr>
+                        <th class="crud-table__col-id">Mã</th>
+                        <th>Khách hàng</th>
+                        <th>Xe lái thử</th>
+                        <th>Trạm</th>
+                        <th>Thời gian</th>
+                        <th>Trạng thái</th>
+                        <th class="text-end">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var schedule in Model.Schedules)
+                {
+                    <tr class="crud-table__row">
+                        <td class="crud-table__cell crud-table__cell--id">
+                            <span class="crud-id-badge">#@schedule.ScheduleId</span>
+                        </td>
+                        <td class="crud-table__cell crud-table__cell--model">
+                            <div class="crud-model">
+                                <span class="crud-model__name">@schedule.CustomerUsername</span>
+                                <span class="crud-model__meta">Đặt lúc @schedule.CreatedAt.ToLocalTime().ToString("dd/MM HH:mm")</span>
+                            </div>
+                        </td>
+                        <td class="crud-table__cell">
+                            <span class="crud-chip">@(!string.IsNullOrWhiteSpace(schedule.VehicleModel) ? schedule.VehicleModel : "Chưa xác định")</span>
+                        </td>
+                        <td class="crud-table__cell">
+                            <div class="d-flex flex-column gap-1">
+                                <span class="crud-meta">@schedule.StationName</span>
+                                <span class="crud-meta crud-meta--muted">@(!string.IsNullOrWhiteSpace(schedule.StationLocation) ? schedule.StationLocation : "Đang cập nhật")</span>
+                            </div>
+                        </td>
+                        <td class="crud-table__cell crud-table__cell--date">
+                            <span class="crud-meta">@schedule.ScheduleTime.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</span>
+                        </td>
+                        <td class="crud-table__cell crud-table__cell--status">
+                            <span class="crud-tag @Model.GetStatusClass(schedule.Status)">
+                                @Model.GetStatusLabel(schedule.Status)
+                            </span>
+                        </td>
+                        <td class="crud-table__cell crud-table__cell--actions text-end">
+                            <div class="crud-table__actions">
+                                @if (Model.CanConfirm(schedule.Status))
+                                {
+                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@schedule.ScheduleId" asp-route-status="Confirmed">
+                                        <button type="submit" class="crud-icon-btn">
+                                            <span class="crud-icon crud-icon--edit" aria-hidden="true"></span>
+                                            <span>Xác nhận</span>
+                                        </button>
+                                    </form>
+                                }
+                                @if (Model.CanComplete(schedule.Status))
+                                {
+                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@schedule.ScheduleId" asp-route-status="Completed">
+                                        <button type="submit" class="crud-icon-btn">
+                                            <span class="crud-icon crud-icon--edit" aria-hidden="true"></span>
+                                            <span>Hoàn tất</span>
+                                        </button>
+                                    </form>
+                                }
+                                @if (Model.CanCancel(schedule.Status))
+                                {
+                                    <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@schedule.ScheduleId" asp-route-status="Cancelled">
+                                        <button type="submit" class="crud-icon-btn crud-icon-btn--danger">
+                                            <span class="crud-icon crud-icon--delete" aria-hidden="true"></span>
+                                            <span>Huỷ</span>
+                                        </button>
+                                    </form>
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        }
     </div>
-    <div class="panel-body">
-        <div class="form-grid">
-            <div class="form-control-modern">
-                <label>Mã lịch</label>
-                <input placeholder="Nhập mã lịch" />
-            </div>
-            <div class="form-control-modern">
-                <label>Mức độ hài lòng</label>
-                <select>
-                    <option>5 - Tuyệt vời</option>
-                    <option>4 - Hài lòng</option>
-                    <option>3 - Bình thường</option>
-                    <option>2 - Cần cải thiện</option>
-                    <option>1 - Chưa hài lòng</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-control-modern">
-            <label>Ghi chú</label>
-            <textarea placeholder="Khách quan tâm tính năng nào nhất? Băn khoăn gì cần giải đáp thêm?"></textarea>
-        </div>
-        <div class="panel-actions">
-            <button class="btn-primary-gradient">Lưu đánh giá</button>
-        </div>
-    </div>
-</div>
+</section>

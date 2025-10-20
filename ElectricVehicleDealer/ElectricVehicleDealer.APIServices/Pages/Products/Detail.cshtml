@@ -1,4 +1,4 @@
-@page "{id:int}"
+﻿@page "{id:int}"
 @using System.Collections.Generic
 @using System.Linq
 @using ElectricVehicleDealer.Common.DTOs.StationDtos
@@ -95,17 +95,20 @@
                             {
                                 <div class="station-item">
                                     <h4>@sc.StationName</h4>
-                                    <p><strong>Dia diem:</strong> @sc.Location</p>
+                                    <p><strong>Địa điểm:</strong> @sc.Location</p>
                                     <p><strong>So luong con:</strong> @sc.Quantity</p>
 
                                     @if (sc.Quantity > 0)
                                     {
-                                        <form method="post"
-                                              asp-page-handler="Reserve"
-                                              asp-route-id="@Model.Vehicle?.VehicleId">
-                                            <input type="hidden" name="SelectedStationCarId" value="@sc.StationCarId" />
-                                            <button class="btn-secondary" type="submit">Đặt xe tại trạm này</button>
-                                        </form>
+                                        <button class="btn-secondary"
+                                                type="button"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#scheduleModal"
+                                                data-station-id="@sc.StationCarId"
+                                                data-station-name="@sc.StationName"
+                                                data-station-location="@sc.Location">
+                                            Đặt lịch lái thử xe
+                                        </button>
                                     }
                                     else
                                     {
@@ -144,44 +147,103 @@
     </div>
 </section>
 
-<div class="modal fade" id="depositModal" tabindex="-1" aria-labelledby="depositModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <form method="post" asp-page-handler="Reserve" asp-route-id="@Model.Vehicle?.VehicleId">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="depositModalLabel">Đặt cọc tại trạm</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="modal fade schedule-modal-container" id="scheduleModal" tabindex="-1" aria-labelledby="scheduleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content schedule-modal">
+            <form method="post" asp-page-handler="Schedule" asp-route-id="@Model.Vehicle?.VehicleId">
+                <div class="modal-header schedule-modal__header">
+                    <div>
+                        <h5 class="modal-title" id="scheduleModalLabel">Đặt lịch lái thử</h5>
+                        <p class="schedule-modal__subtitle">Chọn trạm phù hợp và thời gian thuận tiện để trải nghiệm mẫu xe bạn quan tâm.</p>
+                    </div>
+                    <button type="button" class="btn-close schedule-modal__close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                                <div class="modal-body schedule-modal__body">
+                    <div class="schedule-modal__station">
+                        <label asp-for="ScheduleStationCarId" class="schedule-modal__label">Trạm lái thử</label>
+                        @if (stationCars.Any())
+                        {
+                            <select class="form-select schedule-modal__select"
+                                    asp-for="ScheduleStationCarId"
+                                    data-schedule-select>
+                                @foreach (var station in stationCars)
+                                {
+                                    <option value="@station.StationCarId"
+                                            data-station-name="@station.StationName"
+                                            data-station-location="@station.Location">
+                                        @station.StationName - còn @station.Quantity xe
+                                    </option>
+                                }
+                            </select>
+                        }
+                        else
+                        {
+                            <p class="schedule-modal__empty">Chưa có trạm nào được gán cho mẫu xe này.</p>
+                        }
+                    </div>
+
+                    <div class="schedule-modal__field">
+                        <label asp-for="ScheduleTime" class="schedule-modal__label">Thời gian lái thử</label>
+                        <input type="datetime-local"
+                               class="form-control schedule-modal__input"
+                               asp-for="ScheduleTime"
+                               value="@(Model.ScheduleTime.HasValue ? Model.ScheduleTime.Value.ToString("yyyy-MM-ddTHH:mm") : string.Empty)"
+                               min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
+                        <span asp-validation-for="ScheduleTime" class="schedule-modal__validation text-danger"></span>
+                    </div>
+
+                    <div class="schedule-modal__hint">
+                        <strong>Lưu ý:</strong> Sau khi đặt lịch, nhân viên sẽ liên hệ để xác nhận. Lịch hẹn sẽ ở trạng thái <span>Pending</span> cho đến khi được duyệt.
+                    </div>
+                </div>
+                <div class="modal-footer schedule-modal__footer">
+                    <button type="button" class="btn schedule-modal__btn schedule-modal__btn--ghost" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn schedule-modal__btn schedule-modal__btn--primary" @(stationCars.Any() ? "" : "disabled")>Xác nhận lịch lái thử</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade deposit-modal-container" id="depositModal" tabindex="-1" aria-labelledby="depositModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content deposit-modal">
+            <form method="post" asp-page-handler="Reserve" asp-route-id="@Model.Vehicle?.VehicleId">
+                <div class="modal-header deposit-modal__header">
+                    <h5 class="modal-title deposit-modal__title" id="depositModalLabel">Đặt cọc tại trạm</h5>
+                    <button type="button" class="btn-close deposit-modal__close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body deposit-modal__body">
                     @if (hasAvailableStation)
                     {
-                        <div class="mb-3">
-                            <label asp-for="SelectedStationCarId" class="form-label">Chọn trạm đang còn xe</label>
-                            <select class="form-select" asp-for="SelectedStationCarId">
-                                @foreach (var station in availableStations)
+                        <div class="deposit-modal__field">
+                            <label asp-for="SelectedStationCarId" class="deposit-modal__label">Chọn trạm đang còn xe</label>
+                            <select class="form-select deposit-modal__select" asp-for="SelectedStationCarId">
+                                @foreach (var station in stationCars)
                                 {
                                     <option value="@station.StationCarId">
                                         @station.StationName - còn @station.Quantity xe
                                     </option>
                                 }
                             </select>
-                            <span asp-validation-for="SelectedStationCarId" class="text-danger"></span>
+                            <span asp-validation-for="SelectedStationCarId" class="deposit-modal__validation text-danger"></span>
                         </div>
                         @if (Model.CalculatedDeposit.HasValue)
                         {
-                            <div class="alert alert-info mb-0">
-                                <strong>Tiền đặt cọc:</strong> @Model.CalculatedDeposit.Value.ToString("N0") VND
+                            <div class="deposit-modal__summary">
+                                <strong>Tiền đặt cọc:</strong>
+                                <span>@Model.CalculatedDeposit.Value.ToString("N0") VND</span>
                             </div>
                         }
                     }
                     else
                     {
-                        <p class="mb-0">Chưa có trạm nào còn xe để đặt cọc ngay lúc này.</p>
+                        <p class="deposit-modal__empty">Chưa có trạm nào còn xe để đặt cọc ngay lúc này.</p>
                     }
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <button type="submit" class="btn btn-primary" @(hasAvailableStation ? "" : "disabled")>Xác nhận đặt cọc</button>
+                <div class="modal-footer deposit-modal__footer">
+                    <button type="button" class="btn deposit-modal__btn deposit-modal__btn--ghost" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn deposit-modal__btn deposit-modal__btn--primary" @(hasAvailableStation ? "" : "disabled")>Xác nhận đặt cọc</button>
                 </div>
             </form>
         </div>
@@ -192,14 +254,128 @@
     <partial name="_ValidationScriptsPartial" />
     <script>
         (function () {
-            var hasValidationError = @(ViewData.ModelState.TryGetValue(nameof(Model.SelectedStationCarId), out var entry) && entry.Errors.Count > 0 ? "true" : "false");
+            const stationButtons = Array.from(document.querySelectorAll('[data-station-id]'));
+
+            function createStationFromElement(element) {
+                if (!element) return null;
+                const id = element.getAttribute('data-station-id');
+                const name = element.getAttribute('data-station-name');
+                const location = element.getAttribute('data-station-location');
+                return {
+                    id,
+                    name: name && name.trim().length ? name : null,
+                    location: location && location.trim().length ? location : null
+                };
+            }
+
+            const scheduleModalEl = document.getElementById('scheduleModal');
+            const scheduleStationIdInput = document.getElementById('ScheduleStationCarId');
+            const scheduleSelectEl = scheduleStationIdInput && scheduleStationIdInput.tagName === 'SELECT'
+                ? scheduleStationIdInput
+                : null;
+            const scheduleOptions = scheduleSelectEl ? Array.from(scheduleSelectEl.options) : [];
+            const scheduleStationNameEl = scheduleModalEl ? scheduleModalEl.querySelector('[data-schedule-station-name]') : null;
+            const scheduleStationLocationEl = scheduleModalEl ? scheduleModalEl.querySelector('[data-schedule-station-location]') : null;
+
+            function createStationFromOption(option) {
+                if (!option) return null;
+                const id = option.value;
+                const name = option.getAttribute('data-station-name');
+                const location = option.getAttribute('data-station-location');
+                return {
+                    id,
+                    name: name && name.trim().length ? name : null,
+                    location: location && location.trim().length ? location : null
+                };
+            }
+
+            function findStationById(stationId) {
+                if (stationId == null || stationId === '') return null;
+                const key = stationId.toString();
+                const option = scheduleOptions.find(opt => opt.value === key);
+                if (option) {
+                    return createStationFromOption(option);
+                }
+                const button = stationButtons.find(btn => btn.getAttribute('data-station-id') === key);
+                return createStationFromElement(button);
+            }
+
+            function getFirstStation() {
+                return createStationFromOption(scheduleOptions[0])
+                    || createStationFromElement(stationButtons[0])
+                    || null;
+            }
+
+            function renderStation(station) {
+                const effectiveStation = station || null;
+
+                if (scheduleStationNameEl) {
+                    scheduleStationNameEl.textContent = effectiveStation?.name || 'Chưa chọn trạm';
+                }
+
+                if (scheduleStationLocationEl) {
+                    scheduleStationLocationEl.textContent = effectiveStation?.location
+                        ? `Địa điểm: ${effectiveStation.location}`
+                        : 'Địa điểm đang cập nhật';
+                }
+            }
+
+            function applyStation(stationId, fallbackStation) {
+                const station = findStationById(stationId)
+                    || fallbackStation
+                    || getFirstStation();
+
+                const resolvedId = station?.id ?? stationId ?? '';
+                if (scheduleSelectEl) {
+                    if (scheduleOptions.some(opt => opt.value === resolvedId)) {
+                        scheduleSelectEl.value = resolvedId;
+                    } else if (!scheduleSelectEl.value && scheduleOptions.length) {
+                        scheduleSelectEl.value = scheduleOptions[0].value;
+                    }
+                } else if (scheduleStationIdInput) {
+                    scheduleStationIdInput.value = resolvedId;
+                }
+
+                renderStation(station);
+            }
+
+            if (scheduleSelectEl) {
+                scheduleSelectEl.addEventListener('change', function () {
+                    applyStation(this.value);
+                });
+            }
+
+            if (scheduleModalEl) {
+                scheduleModalEl.addEventListener('show.bs.modal', function (event) {
+                    const trigger = event.relatedTarget;
+                    const stationId = trigger?.getAttribute('data-station-id');
+                    const fallbackStation = createStationFromElement(trigger);
+                    applyStation(stationId, fallbackStation);
+                });
+            }
+
+            const shouldOpenScheduleModal = @(ViewData["ScheduleModalOpen"] != null ? "\"true\"" : "\"false\"");
+            if (shouldOpenScheduleModal === "true" && scheduleModalEl) {
+                applyStation(scheduleStationIdInput?.value);
+                const scheduleModal = bootstrap.Modal.getOrCreateInstance(scheduleModalEl);
+                scheduleModal.show();
+            } else {
+                applyStation(scheduleStationIdInput?.value);
+            }
+
+            const hasValidationError = @(ViewData.ModelState.TryGetValue(nameof(Model.SelectedStationCarId), out var entry) && entry.Errors.Count > 0 ? "true" : "false");
             if (hasValidationError === "true") {
-                var modalElement = document.getElementById('depositModal');
+                const modalElement = document.getElementById('depositModal');
                 if (modalElement) {
-                    var depositModal = new bootstrap.Modal(modalElement);
+                    const depositModal = new bootstrap.Modal(modalElement);
                     depositModal.show();
                 }
             }
         })();
     </script>
 }
+
+
+
+
+

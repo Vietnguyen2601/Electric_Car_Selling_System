@@ -1,192 +1,102 @@
-﻿@page "/dealer/customers/profiles"
-@model PortalPageModel
-@{
-    ViewData["Title"] = "Hồ sơ khách hàng - Dealer";
-    ViewData["PageTitle"] = "Quản lý hồ sơ khách hàng";
-    ViewData["PageDescription"] = "Lưu trữ thông tin khách hàng, lịch sử tương tác và nhu cầu để cá nhân hóa trải nghiệm mua xe.";
+@page "/dealer/customers/profiles"
+@model ElectricVehicleDealer.Presentation.Pages.Dealer.Customers.ProfilesModel
+@using System.Linq
+
+@section Head {
+    <link rel="stylesheet" href="~/css/manage/crud.css" />
 }
 
-@section PageActions {
-    <button class="btn-primary-gradient">Thêm khách hàng</button>
-    <button class="btn-secondary-soft">Nhập từ Excel</button>
-}
-
-<div class="panel">
-    <div class="panel-header">
+<section class="crud-page" id="customer-profiles">
+    <header class="crud-header">
         <div>
-            <h2>Bộ lọc khách hàng</h2>
-            <p>Tìm kiếm theo phân loại, nguồn lead và trạng thái chăm sóc.</p>
+            <h2>Hồ sơ khách hàng</h2>
+            <p>Theo dõi tài khoản đại lý, thông tin liên hệ và trạng thái hoạt động.</p>
         </div>
-    </div>
-    <div class="panel-body">
-        <div class="form-grid">
-            <div class="form-control-modern">
-                <label>Trạng thái</label>
-                <select>
-                    <option>Tất cả</option>
-                    <option>Lead mới</option>
-                    <option>Đang tư vấn</option>
-                    <option>Đã mua xe</option>
-                    <option>Chăm sóc sau bán</option>
-                </select>
-            </div>
-            <div class="form-control-modern">
-                <label>Nguồn lead</label>
-                <select>
-                    <option>Tất cả</option>
-                    <option>Digital Ads</option>
-                    <option>Referral</option>
-                    <option>Event</option>
-                    <option>Walk-in</option>
-                </select>
-            </div>
-            <div class="form-control-modern">
-                <label>Mẫu xe quan tâm</label>
-                <select>
-                    <option>Tất cả</option>
-                    <option>EV3 Sport</option>
-                    <option>EV2 Touring</option>
-                    <option>EV1 Urban</option>
-                    <option>Cargo Fleet</option>
-                </select>
-            </div>
-            <div class="form-control-modern">
-                <label>Nhân viên phụ trách</label>
-                <select>
-                    <option>Tất cả</option>
-                    <option>Nguyễn Minh</option>
-                    <option>Phạm Trâm</option>
-                    <option>Trần Hải</option>
-                    <option>Bùi Thảo</option>
-                </select>
-            </div>
+        <div class="crud-actions">
+            <a class="crud-btn" asp-page="/Account/Create">+ Thêm tài khoản</a>
         </div>
-    </div>
-</div>
+    </header>
 
-<div class="panel">
-    <div class="panel-header">
-        <div>
-            <h2>Danh sách khách hàng</h2>
-            <p>Thông tin chính và trạng thái chăm sóc hiện tại.</p>
-        </div>
+    <div class="crud-table">
+        @if (!Model.Accounts.Any())
+        {
+            <div class="crud-empty">Chưa có tài khoản nào được tạo.</div>
+        }
+        else
+        {
+            <table class="crud-table__table crud-table__table--accounts">
+                <thead>
+                    <tr>
+                        <th class="crud-table__col-id">Mã</th>
+                        <th>Tài khoản</th>
+                        <th>Liên hệ</th>
+                        <th>Vai trò</th>
+                        <th class="text-end">Ngày tạo</th>
+                        <th>Trạng thái</th>
+                        <th class="text-end">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var account in Model.Accounts)
+                {
+                    var roles = account.Roles?.Where(role => !string.IsNullOrWhiteSpace(role)).ToList() ?? new List<string>();
+                    <tr class="crud-table__row">
+                        <td class="crud-table__cell crud-table__cell--id">
+                            <span class="crud-id-badge">#@account.AccountId</span>
+                        </td>
+                        <td class="crud-table__cell crud-table__cell--model">
+                            <div class="crud-model">
+                                <span class="crud-model__name">@account.Username</span>
+                                <span class="crud-model__meta">@account.Email</span>
+                            </div>
+                        </td>
+                        <td class="crud-table__cell crud-table__cell--contact">
+                            @if (string.IsNullOrWhiteSpace(account.ContactNumber))
+                            {
+                                <span class="crud-chip crud-chip--muted">Không có</span>
+                            }
+                            else
+                            {
+                                <span class="crud-chip">@account.ContactNumber</span>
+                            }
+                        </td>
+                        <td class="crud-table__cell crud-table__cell--roles">
+                            @if (roles.Count == 0)
+                            {
+                                <span class="crud-chip crud-chip--muted">Chưa gán</span>
+                            }
+                            else
+                            {
+                                foreach (var role in roles)
+                                {
+                                    <span class="crud-chip">@role</span>
+                                }
+                            }
+                        </td>
+                        <td class="crud-table__cell crud-table__cell--date text-end">
+                            <span class="crud-meta">@account.CreatedAt.ToString("dd/MM/yyyy")</span>
+                        </td>
+                        <td class="crud-table__cell crud-table__cell--status">
+                            <span class="crud-tag @(account.IsActive ? "crud-tag--success" : "crud-tag--danger")">
+                                @(account.IsActive ? "Đang hoạt động" : "Ngưng")
+                            </span>
+                        </td>
+                        <td class="crud-table__cell crud-table__cell--actions text-end">
+                            <div class="crud-table__actions">
+                                <a class="crud-icon-btn" asp-page="/Account/Edit" asp-route-id="@account.AccountId">
+                                    <span class="crud-icon crud-icon--edit" aria-hidden="true"></span>
+                                    <span>Sửa</span>
+                                </a>
+                                <a class="crud-icon-btn crud-icon-btn--danger" asp-page="/Account/Delete" asp-route-id="@account.AccountId">
+                                    <span class="crud-icon crud-icon--delete" aria-hidden="true"></span>
+                                    <span>Xoá</span>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        }
     </div>
-    <div class="panel-body">
-        <table class="table-modern">
-            <thead>
-                <tr>
-                    <th>Khách hàng</th>
-                    <th>Thông tin liên hệ</th>
-                    <th>Mẫu xe quan tâm</th>
-                    <th>Trạng thái</th>
-                    <th>Nhân viên</th>
-                    <th>Lần tương tác cuối</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Nguyễn Gia Huy</td>
-                    <td>huy.nguyen@ecoride.vn · 0909 123 456</td>
-                    <td>EV3 Sport</td>
-                    <td class="badge success">Đã ký hợp đồng</td>
-                    <td>Minh</td>
-                    <td>16/06 - Test drive thành công</td>
-                </tr>
-                <tr>
-                    <td>Lê Thị Mỹ An</td>
-                    <td>an.le@ecoride.vn · 0918 222 333</td>
-                    <td>EV2 Touring</td>
-                    <td class="badge warning">Đang so sánh đối thủ</td>
-                    <td>Hải</td>
-                    <td>17/06 - Gửi báo giá V2</td>
-                </tr>
-                <tr>
-                    <td>Trần Quốc Dũng</td>
-                    <td>dung.tran@ecoride.vn · 0933 456 789</td>
-                    <td>Cargo Fleet</td>
-                    <td class="badge success">Chăm sóc sau bán</td>
-                    <td>Đại</td>
-                    <td>15/06 - Bàn giao đợt 1</td>
-                </tr>
-                <tr>
-                    <td>Phạm Thu Hà</td>
-                    <td>ha.pham@ecoride.vn · 0906 987 654</td>
-                    <td>EV1 Urban</td>
-                    <td class="badge">Lead mới</td>
-                    <td>Trâm</td>
-                    <td>17/06 - Đặt lịch tư vấn</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<div class="split-2">
-    <div class="panel soft">
-        <div class="panel-header">
-            <div>
-                <h2>Thông tin chi tiết</h2>
-                <p>Biểu mẫu cập nhật thông tin khách hàng.</p>
-            </div>
-        </div>
-        <div class="panel-body">
-            <div class="form-grid">
-                <div class="form-control-modern">
-                    <label>Họ tên</label>
-                    <input placeholder="Nguyễn Văn A" />
-                </div>
-                <div class="form-control-modern">
-                    <label>Email</label>
-                    <input placeholder="email@domain.com" />
-                </div>
-                <div class="form-control-modern">
-                    <label>Số điện thoại</label>
-                    <input placeholder="09xx xxx xxx" />
-                </div>
-                <div class="form-control-modern">
-                    <label>Phân loại khách</label>
-                    <select>
-                        <option>Cá nhân</option>
-                        <option>Doanh nghiệp</option>
-                        <option>Chính phủ</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-control-modern">
-                <label>Nhu cầu & ghi chú</label>
-                <textarea placeholder="Ghi chú nhu cầu sử dụng, ngân sách, yêu cầu đặc biệt..."></textarea>
-            </div>
-            <div class="panel-actions">
-                <button class="btn-secondary-soft">Lưu nháp</button>
-                <button class="btn-primary-gradient">Cập nhật hồ sơ</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="panel">
-        <div class="panel-header">
-            <div>
-                <h2>Lịch sử tương tác</h2>
-                <p>Timeline tự động ghi lại cuộc gọi, email, lịch hẹn.</p>
-            </div>
-        </div>
-        <div class="panel-body timeline">
-            <div class="timeline-item">
-                <h4>18/06 · 10:00 · Call</h4>
-                <p>Giải đáp về pin thể rắn và thời gian bảo hành</p>
-            </div>
-            <div class="timeline-item">
-                <h4>17/06 · 15:30 · Email</h4>
-                <p>Gửi báo giá EV2 Touring phiên bản Luxury</p>
-            </div>
-            <div class="timeline-item">
-                <h4>16/06 · 09:00 · Meeting</h4>
-                <p>Test drive EV3 Sport tại showroom Quận 7</p>
-            </div>
-            <div class="timeline-item">
-                <h4>14/06 · 14:00 · Lead mới</h4>
-                <p>Thu thập từ chiến dịch Digital Ads</p>
-            </div>
-        </div>
-    </div>
-</div>
+</section>
