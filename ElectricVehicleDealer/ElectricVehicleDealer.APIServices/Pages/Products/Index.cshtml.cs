@@ -1,5 +1,6 @@
 ﻿using ElectricVehicleDealer.BLL.IServices;
 using ElectricVehicleDealer.Common.DTOs.VehicleDtos;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ElectricVehicleDealer.Presentation.Pages.Products
@@ -18,6 +19,12 @@ namespace ElectricVehicleDealer.Presentation.Pages.Products
         public async Task OnGetAsync()
         {
             Vehicles = await _vehicleService.GetAllAsync();
+        }
+
+        public async Task<IActionResult> OnGetListAsync()
+        {
+            var vehicles = await _vehicleService.GetAllAsync();
+            return new JsonResult(vehicles);
         }
     }
 }

@@ -63,10 +63,10 @@
                     <a class="nav-link @(currentPath.StartsWithSegments("/Evm/Products/Catalog", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/Evm/Products/Catalog#distribution">Điều phối & tồn kho</a>
                     <a class="nav-link @(currentPath.StartsWithSegments("/Evm/Products/Catalog", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/Evm/Products/Catalog#pricing">Giá sỉ & chiết khấu</a>
 
-                    <p class="nav-label">Quản lý đại lý</p>
-                    <a class="nav-link @(currentPath.StartsWithSegments("/evm/dealers/contracts", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/evm/dealers/contracts">Hợp đồng & công nợ</a>
-                    <a class="nav-link @(currentPath.StartsWithSegments("/evm/dealers/targets", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/evm/dealers/targets">Chỉ tiêu doanh số</a>
-                    <a class="nav-link @(currentPath.StartsWithSegments("/evm/dealers/accounts", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/evm/dealers/accounts">Tài khoản đại lý</a>
+                    <p class="nav-label">Quản lý Station</p>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/evm/stations/operations", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/evm/stations/operations">Hoạt động & SLA</a>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/evm/stations/fleet", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/evm/stations/fleet">Đội xe & phân bổ</a>
+                    <a class="nav-link @(currentPath.StartsWithSegments("/evm/stations/access", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/evm/stations/access">Truy cập & nhân sự</a>
 
                     <p class="nav-label">Báo cáo & phân tích</p>
                     <a class="nav-link @(currentPath.StartsWithSegments("/evm/reports/sales", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/evm/reports/sales">Doanh số theo khu vực</a>
@@ -74,13 +74,6 @@
                     <a class="nav-link @(currentPath.StartsWithSegments("/evm/reports/forecast", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/evm/reports/forecast">Dự báo nhu cầu (AI)</a>
                 </div>
 
-                <div class="nav-block">
-                    <h6>Hệ thống</h6>
-                    <a class="nav-link @(currentPath.StartsWithSegments("/auth/login", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/auth/login">Đăng nhập</a>
-                    <a class="nav-link @(currentPath.StartsWithSegments("/manage", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/manage">Trang quản lý</a>
-                    <a class="nav-link @(currentPath.StartsWithSegments("/scheduling/test-drive", StringComparison.OrdinalIgnoreCase) ? "is-active" : null)" href="/scheduling/test-drive">Đặt lịch lái thử</a>
-                    <a class="nav-link" href="/Home">Website khách hàng</a>
-                </div>
             </nav>
         </aside>
 
@@ -96,6 +89,7 @@
                     </div>
                 </div>
                 <div class="topbar-right">
+                    <a class="topbar-action back-home" href="/Home">← Về trang Home</a>
                     <div class="topbar-status">
                         <span class="status-indicator online"></span>
                         <span>Portal Live</span>

@@ -1,0 +1,194 @@
+﻿@page "/dashboard/customer"
+@using System
+@model ElectricVehicleDealer.Presentation.Pages.Dashboard.CustomerModel
+@{
+    Layout = "_CustomerLayout";
+    ViewData["ActiveCustomerNav"] = "overview";
+    ViewData["Title"] = "Customer Dashboard - EcoRide";
+    ViewData["PageTitle"] = "Customer Dashboard";
+    ViewData["PageDescription"] = "Theo dõi đơn đặt cọc và lịch lái thử của bạn.";
+    var nextConfirmed = Model.NextConfirmedTestDrive;
+}
+
+@section PageActions {
+    <a class="customer-action" href="/products">Thêm đơn đặt cọc</a>
+    <a class="customer-action customer-action--secondary" href="/products">Đặt lịch lái thử</a>
+}
+
+<section id="overview" class="customer-section">
+    <header class="customer-section__header">
+        <div>
+            <h2>Tổng quan</h2>
+            <p>Theo dõi nhanh các hoạt động quan trọng của tài khoản khách hàng.</p>
+        </div>
+    </header>
+    <div class="customer-metrics">
+        <article class="customer-metric">
+            <span class="customer-metric__label">Đơn đặt cọc</span>
+            <strong class="customer-metric__value">@Model.DepositOrders.Count</strong>
+            <span class="customer-metric__meta">Đang chờ: @Model.PendingDepositCount | Đã phân công: @Model.AssignedDepositCount</span>
+        </article>
+        <article class="customer-metric">
+            <span class="customer-metric__label">Lịch lái thử</span>
+            <strong class="customer-metric__value">@Model.TestDriveRequests.Count</strong>
+            <span class="customer-metric__meta">Đã được duyệt: @Model.ConfirmedTestDriveCount | Chờ duyệt: @Model.PendingTestDriveCount</span>
+        </article>
+        <article class="customer-metric">
+            <span class="customer-metric__label">Chờ phân công</span>
+            <strong class="customer-metric__value">@Model.AwaitingAssignmentCount</strong>
+            <span class="customer-metric__meta">Kiểm tra nhân viên phụ trách các đơn đặt cọc của bạn.</span>
+        </article>
+    </div>
+    @if (nextConfirmed != null)
+    {
+        <div class="customer-highlight">
+            <div>
+                <h3>Lịch lái thử sắp tới</h3>
+                <p>@nextConfirmed.ScheduleTime.ToLocalTime().ToString("dd/MM/yyyy HH:mm") tại @(string.IsNullOrWhiteSpace(nextConfirmed.StationName) ? "Đang cập nhật" : nextConfirmed.StationName)</p>
+            </div>
+            <a class="customer-highlight__link" href="#testdrives">Xem danh sách</a>
+        </div>
+    }
+</section>
+
+<section id="orders" class="customer-section customer-table-wrapper">
+    <header class="customer-section__header">
+        <div>
+            <h2>Đơn đặt cọc</h2>
+            <p>Kiểm tra tiến độ xử lý đơn đặt cọc và nhân viên phụ trách.</p>
+        </div>
+    </header>
+    @if (!Model.DepositOrders.Any())
+    {
+        <div class="customer-empty">
+            <h3>Chưa có đơn đặt cọc</h3>
+            <p>Hãy chọn một mẫu xe yêu thích và đặt cọc để được hỗ trợ sớm nhất.</p>
+        </div>
+    }
+    else
+    {
+        <div class="crud-table">
+            <table class="crud-table__table">
+                <thead>
+                    <tr>
+                        <th class="crud-table__col-id">Mã đơn</th>
+                        <th>Trạng thái</th>
+                        <th>Trạm xe</th>
+                        <th>Nhân viên phụ trách</th>
+                        <th>Ngày tạo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var order in Model.DepositOrders)
+                {
+                    <tr class="crud-table__row">
+                        <td class="crud-table__cell crud-table__cell--id">
+                            <span class="crud-id-badge">#@order.OrderId</span>
+                        </td>
+                        <td class="crud-table__cell crud-table__cell--status">
+                            <span class="crud-tag @Model.GetOrderStatusClass(order.Status)">
+                                @Model.GetOrderStatusLabel(order.Status)
+                            </span>
+                        </td>
+                        <td class="crud-table__cell">
+                            <div class="d-flex flex-column gap-1">
+                                <span class="crud-meta">@(!string.IsNullOrWhiteSpace(order.StationName) ? order.StationName : "Đang cập nhật")</span>
+                            </div>
+                        </td>
+                        <td class="crud-table__cell">
+                            @if (!string.IsNullOrWhiteSpace(order.StaffUsername))
+                            {
+                                <span class="crud-meta">@order.StaffUsername</span>
+                            }
+                            else
+                            {
+                                <span class="crud-meta crud-meta--muted">Chưa phân công</span>
+                            }
+                        </td>
+                        <td class="crud-table__cell crud-table__cell--date">
+                            <span class="crud-meta">@order.CreatedAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</span>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>
+
+<section id="testdrives" class="customer-section customer-table-wrapper">
+    <header class="customer-section__header">
+        <div>
+            <h2>Lịch lái thử</h2>
+            <p>Theo dõi trạng thái xác nhận và thời gian lái thử.</p>
+        </div>
+    </header>
+    @if (!Model.TestDriveRequests.Any())
+    {
+        <div class="customer-empty">
+            <h3>Chưa có lịch lái thử</h3>
+            <p>Đặt lịch lái thử để trải nghiệm thực tế chiếc xe bạn đã quan tâm.</p>
+        </div>
+    }
+    else
+    {
+        <div class="crud-table">
+            <table class="crud-table__table">
+                <thead>
+                    <tr>
+                        <th class="crud-table__col-id">Mã lịch</th>
+                        <th>Mẫu xe</th>
+                        <th>Trạm</th>
+                        <th>Thời gian</th>
+                        <th>Trạng thái</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var schedule in Model.TestDriveRequests)
+                {
+                    <tr class="crud-table__row">
+                        <td class="crud-table__cell crud-table__cell--id">
+                            <span class="crud-id-badge">#@schedule.ScheduleId</span>
+                        </td>
+                        <td class="crud-table__cell">
+                            <span class="crud-meta">@(!string.IsNullOrWhiteSpace(schedule.VehicleModel) ? schedule.VehicleModel : "Đang cập nhật")</span>
+                        </td>
+                        <td class="crud-table__cell">
+                            <div class="d-flex flex-column gap-1">
+                                <span class="crud-meta">@(!string.IsNullOrWhiteSpace(schedule.StationName) ? schedule.StationName : "Đang cập nhật")</span>
+                                <span class="crud-meta customer-meta-muted">@(!string.IsNullOrWhiteSpace(schedule.StationLocation) ? schedule.StationLocation : "Đang cập nhật")</span>
+                            </div>
+                        </td>
+                        <td class="crud-table__cell crud-table__cell--date">
+                            <span class="crud-meta">@schedule.ScheduleTime.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</span>
+                        </td>
+                        <td class="crud-table__cell crud-table__cell--status">
+                            <span class="crud-tag @Model.GetScheduleStatusClass(schedule.Status)">
+                                @Model.GetScheduleStatusLabel(schedule.Status)
+                            </span>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>
+
+@section Scripts {
+    <script>
+        (() => {
+            const links = document.querySelectorAll('.customer-nav__link');
+            const activate = (hash) => {
+                const target = hash && hash.length > 1 ? hash : '#overview';
+                links.forEach(link => {
+                    const href = link.getAttribute('href');
+                    const endsWith = href.endsWith(target);
+                    link.classList.toggle('is-active', endsWith);
+                });
+            };
+            activate(window.location.hash);
+            window.addEventListener('hashchange', () => activate(window.location.hash));
+        })();
+    </script>
+}

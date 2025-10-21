@@ -1,164 +1,162 @@
-﻿@page "/evm/dealers/accounts"
-@model PortalPageModel
+@page "/evm/stations/access"
+@model ElectricVehicleDealer.Presentation.Pages.Evm.Dealers.AccessModel
+@using System.Linq
 @{
-    ViewData["Title"] = "Tài khoản đại lý - EVM";
-    ViewData["PageTitle"] = "Quản lý tài khoản đại lý";
-    ViewData["PageDescription"] = "Cấp quyền truy cập hệ thống, giám sát trạng thái hoạt động và bảo mật tài khoản cho từng đại lý.";
+    ViewData["Title"] = "Quản lý station - truy cập & vận hành";
+    ViewData["PageTitle"] = "Quyền truy cập station";
+    ViewData["PageDescription"] = "Theo dõi trạng thái hoạt động, liên hệ phụ trách và lịch sử cập nhật của từng station.";
+
+    var totalStations = Model.Stations.Count;
+    var activeStations = Model.ActiveStations;
+    var inactiveStations = Model.InactiveStations;
+    var recentStations = Model.RecentlyUpdatedStations;
+    var totalVehicles = Model.Stations.Sum(s => s.TotalVehicles);
+    var inactiveVehicles = Model.Stations.Sum(s => s.InactiveVehicles);
 }
 
 @section PageActions {
-    <button class="btn-primary-gradient">Tạo tài khoản đại lý</button>
-    <button class="btn-secondary-soft">Đặt lại mật khẩu</button>
+    <button class="btn-primary-gradient">Thêm station mới</button>
+    <a class="btn-secondary-soft" asp-page="/Stations/Index">Mở trang quản trị station</a>
 }
 
 <div class="panel">
     <div class="panel-header">
         <div>
-            <h2>Bảng tài khoản đại lý</h2>
-            <p>Danh sách tài khoản truy cập hệ thống hãng dành cho đại lý.</p>
+            <h2>Tổng quan station</h2>
+            <p>Thống kê trạng thái mở bán và tồn kho đội xe theo dữ liệu mới nhất.</p>
         </div>
     </div>
-    <div class="panel-body">
-        <table class="table-modern">
-            <thead>
-                <tr>
-                    <th>Tài khoản</th>
-                    <th>Đại lý</th>
-                    <th>Vai trò</th>
-                    <th>Trạng thái</th>
-                    <th>Lần đăng nhập</th>
-                    <th>Bảo mật</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>hn-manager@ecoride.vn</td>
-                    <td>EcoRide Hà Nội</td>
-                    <td>Dealer Manager</td>
-                    <td class="badge success">Hoạt động</td>
-                    <td>17/06/2025 · 09:12</td>
-                    <td class="badge">MFA</td>
-                </tr>
-                <tr>
-                    <td>sg-logistics@ecoride.vn</td>
-                    <td>EcoRide Sài Gòn</td>
-                    <td>Dealer Staff</td>
-                    <td class="badge success">Hoạt động</td>
-                    <td>17/06/2025 · 16:24</td>
-                    <td class="badge">MFA</td>
-                </tr>
-                <tr>
-                    <td>dn-director@ecoride.vn</td>
-                    <td>EcoRide Đà Nẵng</td>
-                    <td>Dealer Manager</td>
-                    <td class="badge warning">Khoá tạm</td>
-                    <td>15/06/2025 · 18:45</td>
-                    <td class="badge danger">MFA chưa kích hoạt</td>
-                </tr>
-                <tr>
-                    <td>ct-finance@ecoride.vn</td>
-                    <td>EcoRide Cần Thơ</td>
-                    <td>Finance Officer</td>
-                    <td class="badge success">Hoạt động</td>
-                    <td>16/06/2025 · 08:30</td>
-                    <td class="badge">MFA</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="panel-body grid-3">
+        <div class="stat-card">
+            <span>Station đang mở bán</span>
+            <h3>@activeStations/@totalStations</h3>
+            <span class="kpi-trend">@inactiveStations station tạm ngưng</span>
+        </div>
+        <div class="stat-card">
+            <span>Xe trưng bày trong mạng</span>
+            <h3>@totalVehicles</h3>
+            <span class="badge @(inactiveVehicles > 0 ? "warning" : "success")">
+                @(inactiveVehicles > 0 ? $"{inactiveVehicles} xe tạm dừng" : "Tất cả xe đang hoạt động")
+            </span>
+        </div>
+        <div class="stat-card">
+            <span>Cập nhật trong 7 ngày</span>
+            <h3>@recentStations</h3>
+            <span class="kpi-trend">Station có cập nhật gần đây</span>
+        </div>
     </div>
 </div>
 
-<div class="split-2">
+@if (!string.IsNullOrEmpty(Model.StatusMessage))
+{
     <div class="panel soft">
-        <div class="panel-header">
-            <div>
-                <h2>Tạo tài khoản mới</h2>
-                <p>Thiết lập thông tin và phân quyền cho người dùng đại lý.</p>
-            </div>
-        </div>
         <div class="panel-body">
-            <div class="form-grid">
-                <div class="form-control-modern">
-                    <label>Email đăng nhập</label>
-                    <input placeholder="name@ecoride.vn" />
-                </div>
-                <div class="form-control-modern">
-                    <label>Đại lý</label>
-                    <select>
-                        <option>EcoRide Hà Nội</option>
-                        <option>EcoRide Sài Gòn</option>
-                        <option>EcoRide Đà Nẵng</option>
-                        <option>EcoRide Hải Phòng</option>
-                    </select>
-                </div>
-                <div class="form-control-modern">
-                    <label>Vai trò</label>
-                    <select>
-                        <option>Dealer Manager</option>
-                        <option>Dealer Staff</option>
-                        <option>Finance Officer</option>
-                        <option>Service Advisor</option>
-                    </select>
-                </div>
-                <div class="form-control-modern">
-                    <label>Hiệu lực</label>
-                    <input type="date" />
-                </div>
-            </div>
-            <div class="panel-actions">
-                <button class="btn-secondary-soft">Gửi email kích hoạt</button>
-                <button class="btn-primary-gradient">Tạo tài khoản</button>
-            </div>
+            <strong>@Model.StatusMessage</strong>
         </div>
     </div>
+}
 
-    <div class="panel">
-        <div class="panel-header">
-            <div>
-                <h2>Cấu hình bảo mật</h2>
-                <p>Kiểm soát các tùy chọn bảo mật bắt buộc.</p>
-            </div>
+<div class="panel">
+    <div class="panel-header">
+        <div>
+            <h2>Danh sách station</h2>
+            <p>Quản lý liên hệ phụ trách, trạng thái phục vụ và tồn kho xe trưng bày.</p>
         </div>
-        <div class="panel-body list-modern">
-            <div class="list-item">
-                <strong>Bắt buộc MFA</strong>
-                <span>Tất cả tài khoản phải kích hoạt trong 24h</span>
+    </div>
+    <div class="panel-body">
+        @if (Model.Stations.Any())
+        {
+            <table class="table-modern">
+                <thead>
+                    <tr>
+                        <th>Station</th>
+                        <th>Liên hệ</th>
+                        <th>Xe hoạt động</th>
+                        <th>Tổng xe</th>
+                        <th>Mẫu xe</th>
+                        <th>Cập nhật</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var station in Model.Stations)
+                    {
+                        var statusClass = station.IsActive ? "success" : "danger";
+                        var toggleText = station.IsActive ? "Tạm ngưng" : "Mở lại";
+
+                        <tr>
+                            <td>
+                                <strong>@station.StationName</strong>
+                                <div class="text-muted">@station.Location</div>
+                                <span class="badge @statusClass">@(station.IsActive ? "Đang phục vụ" : "Tạm ngưng")</span>
+                            </td>
+                            <td>
+                                <div>@(string.IsNullOrWhiteSpace(station.ContactNumber) ? "Đang cập nhật" : station.ContactNumber)</div>
+                                <form method="post" asp-page-handler="UpdateContact">
+                                    <input type="hidden" name="stationId" value="@station.StationId" />
+                                    <input type="text" name="contactNumber" value="@station.ContactNumber" placeholder="Nhập số liên hệ" />
+                                    <button type="submit" class="btn-secondary-soft">Lưu liên hệ</button>
+                                </form>
+                            </td>
+                            <td>@station.ActiveVehicles</td>
+                            <td>@station.TotalVehicles</td>
+                            <td>@station.ModelCount</td>
+                            <td>@station.LastUpdated.ToLocalTime().ToString("dd/MM • HH:mm")</td>
+                            <td>
+                                <form method="post" asp-page-handler="ToggleStatus">
+                                    <input type="hidden" name="stationId" value="@station.StationId" />
+                                    <button type="submit" class="btn-primary-gradient">@toggleText</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="crud-empty">
+                Chưa có station nào trong hệ thống. Vui lòng tạo station mới.
             </div>
-            <div class="list-item">
-                <strong>Giới hạn đăng nhập</strong>
-                <span>Khóa sau 5 lần sai · Mở lại bằng OTP</span>
-            </div>
-            <div class="list-item">
-                <strong>Quy tắc mật khẩu</strong>
-                <span>Tối thiểu 10 ký tự · Có ký tự đặc biệt</span>
-            </div>
-            <div class="list-item">
-                <strong>Thông báo bảo mật</strong>
-                <span>Email cảnh báo khi đăng nhập từ thiết bị mới</span>
-            </div>
-        </div>
+        }
     </div>
 </div>
 
 <div class="panel">
     <div class="panel-header">
         <div>
-            <h2>Nhật ký hoạt động</h2>
-            <p>Theo dõi hành động quan trọng trên hệ thống.</p>
+            <h2>Nhật ký station</h2>
+            <p>Những cập nhật gần nhất về trạng thái phục vụ và tồn kho xe.</p>
         </div>
     </div>
-    <div class="panel-body timeline">
-        <div class="timeline-item">
-            <h4>18/06 · 09:02 · hn-manager</h4>
-            <p>Cập nhật giá sỉ EV3 Sport cho chiến dịch tháng 6</p>
-        </div>
-        <div class="timeline-item">
-            <h4>17/06 · 17:40 · sg-logistics</h4>
-            <p>Thêm yêu cầu điều phối 12 xe EV2 Touring</p>
-        </div>
-        <div class="timeline-item">
-            <h4>17/06 · 16:10 · dn-director</h4>
-            <p>Đổi mật khẩu · Kích hoạt MFA</p>
-        </div>
+    <div class="panel-body">
+        @if (Model.Stations.Any())
+        {
+            var timeline = Model.Stations
+                .OrderByDescending(s => s.LastUpdated)
+                .Take(6)
+                .ToList();
+
+            <div class="timeline">
+                @foreach (var entry in timeline)
+                {
+                    <div class="timeline-item">
+                        <h4>@entry.LastUpdated.ToLocalTime().ToString("dd/MM • HH:mm") • @entry.StationName</h4>
+                        <p>
+                            @(entry.IsActive
+                                ? entry.ActiveVehicles > 0
+                                    ? $"Đang mở bán với {entry.ActiveVehicles} xe và {entry.ModelCount} mẫu."
+                                    : "Đang mở bán nhưng chưa có xe trưng bày."
+                                : "Station đang tạm ngưng phục vụ.")</p>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="crud-empty">
+                Chưa có station nào để hiển thị nhật ký.
+            </div>
+        }
     </div>
 </div>

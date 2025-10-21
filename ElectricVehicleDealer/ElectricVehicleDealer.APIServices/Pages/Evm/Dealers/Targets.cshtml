@@ -1,38 +1,49 @@
-﻿@page "/evm/dealers/targets"
-@model PortalPageModel
+@page "/evm/stations/fleet"
+@model ElectricVehicleDealer.Presentation.Pages.Evm.Dealers.FleetModel
+@using System.Linq
 @{
-    ViewData["Title"] = "Chỉ tiêu doanh số đại lý - EVM";
-    ViewData["PageTitle"] = "Chỉ tiêu doanh số & đánh giá";
-    ViewData["PageDescription"] = "Thiết lập mục tiêu doanh số, KPI và theo dõi mức độ hoàn thành của từng đại lý.";
+    ViewData["Title"] = "Đội xe station - EVM";
+    ViewData["PageTitle"] = "Quản lý đội xe trưng bày";
+    ViewData["PageDescription"] = "Theo dõi tồn kho xe tại các station, tình trạng trưng bày và nhu cầu điều phối.";
+
+    var activeVehicleCount = Model.StationInventories.Sum(i => i.ActiveQuantity);
+    var suspendedVehicleCount = Model.StationInventories.Sum(i => i.SuspendedQuantity);
+    var totalModels = Model.VehicleSummaries.Count;
 }
 
 @section PageActions {
-    <button class="btn-primary-gradient">Thiết lập chỉ tiêu</button>
-    <button class="btn-secondary-soft">Gửi thông báo đại lý</button>
+    <button class="btn-primary-gradient">Lập điều phối xe</button>
+    <button class="btn-secondary-soft">Xuất báo cáo tồn kho</button>
 }
 
 <div class="panel">
     <div class="panel-header">
         <div>
-            <h2>Tổng quan mục tiêu</h2>
-            <p>Kế hoạch doanh số toàn quốc năm 2025.</p>
+            <h2>Tổng quan đội xe</h2>
+            <p>Số liệu đang mở bán tại các station dựa trên dữ liệu Station & StationCar.</p>
         </div>
     </div>
     <div class="panel-body grid-3">
         <div class="stat-card">
-            <span>Kế hoạch năm</span>
-            <h3>5.200 xe</h3>
-            <span class="kpi-trend">+18% so với 2024</span>
+            <span>Xe trưng bày hoạt động</span>
+            <h3>@activeVehicleCount</h3>
+            <span class="kpi-trend">@Model.StationsWithInventory station có xe</span>
         </div>
         <div class="stat-card">
-            <span>Mức độ hoàn thành</span>
-            <h3>42%</h3>
-            <span class="badge success">Đúng tiến độ</span>
+            <span>Xe tạm dừng/đang bảo dưỡng</span>
+            <h3>@suspendedVehicleCount</h3>
+            <span class="badge @(suspendedVehicleCount > 0 ? "warning" : "success")">
+                @(suspendedVehicleCount > 0 ? "Cần kiểm tra lịch bảo dưỡng" : "Tất cả xe sẵn sàng")
+            </span>
         </div>
         <div class="stat-card">
-            <span>Đại lý vượt KPI</span>
-            <h3>9/28</h3>
-            <span class="badge">Top thưởng Q2</span>
+            <span>Mẫu xe theo dõi</span>
+            <h3>@totalModels</h3>
+            <span class="kpi-trend">
+                @(Model.LowStockAssignments > 0
+                    ? $"{Model.LowStockAssignments} phân bổ cảnh báo"
+                    : "Không có cảnh báo tồn kho")
+            </span>
         </div>
     </div>
 </div>
@@ -40,57 +51,83 @@
 <div class="panel">
     <div class="panel-header">
         <div>
-            <h2>Bảng chỉ tiêu theo đại lý</h2>
-            <p>Doanh số mục tiêu và mức hoàn thành thực tế.</p>
+            <h2>Phân bổ xe theo station</h2>
+            <p>Cập nhật số lượng xe trưng bày và mẫu xe hoạt động tại từng station.</p>
         </div>
     </div>
     <div class="panel-body">
-        <table class="table-modern">
-            <thead>
-                <tr>
-                    <th>Đại lý</th>
-                    <th>Mục tiêu quý</th>
-                    <th>Thực tế</th>
-                    <th>Tỷ lệ hoàn thành</th>
-                    <th>KPI phụ</th>
-                    <th>Đánh giá</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>EcoRide Hà Nội</td>
-                    <td>520 xe</td>
-                    <td>286 xe</td>
-                    <td>55%</td>
-                    <td>CSAT 4.6/5</td>
-                    <td class="badge success">Đúng tiến độ</td>
-                </tr>
-                <tr>
-                    <td>EcoRide Sài Gòn</td>
-                    <td>640 xe</td>
-                    <td>362 xe</td>
-                    <td>57%</td>
-                    <td>Fleet 12%</td>
-                    <td class="badge success">Vượt nhẹ</td>
-                </tr>
-                <tr>
-                    <td>EcoRide Đà Nẵng</td>
-                    <td>280 xe</td>
-                    <td>112 xe</td>
-                    <td>40%</td>
-                    <td>CSAT 4.1/5</td>
-                    <td class="badge warning">Cần hỗ trợ</td>
-                </tr>
-                <tr>
-                    <td>EcoRide Cần Thơ</td>
-                    <td>180 xe</td>
-                    <td>92 xe</td>
-                    <td>51%</td>
-                    <td>Fleet 6%</td>
-                    <td class="badge">Theo dõi</td>
-                </tr>
-            </tbody>
-        </table>
+        @if (Model.StationInventories.Any())
+        {
+            <table class="table-modern">
+                <thead>
+                    <tr>
+                        <th>Station</th>
+                        <th>Mẫu hoạt động</th>
+                        <th>Xe hoạt động</th>
+                        <th>Xe tạm dừng</th>
+                        <th>Chi tiết mẫu xe</th>
+                        <th>Trạng thái</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var station in Model.StationInventories)
+                    {
+                        var statusClass = station.IsActive
+                            ? (station.HasLowStock ? "warning" : "success")
+                            : "danger";
+
+                        <tr>
+                            <td>
+                                <strong>@station.StationName</strong>
+                                <div class="text-muted">@station.Location</div>
+                            </td>
+                            <td>@station.ActiveModels/@station.TotalModels</td>
+                            <td>
+                                <strong>@station.ActiveQuantity</strong>
+                                @if (station.HasLowStock)
+                                {
+                                    <span class="badge warning">Tồn kho thấp</span>
+                                }
+                            </td>
+                            <td>@station.SuspendedQuantity</td>
+                            <td>
+                                @if (station.Vehicles.Any())
+                                {
+                                    <div class="list-modern">
+                                        @foreach (var vehicle in station.Vehicles)
+                                        {
+                                            <div class="list-item">
+                                                <span>@vehicle.VehicleName</span>
+                                                <span class="badge @(vehicle.IsActive ? "success" : "warning")">
+                                                    @vehicle.Quantity xe
+                                                </span>
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">Chưa có phân bổ</span>
+                                }
+                            </td>
+                            <td>
+                                <span class="badge @statusClass">
+                                    @(station.IsActive
+                                        ? (station.ActiveQuantity > 0 ? "Đang mở bán" : "Chưa có xe trưng bày")
+                                        : "Tạm ngưng")
+                                </span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="crud-empty">
+                Chưa có dữ liệu phân bổ xe cho station.
+            </div>
+        }
     </div>
 </div>
 
@@ -98,37 +135,51 @@
     <div class="panel soft">
         <div class="panel-header">
             <div>
-                <h2>Thiết lập KPI</h2>
-                <p>Cấu hình mục tiêu doanh số và KPI phụ cho từng đại lý.</p>
+                <h2>Lập điều phối xe</h2>
+                <p>Đề xuất chuyển xe giữa các station dựa trên tình trạng thực tế.</p>
             </div>
         </div>
         <div class="panel-body">
             <div class="form-grid">
                 <div class="form-control-modern">
-                    <label>Đại lý</label>
+                    <label>Station nguồn</label>
                     <select>
-                        <option>EcoRide Hà Nội</option>
-                        <option>EcoRide Sài Gòn</option>
-                        <option>EcoRide Đà Nẵng</option>
-                        <option>EcoRide Quy Nhơn</option>
+                        @foreach (var station in Model.StationInventories)
+                        {
+                            <option value="@station.StationId">@station.StationName</option>
+                        }
                     </select>
                 </div>
                 <div class="form-control-modern">
-                    <label>Chỉ tiêu quý</label>
-                    <input placeholder="Số lượng xe" />
+                    <label>Station nhận</label>
+                    <select>
+                        @foreach (var station in Model.StationInventories)
+                        {
+                            <option value="@station.StationId">@station.StationName</option>
+                        }
+                    </select>
                 </div>
                 <div class="form-control-modern">
-                    <label>Chỉ tiêu Fleet</label>
-                    <input placeholder="%" />
+                    <label>Mẫu xe</label>
+                    <select>
+                        @foreach (var vehicle in Model.VehicleSummaries)
+                        {
+                            <option value="@vehicle.VehicleName">@vehicle.VehicleName</option>
+                        }
+                    </select>
                 </div>
                 <div class="form-control-modern">
-                    <label>Chỉ tiêu CSAT</label>
-                    <input placeholder="Điểm" />
+                    <label>Số lượng</label>
+                    <input type="number" min="1" placeholder="Nhập số xe điều phối" />
+                </div>
+                <div class="form-control-modern">
+                    <label>Ngày thực hiện</label>
+                    <input type="date" />
                 </div>
             </div>
             <div class="panel-actions">
                 <button class="btn-secondary-soft">Lưu nháp</button>
-                <button class="btn-primary-gradient">Cập nhật</button>
+                <button class="btn-primary-gradient">Gửi đề xuất</button>
             </div>
         </div>
     </div>
@@ -136,27 +187,47 @@
     <div class="panel">
         <div class="panel-header">
             <div>
-                <h2>Chương trình thưởng</h2>
-                <p>Chính sách thưởng theo mức độ hoàn thành KPI.</p>
+                <h2>Tồn kho theo mẫu xe</h2>
+                <p>Thống kê tổng số xe và mức độ phủ tại các station cho từng mẫu.</p>
             </div>
         </div>
-        <div class="panel-body list-modern">
-            <div class="list-item">
-                <strong>≥ 120% KPI</strong>
-                <span>Thưởng 4% doanh số + hỗ trợ marketing</span>
-            </div>
-            <div class="list-item">
-                <strong>100% - 119% KPI</strong>
-                <span>Thưởng 2% doanh số</span>
-            </div>
-            <div class="list-item">
-                <strong>80% - 99% KPI</strong>
-                <span>Cần kế hoạch cải thiện cùng hãng</span>
-            </div>
-            <div class="list-item">
-                <strong>&lt; 80% KPI</strong>
-                <span>Kích hoạt chương trình hỗ trợ đặc biệt</span>
-            </div>
+        <div class="panel-body">
+            @if (Model.VehicleSummaries.Any())
+            {
+                <table class="table-modern">
+                    <thead>
+                        <tr>
+                            <th>Mẫu xe</th>
+                            <th>Tổng xe</th>
+                            <th>Station đang bán</th>
+                            <th>Station cảnh báo</th>
+                            <th>Trung bình/station</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var vehicle in Model.VehicleSummaries)
+                        {
+                            <tr>
+                                <td>@vehicle.VehicleName</td>
+                                <td>@vehicle.TotalQuantity</td>
+                                <td>@vehicle.ActiveStations</td>
+                                <td>
+                                    <span class="badge @(vehicle.LowStockStations > 0 ? "warning" : "success")">
+                                        @vehicle.LowStockStations
+                                    </span>
+                                </td>
+                                <td>@vehicle.AveragePerStation</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="crud-empty">
+                    Chưa có mẫu xe nào được phân bổ đến station.
+                </div>
+            }
         </div>
     </div>
 </div>
@@ -164,27 +235,28 @@
 <div class="panel">
     <div class="panel-header">
         <div>
-            <h2>Đánh giá và ghi chú</h2>
-            <p>Ghi nhận nhận xét từ team khu vực và kế hoạch hỗ trợ.</p>
+            <h2>Ghi chú điều phối</h2>
+            <p>Các đề xuất ưu tiên dựa trên tồn kho thực tế tại station.</p>
         </div>
     </div>
     <div class="panel-body">
-        <div class="form-grid">
-            <div class="form-control-modern">
-                <label>Đại lý</label>
-                <input value="EcoRide Đà Nẵng" />
+        @if (Model.FocusNotes.Any())
+        {
+            <div class="list-modern">
+                @foreach (var note in Model.FocusNotes)
+                {
+                    <div class="list-item">
+                        <strong>@note.StationName</strong>
+                        <span>@note.Message</span>
+                    </div>
+                }
             </div>
-            <div class="form-control-modern">
-                <label>Người đánh giá</label>
-                <input value="Regional Manager - Trung" />
+        }
+        else
+        {
+            <div class="crud-empty">
+                Dữ liệu tồn kho đang cân bằng, chưa có ghi chú điều phối.
             </div>
-        </div>
-        <div class="form-control-modern">
-            <label>Ghi chú</label>
-            <textarea placeholder="Đề xuất hỗ trợ truyền thông, đào tạo, điều chỉnh chỉ tiêu...">Đề xuất chương trình roadshow EV1 tại phố đi bộ và bổ sung 10 xe demo trong tháng 7.</textarea>
-        </div>
-        <div class="panel-actions">
-            <button class="btn-primary-gradient">Lưu đánh giá</button>
-        </div>
+        }
     </div>
 </div>

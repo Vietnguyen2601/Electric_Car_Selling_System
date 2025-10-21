@@ -3,6 +3,7 @@ using ElectricVehicleDealer.BLL.Services;
 using ElectricVehicleDealer.DAL.DBContext;
 using ElectricVehicleDealer.DAL.Repositories.IRepository;
 using ElectricVehicleDealer.DAL.Repositories.Repository;
+using ElectricVehicleDealer.Presentation.Hubs;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -17,6 +18,7 @@ builder.Services.AddSession(options =>
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddRazorPages();
+builder.Services.AddSignalR();
 
 
 //Đăng ký DbContext với chuỗi kết nối từ appsettings.json
@@ -76,6 +78,7 @@ app.UseSession();
 app.UseAuthorization();
 
 app.MapRazorPages();
+app.MapHub<VehicleHub>("/hubs/vehicle");
 app.MapFallbackToPage("/Homepage/Home");
 
 

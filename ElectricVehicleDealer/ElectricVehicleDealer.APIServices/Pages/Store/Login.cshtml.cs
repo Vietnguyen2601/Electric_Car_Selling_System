@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ElectricVehicleDealer.Presentation.Pages.Store
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
     public class LoginModel : PageModel
     {
         private readonly IAccountService _accountService;
@@ -34,6 +37,8 @@ namespace ElectricVehicleDealer.Presentation.Pages.Store
             {
                 HttpContext.Session.SetInt32("AccountId", account.AccountId);
                 HttpContext.Session.SetString("AccountName", account.Username);
+                var roles = account.Roles?.Where(r => !string.IsNullOrWhiteSpace(r)).ToList() ?? new List<string>();
+                HttpContext.Session.SetString("AccountRoles", string.Join(',', roles));
 
                 if (!string.IsNullOrEmpty(returnUrl))
                     return LocalRedirect(returnUrl);
