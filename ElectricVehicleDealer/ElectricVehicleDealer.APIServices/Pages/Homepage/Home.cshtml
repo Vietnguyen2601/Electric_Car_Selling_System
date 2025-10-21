@@ -1,5 +1,7 @@
 ﻿@page
 @model ElectricVehicleDealer.Presentation.Pages.Homepage.HomeModel
+@using System
+@using System.Linq
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 @{
     Layout = null;
@@ -29,11 +31,32 @@
         </nav>
         @{
             var username = HttpContextAccessor.HttpContext?.Session.GetString("AccountName");
+            var roleData = HttpContextAccessor.HttpContext?.Session.GetString("AccountRoles") ?? string.Empty;
+            var roles = string.IsNullOrWhiteSpace(roleData)
+                ? Array.Empty<string>()
+                : roleData.Split(',', StringSplitOptions.RemoveEmptyEntries)
+                    .Select(role => role.Trim())
+                    .Where(role => !string.IsNullOrEmpty(role))
+                    .ToArray();
+            bool isCustomer = roles.Any(role => string.Equals(role, "Customer", StringComparison.OrdinalIgnoreCase));
+            bool canSeeDealerDashboard = roles.Any(role =>
+                string.Equals(role, "Admin", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(role, "Dealer", StringComparison.OrdinalIgnoreCase));
         }
 
         <div class="nav-right">
             @if (!string.IsNullOrEmpty(username))
             {
+                if (isCustomer)
+                {
+                    <a href="/dashboard/customer" class="btn-dashboard">Customer Dashboard</a>
+                }
+
+                if (canSeeDealerDashboard)
+                {
+                    <a href="/dashboard/dealer" class="btn-dashboard">Dealer Dashboard</a>
+                }
+
                 <span>Xin chào, @username!</span>
                 <a href="/store/logout" class="btn-logout">Đăng xuất</a>
             }
@@ -82,35 +105,10 @@
             <div class="trusted-item">Trả góp 0% lãi suất</div>
         </section>
 
-        <section class="quick-review">
-            <div class="quick-inner">
-                <div>
-                    <h2>Truy cập nhanh UI</h2>
-                    <p>Nhấn vào các nút bên dưới để duyệt nhanh các trang đã dựng.</p>
-                </div>
-                <div class="quick-grid">
-                    <a href="/store/login">Đăng nhập khách hàng</a>
-                    <a href="/store/register">Đăng ký khách hàng</a>
-                    <a href="/products">Danh mục sản phẩm</a>
-                    <a href="/products/detail">Chi tiết sản phẩm</a>
-                    <a href="/cart">Giỏ hàng</a>
-                    <a href="/dashboard/dealer">Dealer Dashboard</a>
-                    <a href="/dealer/vehicles/catalog">Dealer - Danh mục xe</a>
-                    <a href="/dealer/sales/quotes">Dealer - Báo giá</a>
-                    <a href="/dealer/customers/profiles">Dealer - Khách hàng</a>
-                    <a href="/dealer/reports/sales-by-staff">Dealer - Báo cáo</a>
-                    <a href="/dashboard/evm">EVM Dashboard</a>
-                    <a href="/evm/products/catalog">EVM - Sản phẩm</a>
-                    <a href="/evm/dealers/contracts">EVM - Hợp đồng</a>
-                    <a href="/evm/reports/forecast">EVM - Dự báo</a>
-                </div>
-            </div>
-        </section>
-
         <section class="feature-section">
             <div class="section-header">
                 <h2>Vì sao chọn EcoRide</h2>
-                <p>Thiết kế tối ưu trải nghiệm và tối ưu hiệu suất cho hành trình của bạn.</p>
+                <p>Thiết kế tối ưu trải nghiệm và hiệu suất cho hành trình của bạn.</p>
             </div>
             <div class="feature-grid">
                 <article class="feature-card">
@@ -119,7 +117,7 @@
                     <p>Đạt 80% pin chỉ trong 20 phút với hệ thống sạc chuẩn CCS2.</p>
                 </article>
                 <article class="feature-card">
-                    <span class="feature-icon">🛰️</span>
+                    <span class="feature-icon">🔗</span>
                     <h3>Kết nối IoT</h3>
                     <p>Theo dõi xe theo thời gian thực và điều khiển từ xa qua ứng dụng EcoRide.</p>
                 </article>

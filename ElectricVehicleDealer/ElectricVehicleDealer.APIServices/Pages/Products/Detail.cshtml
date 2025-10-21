@@ -12,7 +12,7 @@
     var hasAvailableStation = availableStations.Any();
 }
 
-<section class="store-section">
+<section class="store-section" data-vehicle-id="@Model.Vehicle?.VehicleId">
     <div class="store-container">
         @if (!string.IsNullOrEmpty(Model.SuccessMessage))
         {
@@ -32,8 +32,8 @@
 
         <div class="section-header">
             <div>
-                <h1>@Model.Vehicle?.Model</h1>
-                <p>@Model.Vehicle?.Type</p>
+                <h1 data-vehicle-field="model">@Model.Vehicle?.Model</h1>
+                <p data-vehicle-field="type">@Model.Vehicle?.Type</p>
             </div>
         </div>
 
@@ -44,27 +44,21 @@
                         <img src="/images/bike3.jpg" alt="@Model.Vehicle?.Model">
                     </figure>
                     <div class="product-tags">
-                        <span class="product-tag">@Model.Vehicle?.Color</span>
+                        <span class="product-tag" data-vehicle-field="color">@Model.Vehicle?.Color</span>
                     </div>
                     <div class="product-info">
                         <h3>Giá bán lẻ đề xuất</h3>
-                        <p class="price">@Model.Vehicle?.Price.ToString("N0") VND</p>
-                        @if (Model.CalculatedDeposit.HasValue)
-                        {
-                            <small class="text-muted d-block">Tiền đặt cọc dự kiến: @Model.CalculatedDeposit.Value.ToString("N0") VND</small>
-                        }
+                        <p class="price" data-vehicle-field="price">@Model.Vehicle?.Price.ToString("N0") VND</p>
+                        <small class="text-muted d-block" data-vehicle-field="deposit" @(Model.CalculatedDeposit.HasValue ? "" : "hidden")>Tiền đặt cọc dự kiến: @Model.CalculatedDeposit.Value.ToString("N0") VND</small>
                     </div>
                     <button class="btn-primary"
                             type="button"
                             data-bs-toggle="modal"
-                            data-bs-target="#depositModal"
+                            data-bs-target="#depositModal" data-vehicle-action="deposit-button"
                             @(hasAvailableStation ? "" : "disabled")>
                         Đặt cọc online
                     </button>
-                    @if (!hasAvailableStation)
-                    {
-                        <small class="text-danger d-block mt-2">Chưa có trạm còn xe để đặt cọc.</small>
-                    }
+                    <small class="text-danger d-block mt-2" data-vehicle-state="no-stock" @(hasAvailableStation ? "hidden" : "")>Chưa có trạm còn xe để đặt cọc.</small>
                     <button class="btn-secondary mt-3" type="button">Tính phương án trả góp</button>
                 </div>
 
@@ -73,22 +67,22 @@
                     <div class="list-modern">
                         <div class="list-item">
                             <strong>Màu xe:</strong>
-                            <span>@Model.Vehicle?.Model</span>
+                            <span data-vehicle-field="model">@Model.Vehicle?.Model</span>
                         </div>
                         <div class="list-item">
                             <strong>Phân khúc:</strong>
-                            <span>@Model.Vehicle?.Type</span>
+                            <span data-vehicle-field="type">@Model.Vehicle?.Type</span>
                         </div>
                         <div class="list-item">
                             <strong>Màu sắc:</strong>
-                            <span>@Model.Vehicle?.Color</span>
+                            <span data-vehicle-field="color">@Model.Vehicle?.Color</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="product-card">
                     <h3>Phân bổ xe theo trạm</h3>
-                    <div class="station-list">
+                    <div class="station-list" id="station-list">
                         @if (stationCars.Any())
                         {
                             foreach (var sc in stationCars)
@@ -96,7 +90,7 @@
                                 <div class="station-item">
                                     <h4>@sc.StationName</h4>
                                     <p><strong>Địa điểm:</strong> @sc.Location</p>
-                                    <p><strong>So luong con:</strong> @sc.Quantity</p>
+                                    <p><strong>Số lượng còn:</strong> @sc.Quantity</p>
 
                                     @if (sc.Quantity > 0)
                                     {
@@ -198,7 +192,7 @@
                 </div>
                 <div class="modal-footer schedule-modal__footer">
                     <button type="button" class="btn schedule-modal__btn schedule-modal__btn--ghost" data-bs-dismiss="modal">Hủy</button>
-                    <button type="submit" class="btn schedule-modal__btn schedule-modal__btn--primary" @(stationCars.Any() ? "" : "disabled")>Xác nhận lịch lái thử</button>
+                    <button type="submit" class="btn schedule-modal__btn schedule-modal__btn--primary" data-schedule-action="submit" @(stationCars.Any() ? "" : "disabled")>Xác nhận lịch lái thử</button>
                 </div>
             </form>
         </div>
@@ -214,36 +208,28 @@
                     <button type="button" class="btn-close deposit-modal__close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body deposit-modal__body">
-                    @if (hasAvailableStation)
-                    {
-                        <div class="deposit-modal__field">
-                            <label asp-for="SelectedStationCarId" class="deposit-modal__label">Chọn trạm đang còn xe</label>
-                            <select class="form-select deposit-modal__select" asp-for="SelectedStationCarId">
-                                @foreach (var station in stationCars)
-                                {
-                                    <option value="@station.StationCarId">
-                                        @station.StationName - còn @station.Quantity xe
-                                    </option>
-                                }
-                            </select>
-                            <span asp-validation-for="SelectedStationCarId" class="deposit-modal__validation text-danger"></span>
-                        </div>
-                        @if (Model.CalculatedDeposit.HasValue)
-                        {
-                            <div class="deposit-modal__summary">
-                                <strong>Tiền đặt cọc:</strong>
-                                <span>@Model.CalculatedDeposit.Value.ToString("N0") VND</span>
-                            </div>
-                        }
-                    }
-                    else
-                    {
-                        <p class="deposit-modal__empty">Chưa có trạm nào còn xe để đặt cọc ngay lúc này.</p>
-                    }
+                    <div class="deposit-modal__field" data-deposit-section="selector" @(hasAvailableStation ? "" : "hidden")>
+                        <label asp-for="SelectedStationCarId" class="deposit-modal__label">Chọn trạm đang còn xe</label>
+                                                <select class="form-select deposit-modal__select"
+                                asp-for="SelectedStationCarId"
+                                data-deposit-select="true"
+                                disabled="@(hasAvailableStation ? null : "disabled")">
+                            @foreach (var station in stationCars)
+                            {
+                                <option value="@station.StationCarId">@station.StationName - còn @station.Quantity xe</option>
+                            }
+                        </select>
+                        <span asp-validation-for="SelectedStationCarId" class="deposit-modal__validation text-danger"></span>
+                    </div>
+                    <div class="deposit-modal__summary" data-vehicle-field="deposit-summary" @(Model.CalculatedDeposit.HasValue ? "" : "hidden")>
+                        <strong>Tiền đặt cọc:</strong>
+                        <span data-deposit-amount>@Model.CalculatedDeposit.Value.ToString("N0") VND</span>
+                    </div>
+                    <p class="deposit-modal__empty" data-deposit-section="empty" @(hasAvailableStation ? "hidden" : "")>Chưa có trạm nào còn xe để đặt cọc ngay lúc này.</p>
                 </div>
                 <div class="modal-footer deposit-modal__footer">
                     <button type="button" class="btn deposit-modal__btn deposit-modal__btn--ghost" data-bs-dismiss="modal">Hủy</button>
-                    <button type="submit" class="btn deposit-modal__btn deposit-modal__btn--primary" @(hasAvailableStation ? "" : "disabled")>Xác nhận đặt cọc</button>
+                    <button type="submit" class="btn deposit-modal__btn deposit-modal__btn--primary" data-deposit-action="submit" @(hasAvailableStation ? "" : "disabled")>Xác nhận đặt cọc</button>
                 </div>
             </form>
         </div>
@@ -252,6 +238,7 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.7/signalr.min.js" crossorigin="anonymous"></script>
     <script>
         (function () {
             const stationButtons = Array.from(document.querySelectorAll('[data-station-id]'));
@@ -373,7 +360,41 @@
             }
         })();
     </script>
+    <script>
+        (function () {
+            const detailHost = document.querySelector('[data-vehicle-id]');
+            if (!detailHost || typeof signalR === 'undefined') {
+                return;
+            }
+
+            const connection = new signalR.HubConnectionBuilder()
+                .withUrl('/hubs/vehicle')
+                .withAutomaticReconnect()
+                .build();
+
+            const reloadPage = function () {
+                window.location.reload();
+            };
+
+            connection.on('VehicleCatalogChanged', reloadPage);
+            connection.onreconnected(reloadPage);
+
+            const startConnection = async function () {
+                try {
+                    await connection.start();
+                } catch (error) {
+                    console.error('Unable to connect SignalR.', error);
+                    setTimeout(startConnection, 5000);
+                }
+            };
+
+            startConnection();
+        })();
+    </script>
 }
+
+
+
 
 
 

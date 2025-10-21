@@ -177,6 +177,17 @@ a {
     gap: 24px;
 }
 
+.product-empty-state {
+    grid-column: 1 / -1;
+    padding: 48px 24px;
+    border-radius: var(--store-radius-md);
+    border: var(--store-border);
+    background: rgba(15, 23, 45, 0.65);
+    text-align: center;
+    color: var(--store-text-subtle);
+    font-size: 16px;
+}
+
 .product-card {
     background: var(--store-surface);
     border-radius: var(--store-radius-md);

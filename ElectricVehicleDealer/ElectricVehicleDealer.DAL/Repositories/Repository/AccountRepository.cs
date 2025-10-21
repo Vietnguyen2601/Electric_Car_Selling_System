@@ -56,6 +56,8 @@ namespace ElectricVehicleDealer.DAL.Repositories.Repository
         public async Task<Account?> GetByEmailAndPasswordAsync(string email, string password)
         {
             return await _context.Accounts
+                .Include(a => a.AccountRoles)
+                    .ThenInclude(ar => ar.Role)
                 .FirstOrDefaultAsync(a => a.Email == email && a.Password == password && a.IsActive == true);
         }
     }

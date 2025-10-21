@@ -81,3 +81,84 @@
         </div>
     </div>
 </section>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.7/signalr.min.js" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const productGrid = document.querySelector('.product-grid');
+            if (!productGrid || typeof signalR === 'undefined') {
+                return;
+            }
+
+            const listEndpoint = '/products?handler=List';
+            const priceFormatter = new Intl.NumberFormat('vi-VN');
+
+            const connection = new signalR.HubConnectionBuilder()
+                .withUrl('/hubs/vehicle')
+                .withAutomaticReconnect()
+                .build();
+
+            connection.onreconnected(refreshProducts);
+            connection.on('VehicleCatalogChanged', refreshProducts);
+
+            async function refreshProducts() {
+                try {
+                    const response = await fetch(listEndpoint, { headers: { 'Accept': 'application/json' } });
+                    if (!response.ok) {
+                        throw new Error('Response not ok');
+                    }
+
+                    const data = await response.json();
+                    const vehicles = Array.isArray(data) ? data : [];
+                    renderProducts(vehicles);
+                } catch (error) {
+                    console.error('Không thể tải danh sách xe.', error);
+                }
+            }
+
+            function renderProducts(vehicles) {
+                if (!vehicles.length) {
+                    productGrid.innerHTML = '<div class="product-empty-state">Hiện chưa có xe nào trong danh mục.</div>';
+                    return;
+                }
+
+                const cards = vehicles.map(vehicle => {
+                    const vehicleId = vehicle.vehicleId ?? vehicle.VehicleId;
+                    const model = vehicle.model ?? vehicle.Model ?? 'EcoRide';
+                    const priceValue = Number(vehicle.price ?? vehicle.Price ?? 0);
+                    const formattedPrice = priceFormatter.format(priceValue);
+
+                    return `
+                        <article class="product-card" data-vehicle-id="${vehicleId}">
+                            <figure>
+                                <img src="/images/bike3.jpg" alt="${model}" />
+                            </figure>
+                            <div class="product-info">
+                                <h3>${model}</h3>
+                                <p>Giá khởi điểm</p>
+                            </div>
+                            <div class="product-meta">
+                                <span class="price">${formattedPrice} ₫</span>
+                                <a class="btn-secondary" href="/products/detail/${vehicleId}">Xem chi tiết</a>
+                            </div>
+                        </article>`;
+                });
+
+                productGrid.innerHTML = cards.join('');
+            }
+
+            async function start() {
+                try {
+                    await connection.start();
+                    await refreshProducts();
+                } catch (err) {
+                    console.error('Không thể kết nối SignalR.', err);
+                    setTimeout(start, 5000);
+                }
+            }
+
+            start();
+        });
+    </script>
+}
