@@ -3,9 +3,6 @@ using ElectricVehicleDealer.Common.DTOs.OrderDtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ElectricVehicleDealer.Presentation.Pages.Orders
 {
@@ -108,7 +105,7 @@ namespace ElectricVehicleDealer.Presentation.Pages.Orders
                 return NotFound();
             }
 
-            return RedirectToPage("Index");
+            return Redirect("/dealer/sales/orders");
         }
 
         private async Task LoadLookupsAsync()

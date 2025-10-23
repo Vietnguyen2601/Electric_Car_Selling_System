@@ -418,23 +418,23 @@
 
 .crud-tag--neutral {
     background: rgba(255, 255, 255, 0.12);
-    color: var(--text-secondary, var(--manage-text-secondary));
+    color: #ffffff;
     border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .crud-tag--success {
     background: rgba(64, 224, 255, 0.16);
-    color: var(--accent, var(--manage-accent));
+    color: #ffffff;
 }
 
 .crud-tag--danger {
     background: rgba(255, 107, 129, 0.18);
-    color: var(--manage-danger);
+    color: #ffffff;
 }
 
 .crud-tag--warning {
     background: rgba(255, 185, 80, 0.15);
-    color: #ffbe55;
+    color: #ffffff;
 }
 
 .crud-form {
@@ -471,7 +471,7 @@
     border: 1px solid rgba(64, 224, 255, 0.18);
     padding: 0.65rem 0.85rem;
     background: rgba(4, 11, 28, 0.55);
-    color: var(--text-primary, var(--manage-text-primary));
+    color: #ffffff !important;
 }
 
 .crud-field input:focus,
@@ -481,6 +481,30 @@
     box-shadow: 0 0 0 0.17rem rgba(64, 224, 255, 0.18);
     background: rgba(4, 11, 28, 0.7);
     outline: none;
+    color: #ffffff !important;
+}
+
+/* Force white color for form controls - override Bootstrap */
+.crud-form .form-control,
+.crud-form input.form-control,
+.crud-form select.form-control,
+.crud-form textarea.form-control {
+    color: #ffffff !important;
+}
+
+.crud-form .form-control:focus,
+.crud-form input.form-control:focus,
+.crud-form select.form-control:focus,
+.crud-form textarea.form-control:focus {
+    color: #ffffff !important;
+}
+
+.crud-field .form-control {
+    color: #ffffff !important;
+}
+
+.crud-field .form-control:focus {
+    color: #ffffff !important;
 }
 
 .crud-field .form-check-input {
@@ -730,4 +754,19 @@
     .vehicle-distribution__grid {
         grid-template-columns: 1fr;
     }
+}
+
+input.form-control,
+select.form-control,
+textarea.form-control,
+.form-control {
+    color: #ffffff !important;
+}
+
+input.form-control:focus,
+select.form-control:focus,
+textarea.form-control:focus,
+.form-control:focus,
+.form-control:active {
+    color: #ffffff !important;
 }

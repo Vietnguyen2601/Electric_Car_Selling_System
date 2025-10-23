@@ -72,6 +72,7 @@
                 <thead>
                     <tr>
                         <th class="crud-table__col-id">Mã đơn</th>
+                        <th>Tên xe</th>
                         <th>Trạng thái</th>
                         <th>Trạm xe</th>
                         <th>Nhân viên phụ trách</th>
@@ -85,9 +86,33 @@
                         <td class="crud-table__cell crud-table__cell--id">
                             <span class="crud-id-badge">#@order.OrderId</span>
                         </td>
+                        <td class="crud-table__cell">
+                            <span class="crud-meta">@(!string.IsNullOrWhiteSpace(order.VehicleModel) ? order.VehicleModel : "Đang cập nhật")</span>
+                        </td>
                         <td class="crud-table__cell crud-table__cell--status">
-                            <span class="crud-tag @Model.GetOrderStatusClass(order.Status)">
-                                @Model.GetOrderStatusLabel(order.Status)
+                            @{
+                                var statusClass = "crud-tag--neutral";
+                                var statusLabel = "Đang cập nhật";
+                                
+                                if (order.Status == "Available") {
+                                    statusClass = "crud-tag--success";
+                                    statusLabel = "Đã nhận cọc";
+                                } else if (order.Status == "Pending") {
+                                    statusClass = "crud-tag--warning";
+                                    statusLabel = "Đang chờ xử lý";
+                                } else if (order.Status == "Confirmed") {
+                                    statusClass = "crud-tag--success";
+                                    statusLabel = "Đã xác nhận";
+                                } else if (order.Status == "Completed") {
+                                    statusClass = "crud-tag--success";
+                                    statusLabel = "Hoàn tất";
+                                } else if (order.Status == "Cancelled") {
+                                    statusClass = "crud-tag--danger";
+                                    statusLabel = "Đã hủy";
+                                }
+                            }
+                            <span class="crud-tag @statusClass">
+                                @statusLabel
                             </span>
                         </td>
                         <td class="crud-table__cell">

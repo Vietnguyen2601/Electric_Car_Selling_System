@@ -18,5 +18,6 @@ namespace ElectricVehicleDealer.Common.DTOs.OrderDtos
         public string? CustomerUsername { get; set; }
         public string? StaffUsername { get; set; }
         public string? StationName { get; set; }
+        public string? VehicleModel { get; set; }
     }
 }
