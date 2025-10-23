@@ -26,6 +26,8 @@ namespace ElectricVehicleDealer.DAL.Repositories.Repository
                 .Include(o => o.Promotion)
                 .Include(o => o.StationCar)
                     .ThenInclude(sc => sc.Station)
+                .Include(o => o.StationCar)
+                    .ThenInclude(sc => sc.Vehicle)
                 .Where(o => o.IsActive)
                 .ToListAsync();
         }
@@ -38,6 +40,8 @@ namespace ElectricVehicleDealer.DAL.Repositories.Repository
                 .Include(o => o.Promotion)
                 .Include(o => o.StationCar)
                     .ThenInclude(sc => sc.Station)
+                .Include(o => o.StationCar)
+                    .ThenInclude(sc => sc.Vehicle)
                 .FirstOrDefaultAsync(o => o.OrderId == id && o.IsActive);
         }
 
