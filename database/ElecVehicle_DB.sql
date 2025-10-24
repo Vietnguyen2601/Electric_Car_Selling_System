@@ -1,4 +1,4 @@
-﻿-- Drop and recreate the database
+﻿ -- Drop and recreate the database
 ALTER DATABASE evdms_database
 SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
 
